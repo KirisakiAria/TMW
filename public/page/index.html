@@ -24,6 +24,7 @@
 	<script src="../js/anime.min.js"></script>
 	<script src="../js/snap.svg-min.js"></script>
 	<script src="../js/TweenMax.min.js"></script>
+	<script src="../js/easeljs-0.8.2.min.js"></script>
 	<script>document.documentElement.className = 'js';</script>
 </head>
 <body class="tmw">
@@ -76,3 +77,149 @@
 			</svg>
 		</div>
 	</nav>
+	<main>
+		<div class="mask"></div>
+		<div class="trans"></div>
+		<h2 class="trigger-headline trigger-headline--hidden">
+			<span>F</span>
+			<span>A</span>
+			<span>I</span>
+			<span>T</span>
+			<span>H</span>
+		</h2>
+		<h4 class="animeh4">
+			<span class="lettergroup">
+				<span class="letter">T</span>
+				<span class="letter">h</span>
+				<span class="letter">a</span>
+				<span class="letter">t</span>
+				<span class="letter">'</span>
+				<span class="letter">s</span>
+			</span>
+			<span class="lettergroup">
+				<span class="letter">M</span>
+				<span class="letter">y</span>
+			</span>
+			<span class="lettergroup">
+				<span class="letter">W</span>
+				<span class="letter">a</span>
+				<span class="letter">y</span>
+				<span class="letter lastletter"> <i class="fa fa-heart"></i>
+				</span>
+			</span>
+		</h4>
+		<!-- <canvas id="firework" class="fireworks"></canvas>
+	-->
+	<div id="segmenter" class="segmenter" style="background-image: url(../img/ed.jpg);"></div>
+	<div class="bottom-nav text-center">
+		<button id="btn-effect" class="button btn-effect">
+			<span>S</span>
+			<span>T</span>
+			<span>A</span>
+			<span>R</span>
+			<span>T</span>
+		</button>
+	</div>
+</main>
+<script src="../js/imagesloaded.pkgd.min.js"></script>
+<script src="../js/SegmentEffect.js"></script>
+<script src="../js/common.js"></script>
+<script>
+		//为了性能，有些东西用原生
+		$(function() {
+			(function() {
+				//背景
+				var segmenter = new Segmenter(document.getElementById('segmenter'), {
+					pieces: 7,
+					animation: {
+						duration: 1500,
+						easing: 'easeOutQuad',
+						delay: 350,
+						translateZ: {
+							min: 10,
+							max: 65
+						}
+					},
+					parallax: true,
+					parallaxMovement: {
+						min: 5,
+						max: 10
+					},
+					positions: [{
+						top: 10,
+						left: 20,
+						width: 20,
+						height: 30
+					}, {
+						top: 8,
+						left: 35,
+						width: 30,
+						height: 30
+					}, {
+						top: 25,
+						left: 18,
+						width: 14,
+						height: 25
+					}, {
+						top: 28,
+						left: 50,
+						width: 20,
+						height: 20
+					}, {
+						top: 30,
+						left: 65,
+						width: 10,
+						height: 30
+					}, {
+						top: 48,
+						left: 20,
+						width: 10,
+						height: 13
+					}, {
+						top: 50,
+						left: 67,
+						width: 20,
+						height: 20
+					}],
+					onReady: function() {
+						document.getElementById("btn-effect").addEventListener("click", function() {
+							$(".trans").addClass("scale");
+							setTimeout(function() {
+								segmenter.animate();
+								$(".trigger-headline").addClass("gauss");
+								//文字动画
+								var basicTimeline = anime.timeline();
+								basicTimeline
+									.add({
+										targets: '.letter',
+										opacity: {
+											value: 1,
+											duration: 800,
+											easing: 'easeInElastic',
+											elasticity: 800,
+											delay: function(el, index) {
+												return index * 300;
+											},
+										}
+									}).add({
+										targets: '.lastletter',
+										rotate: 360,
+										translateY: -15,
+										duration: 700,
+										easing: 'easeInOutQuad',
+										delay: 500
+									});
+							}, 1500);
+							$(this).addClass("btn-hidden");
+							$(".trigger-headline").removeClass('trigger-headline--hidden');
+						});
+					},
+					onAnimationComplete: function() {
+						$("#menu").fadeIn(500);
+					}
+				});
+			})();
+		});
+	</script>
+</body>
+</html>
