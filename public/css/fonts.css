@@ -1,0 +1,16 @@
+@font-face
+{
+    font-family: 'HB';
+    font-weight: normal;
+    font-style: normal;
+
+    src: url('../fonts/helvetica_condensed_bold-webfont.woff') format('woff');
+}
+@font-face
+{
+    font-family: 'VD';
+    font-weight: normal;
+    font-style: normal;
+
+    src: url('../fonts/Verdana.woff') format('woff');
+}
