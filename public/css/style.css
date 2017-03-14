@@ -1208,7 +1208,26 @@ main
 /*新闻*/
 .news
 {
-    background: #404040;
+    background: #202020;
+}
+.news .title
+{
+    display:         flex;
+    display: -webkit-flex;
+            flex-direction: column;
+
+    height: 100vh;
+    width: 100vw;
+
+    background: url(../img/ed2.jpg) center;
+    background-attachment: fixed;
+
+            justify-content: center;
+    -webkit-justify-content: center;
+    -webkit-flex-wrap: wrap;
+            flex-wrap: wrap;
+    -webkit-flex-direction: column;
+
 }
 .news h1,
 .news h4
@@ -1225,7 +1244,6 @@ main
 }
 .news h1
 {
-    margin-top: 20px;
     margin-bottom: 20px;
 }
 .news .h4div
@@ -1243,8 +1261,6 @@ main
     position: relative;
 
     display: inline-block;
-
-    background: #404040;
 }
 .news h4::after,
 .news h4::before
@@ -1268,6 +1284,10 @@ main
 .news h4::before
 {
     right: -100px;
+}
+.news main
+{
+    padding-top: 30px;
 }
 .news .content
 {
