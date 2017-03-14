@@ -93,22 +93,6 @@ img
 {
     text-align: center;
 }
-.tra0_3
-{
-    -webkit-transition: all .3s ease-out 0s;
-       -moz-transition: all .3s ease-out 0s;
-        -ms-transition: all .3s ease-out 0s;
-         -o-transition: all .3s ease-out 0s;
-            transition: all .3s ease-out 0s;
-}
-.tra1
-{
-    -webkit-transition: all 1s ease-out 0s;
-       -moz-transition: all 1s ease-out 0s;
-        -ms-transition: all 1s ease-out 0s;
-         -o-transition: all 1s ease-out 0s;
-            transition: all 1s ease-out 0s;
-}
 .disnone
 {
     display: none !important;
@@ -1206,18 +1190,14 @@ main
     }
 }
 /*新闻*/
-.news
-{
-    background: #202020;
-}
 .news .title
 {
     display:         flex;
     display: -webkit-flex;
             flex-direction: column;
 
+    width: calc(100vw - 15px);
     height: 100vh;
-    width: 100vw;
 
     background: url(../img/ed2.jpg) center;
     background-attachment: fixed;
@@ -1227,7 +1207,6 @@ main
     -webkit-flex-wrap: wrap;
             flex-wrap: wrap;
     -webkit-flex-direction: column;
-
 }
 .news h1,
 .news h4
@@ -1248,7 +1227,7 @@ main
 }
 .news .h4div
 {
-    margin-bottom: 40px;
+    margin-bottom: 25px;
 
     text-align: center;
 }
@@ -1262,13 +1241,13 @@ main
 
     display: inline-block;
 }
-.news h4::after,
-.news h4::before
+.news .h4div h4::after,
+.news .h4div h4::before
 {
     position: absolute;
     top: 50%;
 
-    width: 70px;
+    width: 150px;
     height: 1px;
 
     content: '';
@@ -1277,17 +1256,25 @@ main
 
     background: #fff;
 }
-.news h4::after
+.news .h4div h4::after
 {
-    left: -100px;
+    left: -180px;
 }
-.news h4::before
+.news .h4div h4::before
 {
-    right: -100px;
+    right: -180px;
+}
+.news .lasttitle
+{
+    font-family: '楷体';
 }
 .news main
 {
     padding-top: 30px;
+    padding-bottom: 140px;
+
+    background: url(../img/bg.jpg) center;
+    background-size: cover;
 }
 .news .content
 {
@@ -1418,8 +1405,6 @@ main
     position: relative;
 
     margin: 0;
-
-    white-space: normal;
 }
 .tilter__description
 {
@@ -1432,7 +1417,7 @@ main
 
     -webkit-transition: all .6s ease 0s;
             transition: all .6s ease 0s;
-    white-space: normal;
+    white-space: nowrap;
     letter-spacing: .2em;
 }
 .tilter .tilter__title::after,
@@ -1491,4 +1476,90 @@ main
 .tilter .tilter__figure::before
 {
     box-shadow: none;
+}
+/*分页*/
+.page
+{
+    margin-top: 40px;
+}
+.page li
+{
+    line-height: 38px;
+
+    position: relative;
+
+    display: inline-block;
+    overflow: hidden;
+
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+    margin-left: 8px;
+
+    -webkit-transition: all .3s ease-out 0s;
+       -moz-transition: all .3s ease-out 0s;
+        -ms-transition: all .3s ease-out 0s;
+         -o-transition: all .3s ease-out 0s;
+            transition: all .3s ease-out 0s;
+}
+.page li::after,
+.page li::before
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 0;
+    height: 100%;
+
+    content: '';
+    -webkit-transition: all .2s ease-out 0s;
+       -moz-transition: all .2s ease-out 0s;
+        -ms-transition: all .2s ease-out 0s;
+         -o-transition: all .2s ease-out 0s;
+            transition: all .2s ease-out 0s;
+
+    background: #666;
+}
+.page li::before
+{
+    z-index: 1;
+    right: 0;
+    left: auto;
+
+    -webkit-transition: all .2s ease-out .25s;
+       -moz-transition: all .2s ease-out .25s;
+        -ms-transition: all .2s ease-out .25s;
+         -o-transition: all .2s ease-out .25s;
+            transition: all .2s ease-out .25s;
+
+    background: #fff;
+}
+.page li a
+{
+    font-family: 'VD';
+    font-size: 16px;
+
+    position: relative;
+    z-index: 2;
+
+    display: inline-block;
+
+    width: 100%;
+    height: 100%;
+
+    color: #fff;
+}
+.page li:hover
+{
+    border-color: #fff;
+}
+.page li:hover a
+{
+    color: #212121;
+}
+.page li:hover::after,
+.page li:hover::before
+{
+    width: 100%;
 }
