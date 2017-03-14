@@ -807,6 +807,8 @@ main
     top: 0;
     left: 0;
 
+    visibility: hidden;
+
     width: 100vw;
     height: 100vh;
 
@@ -819,6 +821,8 @@ main
 }
 .mask.act
 {
+    visibility: visible;
+
     opacity: 1;
 }
 .menu
@@ -1191,12 +1195,280 @@ main
     {
         font-size: 50px;
     }
-    .animeh4 {
+    .animeh4
+    {
         font-size: 20px;
     }
-    .animeh4 .lettergroup {
+    .animeh4 .lettergroup
+    {
         margin-right: 10px;
         margin-left: 10px;
     }
 }
 /*新闻*/
+.news
+{
+    background: #404040;
+}
+.news h1,
+.news h4
+{
+    font-family: 'HB';
+    font-size: 48px;
+
+    position: relative;
+
+    text-align: center;
+    letter-spacing: 2px;
+
+    color: #fff;
+}
+.news h1
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.news .h4div
+{
+    margin-bottom: 40px;
+
+    text-align: center;
+}
+.news h4
+{
+    font-family: 'VD';
+    font-size: 18px;
+    font-weight: 100;
+
+    position: relative;
+
+    display: inline-block;
+
+    background: #404040;
+}
+.news h4::after,
+.news h4::before
+{
+    position: absolute;
+    top: 50%;
+
+    width: 70px;
+    height: 1px;
+
+    content: '';
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+
+    background: #fff;
+}
+.news h4::after
+{
+    left: -100px;
+}
+.news h4::before
+{
+    right: -100px;
+}
+.news .content
+{
+    display:         flex;
+    display: -webkit-flex;
+
+    width: 1100px;
+    margin: auto;
+
+            justify-content: center;
+    -webkit-justify-content: center;
+    -webkit-align-items: center;
+            align-items: center;
+            flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+}
+.tilter
+{
+    position: relative;
+
+    display: block;
+
+    width: 300px;
+    height: 415px;
+    margin: 1.5em 2.5em;
+
+    color: #404040;
+
+    flex: none;
+    perspective: 1000px;
+}
+
+.tilter *
+{
+    pointer-events: none;
+}
+
+
+.tilter__figure,
+.tilter__image
+{
+    display: block;
+
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.tilter__figure > *
+{
+            will-change: transform;
+    -webkit-will-change: transform;
+}
+
+.tilter__figure,
+.tilter__deco--overlay,
+.tilter__deco--lines,
+.tilter__deco--shine div,
+.tilter__caption
+{
+    transition: transform .2s ease-out;
+}
+
+.tilter__figure
+{
+    position: relative;
+}
+
+.tilter__figure::before
+{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+
+    width: 90%;
+    height: 90%;
+
+    content: '';
+
+    box-shadow: 0 30px 20px rgba(35,32,39,.5);
+}
+
+.tilter__deco
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    overflow: hidden;
+
+    width: 100%;
+    height: 100%;
+}
+
+.tilter__deco--overlay
+{
+    background: rgba(255,255,255,.3);
+}
+
+.tilter__deco--shine div
+{
+    position: absolute;
+    top: -50%;
+    left: -50%;
+
+    width: 200%;
+    height: 200%;
+
+    background-image: linear-gradient(45deg, rgba(0, 0, 0, .5) 0%, rgba(255, 255, 255, .25) 50%, transparent 100%);
+}
+
+.tilter__caption
+{
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+    padding: 4em;
+}
+
+.tilter__title
+{
+    font-family: 'VD',Arial;
+    font-size: 2.5em;
+    font-weight: normal;
+    line-height: 1;
+
+    position: relative;
+
+    margin: 0;
+
+    white-space: normal;
+}
+.tilter__description
+{
+    font-family: 'VD',Arial;
+    font-size: 1em;
+
+    position: relative;
+
+    margin: 1em 0 0 0;
+
+    -webkit-transition: all .6s ease 0s;
+            transition: all .6s ease 0s;
+    white-space: normal;
+    letter-spacing: .2em;
+}
+.tilter .tilter__title::after,
+.tilter .tilter__description::after
+{
+    position: absolute;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+
+    overflow: hidden;
+
+    width: 0;
+
+    content: attr(data-title);
+    -webkit-transition: all .6s ease 0s;
+            transition: all .6s ease 0s;
+
+    color: #fff;
+}
+.tilter .tilter__description::after
+{
+    right: 0;
+    left: auto;
+}
+.tilter:hover .tilter__title::after,
+.tilter:hover .tilter__description::after
+{
+    width: 100%;
+}
+.tilter:hover .tilter__description
+{
+    color: rgba(0,0,0,.0);
+}
+.tilter .tilter__deco--lines
+{
+    fill: none;
+    stroke: #555;
+    stroke-width: 3px;
+}
+.tilter .tilter__deco--lines path
+{
+    -webkit-transition: all .7s;
+            transition: all .7s;
+
+    stroke-dasharray: 150;
+    stroke-dashoffset: 600;
+}
+.tilter:hover .tilter__deco--lines path
+{
+    stroke-dashoffset: 0;
+    stroke: #fff;
+}
+
+.tilter .tilter__figure::before
+{
+    box-shadow: none;
+}
