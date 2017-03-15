@@ -783,7 +783,7 @@ main
     box-shadow: -5px -5px 30px rgba(0, 0, 0, .7);
 }
 
-/*菜单*/
+/*首页菜单*/
 .mask
 {
     position: fixed;
@@ -809,7 +809,7 @@ main
 
     opacity: 1;
 }
-.menu
+.tmw .menu
 {
     position: fixed;
     z-index: 1000;
@@ -829,7 +829,7 @@ main
     pointer-events: none;
 }
 
-.menu.menu--open
+.tmw .menu.menu--open
 {
     -webkit-transform: translate3d(-50%, 0, 0);
             transform: translate3d(-50%, 0, 0);
@@ -842,14 +842,14 @@ main
             transition: opacity .6s;
 }
 
-.menu.menu--open + .main
+.tmw .menu.menu--open + .main
 {
     pointer-events: none;
 
     opacity: .1;
 }
 
-.menu__inner
+.tmw .menu__inner
 {
     position: relative;
     z-index: 100;
@@ -979,7 +979,7 @@ main
 
     color: #fff;
 }
-.menu__handle
+.tmw .menu__handle
 {
     position: absolute;
     z-index: 2000;
@@ -999,7 +999,7 @@ main
     outline: none;
     background: transparent;
 }
-.menu__handle:hover
+.tmw .menu__handle:hover
 {
     -webkit-animation-name: rubberBand;
             animation-name: rubberBand;
@@ -1093,8 +1093,8 @@ main
                 transform: scale3d(1, 1, 1);
     }
 }
-.menu__handle::before,
-.menu__handle::after
+.tmw .menu__handle::before,
+.tmw .menu__handle::after
 {
     position: absolute;
     top: 0;
@@ -1113,36 +1113,36 @@ main
     background: #ededed;
 }
 
-.menu__handle span
+.tmw .menu__handle span
 {
     display: none;
 }
 
-.menu__handle::before
+.tmw .menu__handle::before
 {
     -webkit-transform: rotate3d(0, 0, 1, 45deg);
             transform: rotate3d(0, 0, 1, 45deg);
 }
 
-.menu__handle::after
+.tmw .menu__handle::after
 {
     -webkit-transform: rotate3d(0, 0, 1, -45deg);
             transform: rotate3d(0, 0, 1, -45deg);
 }
 
-.menu--open .menu__handle::before
+.tmw .menu--open .menu__handle::before
 {
     -webkit-transform: translate3d(0, 75%, 0) rotate3d(0, 0, 1, 135deg);
             transform: translate3d(0, 75%, 0) rotate3d(0, 0, 1, 135deg);
 }
 
-.menu--open .menu__handle::after
+.tmw .menu--open .menu__handle::after
 {
     -webkit-transform: translate3d(0, 75%, 0) rotate3d(0, 0, 1, -135deg);
             transform: translate3d(0, 75%, 0) rotate3d(0, 0, 1, -135deg);
 }
 
-.morph-shape
+.tmw .morph-shape
 {
     position: absolute;
     top: 0;
@@ -1152,13 +1152,194 @@ main
     height: 200px;
 }
 
-.morph-shape svg path
+.tmw .morph-shape svg path
 {
     stroke: #ededed;
     stroke-width: 2px;
 }
+/*内页菜单*/
+.tmw-in .menu
+{
+    position: fixed;
+    z-index: 100;
+    top: 3em;
+    bottom: 3em;
+    left: 0;
 
-/*media quire*/
+    overflow: hidden;
+
+    width: 300px;
+
+    -webkit-transition: -webkit-transform .6s;
+            transition:         transform .6s;
+    -webkit-transform: translate3d(-150px, 0, 0);
+            transform: translate3d(-150px, 0, 0);
+}
+
+.tmw-in .menu.menu--open
+{
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+}
+
+.tmw-in .main
+{
+    -webkit-transition: opacity .6s;
+            transition: opacity .6s;
+}
+
+.tmw-in .menu.menu--open + .main
+{
+    pointer-events: none;
+
+    opacity: .3;
+}
+
+.tmw-in .menu__inner
+{
+    position: relative;
+    z-index: 100;
+
+    overflow-y: auto;
+
+    width: calc(100% + 25px);
+    height: 100%;
+    padding: 0 140px 2em 0;
+}
+.tmw-in .menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tmw-in .menu ul li {
+    margin: 0 0 2em 0;
+    -webkit-transform: translate3d(-150px, 0, 0);
+    transform: translate3d(-150px, 0, 0);
+    -webkit-transition: -webkit-transform 0.6s;
+    transition: transform 0.6s;
+}
+
+.tmw-in .menu.menu--anim ul li {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.tmw-in .menu ul li:first-child {
+    -webkit-transition-delay: 0.3s;
+    transition-delay: 0.3s;
+}
+
+.tmw-in .menu ul li:nth-child(2) {
+    -webkit-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+}
+
+.tmw-in .menu ul li:nth-child(3) {
+    -webkit-transition-delay: 0.1s;
+    transition-delay: 0.1s;
+}
+
+.tmw-in .menu__handle
+{
+    position: absolute;
+    z-index: 2000;
+    top: 3px;
+    right: 70px;
+
+    width: 30px;
+    height: 24px;
+    padding: 0;
+
+    border: none;
+    outline: none;
+}
+
+.tmw-in .menu__handle::before,
+.tmw-in .menu__handle::after,
+.tmw-in .menu__handle span
+{
+    background: #5f656f;
+}
+
+.tmw-in .menu__handle::before,
+.tmw-in .menu__handle::after
+{
+    position: absolute;
+    top: 50%;
+    left: 0;
+
+    width: 100%;
+    height: 2px;
+
+    content: '';
+    -webkit-transition: -webkit-transform .25s;
+            transition:         transform .25s;
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+}
+
+.tmw-in .menu__handle span
+{
+    position: absolute;
+    left: 0;
+
+    overflow: hidden;
+
+    width: 100%;
+    height: 2px;
+
+    -webkit-transition: opacity .25s;
+            transition: opacity .25s;
+    text-indent: 200%;
+}
+
+.tmw-in .menu__handle::before
+{
+    -webkit-transform: translate3d(0, -10px, 0);
+            transform: translate3d(0, -10px, 0);
+}
+
+.tmw-in .menu__handle::after
+{
+    -webkit-transform: translate3d(0, 10px, 0);
+            transform: translate3d(0, 10px, 0);
+}
+
+.tmw-in .menu--open .menu__handle span
+{
+    opacity: 0;
+}
+
+.tmw-in .menu--open .menu__handle::before
+{
+    -webkit-transform: rotate3d(0, 0, 1, 45deg);
+            transform: rotate3d(0, 0, 1, 45deg);
+}
+
+.tmw-in .menu--open .menu__handle::after
+{
+    -webkit-transform: rotate3d(0, 0, 1, -45deg);
+            transform: rotate3d(0, 0, 1, -45deg);
+}
+
+.tmw-in .morph-shape
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 240px;
+    height: 100%;
+}
+
+.tmw-in .morph-shape svg path
+{
+    stroke: #ededed;
+    stroke-width: 3px;
+}
+
+/*媒体查询*/
 @media (max-width:1100px)
 {
     .trigger-headline
