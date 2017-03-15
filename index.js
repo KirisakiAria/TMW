@@ -8,7 +8,7 @@ var routes = require('./routes');
 var pkg = require('./package');
 var mongoose = require("./config/mongoose");
 
-var db = mongoose()
+var db = mongoose();
 
 var app = express();
 

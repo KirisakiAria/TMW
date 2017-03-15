@@ -13,11 +13,23 @@ router.get('/', function(req, res, next) {
 		date: new Date(),
 		content: "test"
 	});
-	res.locals = {
-		title:"NEWS",
-		newstitle:"TEST",
-		author:"admin",
-	}
-	res.status(200).render('../views/news/news.ejs');
+
+	news.save(function(err, doc) {
+		if (err) {
+			console.log(err);
+			return next();
+		}
+	});
+	News.find({}, function(err, docs) {
+		if (err) {
+			console.log(err);
+			return next();
+		}
+		res.status(200).render('../views/news/news.ejs', {
+			title: "NEWS",
+			newstitle: docs[0].title,
+			author: "admin"
+		});
+	});
 });
 module.exports = router;
