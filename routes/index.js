@@ -1,6 +1,7 @@
 module.exports = function (app) {
-  app.get('/', function (req, res) {
-    res.redirect('/index');
-  });
-  app.use('/index', require('./main'));
+  app.use('/', require('./main'));
+  app.use('/news', require('./news'));
+  // app.use('/daily', require('./daily'));
+  // app.use('/share', require('./share'));
+  // app.use('/project', require('./project'));
 };

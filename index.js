@@ -6,6 +6,9 @@ var flash = require('connect-flash');
 var config = require('config-lite');
 var routes = require('./routes');
 var pkg = require('./package');
+var mongoose = require("./config/mongoose");
+
+var db = mongoose()
 
 var app = express();
 
@@ -40,7 +43,6 @@ app.locals.site = {
   author:pkg.author,
   description: pkg.description
 };
-
 
 // 路由
 routes(app);

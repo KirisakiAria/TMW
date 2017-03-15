@@ -1,52 +1,102 @@
-	<%- include('../public/header') %>
-	<main>
-		<div class="mask"></div>
-		<div class="trans"></div>
-		<h2 class="trigger-headline trigger-headline--hidden">
-			<span>F</span>
-			<span>A</span>
-			<span>I</span>
-			<span>T</span>
-			<span>H</span>
-		</h2>
-		<h4 class="animeh4">
-			<span class="lettergroup">
-				<span class="letter">T</span>
-				<span class="letter">h</span>
-				<span class="letter">a</span>
-				<span class="letter">t</span>
-				<span class="letter">'</span>
-				<span class="letter">s</span>
-			</span>
-			<span class="lettergroup">
-				<span class="letter">M</span>
-				<span class="letter">y</span>
-			</span>
-			<span class="lettergroup">
-				<span class="letter">W</span>
-				<span class="letter">a</span>
-				<span class="letter">y</span>
-				<span class="letter lastletter"> <i class="fa fa-heart"></i>
-				</span>
-			</span>
-		</h4>
-		<!-- <canvas id="firework" class="fireworks"></canvas>
-	-->
-	<div id="segmenter" class="segmenter" style="background-image: url(../img/ed.jpg);"></div>
-	<div class="bottom-nav text-center">
-		<button id="btn-effect" class="button btn-effect">
-			<span>S</span>
-			<span>T</span>
-			<span>A</span>
-			<span>R</span>
-			<span>T</span>
-		</button>
+<%- include('../public/header') %>
+<body class="tmw">
+<nav id="menu" class="menu">
+	<button class="menu__handle">
+		<span>Menu</span>
+	</button>
+	<div class="menu__inner">
+		<ul>
+			<li>
+				<a href="#">
+					<span>H</span>
+					<span class="mainspan">OM</span>
+					<span>E</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<span>D</span>
+					<span class="mainspan">AIL</span>
+					<span>Y</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<span>N</span>
+					<span class="mainspan">EW</span>
+					<span>S</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<span>S</span>
+					<span class="mainspan">HAR</span>
+					<span>E</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<span>PR</span>
+					<span class="mainspan">OJE</span>
+					<span>CT</span>
+				</a>
+			</li>
+		</ul>
 	</div>
-	</main>
-	<script src="../js/imagesloaded.pkgd.min.js"></script>
-	<script src="../js/SegmentEffect.js"></script>
-	<script src="../js/common.js"></script>
-	<script>
+	<div class="morph-shape" data-morph-open="M-10,100c0,0,44-95,290-95c232,0,290,95,290,95" data-morph-close="M-10,100c0,0,44,95,290,95c232,0,290-95,290-95">
+		<svg width="100%" height="100%" viewBox="0 0 560 200" preserveAspectRatio="none">
+			<path fill="none" d="M-10,100c0,0,44,0,290,0c232,0,290,0,290,0"/>
+		</svg>
+	</div>
+</nav>
+<main>
+	<div class="mask"></div>
+	<div class="trans"></div>
+	<h2 class="trigger-headline trigger-headline--hidden">
+		<span>F</span>
+		<span>A</span>
+		<span>I</span>
+		<span>T</span>
+		<span>H</span>
+	</h2>
+	<h4 class="animeh4">
+		<span class="lettergroup">
+			<span class="letter">T</span>
+			<span class="letter">h</span>
+			<span class="letter">a</span>
+			<span class="letter">t</span>
+			<span class="letter">'</span>
+			<span class="letter">s</span>
+		</span>
+		<span class="lettergroup">
+			<span class="letter">M</span>
+			<span class="letter">y</span>
+		</span>
+		<span class="lettergroup">
+			<span class="letter">W</span>
+			<span class="letter">a</span>
+			<span class="letter">y</span>
+			<span class="letter lastletter"> <i class="fa fa-heart"></i>
+			</span>
+		</span>
+	</h4>
+	<!-- <canvas id="firework" class="fireworks"></canvas>
+-->
+<div id="segmenter" class="segmenter" style="background-image: url(../img/ed.jpg);"></div>
+<div class="bottom-nav text-center">
+	<button id="btn-effect" class="button btn-effect">
+		<span>S</span>
+		<span>T</span>
+		<span>A</span>
+		<span>R</span>
+		<span>T</span>
+	</button>
+</div>
+</main>
+<script src="../js/imagesloaded.pkgd.min.js"></script>
+<script src="../js/SegmentEffect.js"></script>
+<script src="../js/common.js"></script>
+<script>
 		//为了性能，有些东西用原生
 		$(function() {
 			(function() {
@@ -141,7 +191,71 @@
 					}
 				});
 			})();
+			//菜单
+			(function() {
+
+				function SVGMenu(el, options) {
+					this.el = el;
+					this.init();
+				}
+
+				SVGMenu.prototype.init = function() {
+					this.trigger = this.el.querySelector('button.menu__handle');
+					this.shapeEl = this.el.querySelector('div.morph-shape');
+
+					var s = Snap(this.shapeEl.querySelector('svg'));
+					this.pathEl = s.select('path');
+					this.paths = {
+						reset: this.pathEl.attr('d'),
+						open: this.shapeEl.getAttribute('data-morph-open'),
+						close: this.shapeEl.getAttribute('data-morph-close')
+					};
+
+					this.isOpen = false;
+
+					this.initEvents();
+				};
+
+				SVGMenu.prototype.initEvents = function() {
+					this.trigger.addEventListener('click', this.toggle.bind(this));
+				};
+
+				SVGMenu.prototype.toggle = function() {
+					var self = this;
+					var $el = $(self.el);
+					if (this.isOpen) {
+						$el.removeClass('menu--anim');
+						setTimeout(function() {
+							$el.removeClass('menu--open');
+							$(".mask").removeClass("act");
+						}, 250);
+						this.pathEl.stop().animate({
+							'path': this.paths.close
+						}, 350, mina.easeout, function() {
+							self.pathEl.stop().animate({
+								'path': self.paths.reset
+							}, 700, mina.elastic);
+						});
+					} else {
+						$el.addClass('menu--anim');
+						setTimeout(function() {
+							$el.addClass('menu--open');
+							$(".mask").addClass("act");
+						}, 250);
+
+						this.pathEl.stop().animate({
+							'path': this.paths.open
+						}, 350, mina.backin, function() {
+							self.pathEl.stop().animate({
+								'path': self.paths.reset
+							}, 700, mina.elastic);
+						});
+					}
+					this.isOpen = !this.isOpen;
+				};
+				new SVGMenu(document.getElementById('menu'));
+			})();
 		});
 	</script>
-	</body>
-	</html>
+</body>
+</html>

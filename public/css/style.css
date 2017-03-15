@@ -784,7 +784,10 @@ main
 }
 
 /*首页菜单*/
-.mask
+
+/*蒙层*/
+.mask,
+.mask-in
 {
     position: fixed;
     z-index: 999;
@@ -803,7 +806,13 @@ main
     background-image: -webkit-linear-gradient(to top, #3f474e 0%,rgba(45,52,58,.5) 60%, transparent);
     background-image:         linear-gradient(to top,#3f474e 0%, rgba(45,52,58,.5) 60%,transparent);
 }
-.mask.act
+.mask-in
+{
+    background-image: -webkit-linear-gradient(to right, #3f474e 0%,rgba(45,52,58,.5) 60%, transparent);
+    background-image:         linear-gradient(to right,#3f474e 0%, rgba(45,52,58,.5) 60%,transparent);
+}
+.mask.act,
+.mask-in.act
 {
     visibility: visible;
 
@@ -1161,7 +1170,7 @@ main
 .tmw-in .menu
 {
     position: fixed;
-    z-index: 100;
+    z-index: 1000;
     top: 3em;
     bottom: 3em;
     left: 0;
@@ -1206,38 +1215,46 @@ main
     height: 100%;
     padding: 0 140px 2em 0;
 }
-.tmw-in .menu ul {
-    list-style: none;
-    padding: 0;
+.tmw-in .menu ul
+{
     margin: 0;
+    padding: 0;
+
+    list-style: none;
 }
 
-.tmw-in .menu ul li {
+.tmw-in .menu ul li
+{
     margin: 0 0 2em 0;
+
+    -webkit-transition: -webkit-transform .6s;
+            transition:         transform .6s;
     -webkit-transform: translate3d(-150px, 0, 0);
-    transform: translate3d(-150px, 0, 0);
-    -webkit-transition: -webkit-transform 0.6s;
-    transition: transform 0.6s;
+            transform: translate3d(-150px, 0, 0);
 }
 
-.tmw-in .menu.menu--anim ul li {
+.tmw-in .menu.menu--anim ul li
+{
     -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
 }
 
-.tmw-in .menu ul li:first-child {
-    -webkit-transition-delay: 0.3s;
-    transition-delay: 0.3s;
+.tmw-in .menu ul li:first-child
+{
+    -webkit-transition-delay: .3s;
+            transition-delay: .3s;
 }
 
-.tmw-in .menu ul li:nth-child(2) {
-    -webkit-transition-delay: 0.2s;
-    transition-delay: 0.2s;
+.tmw-in .menu ul li:nth-child(2)
+{
+    -webkit-transition-delay: .2s;
+            transition-delay: .2s;
 }
 
-.tmw-in .menu ul li:nth-child(3) {
-    -webkit-transition-delay: 0.1s;
-    transition-delay: 0.1s;
+.tmw-in .menu ul li:nth-child(3)
+{
+    -webkit-transition-delay: .1s;
+            transition-delay: .1s;
 }
 
 .tmw-in .menu__handle
@@ -1250,6 +1267,11 @@ main
     width: 30px;
     height: 24px;
     padding: 0;
+
+    -webkit-transition: -webkit-transform .5s;
+            transition:         transform .5s;
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
 
     border: none;
     outline: none;
@@ -1289,8 +1311,8 @@ main
     width: 100%;
     height: 2px;
 
-    -webkit-transition: opacity .25s;
-            transition: opacity .25s;
+    -webkit-transition: all .25s;
+            transition: all .25s;
     text-indent: 200%;
 }
 
@@ -1310,7 +1332,21 @@ main
 {
     opacity: 0;
 }
+.tmw-in .menu__handle:hover::before
+{
+    -webkit-transform: translate3d(0, -5px, 0);
+            transform: translate3d(0, -5px, 0);
+}
 
+.tmw-in .menu__handle:hover::after
+{
+    -webkit-transform: translate3d(0, 5px, 0);
+            transform: translate3d(0, 5px, 0);
+}
+.tmw-in .menu__handle:hover span
+{
+    left: 5px;
+}
 .tmw-in .menu--open .menu__handle::before
 {
     -webkit-transform: rotate3d(0, 0, 1, 45deg);
@@ -1322,7 +1358,11 @@ main
     -webkit-transform: rotate3d(0, 0, 1, -45deg);
             transform: rotate3d(0, 0, 1, -45deg);
 }
-
+.tmw-in .menu--open .menu__handle:hover
+{
+    -webkit-transform: rotate3d(0, 0, 1, 90deg);
+            transform: rotate3d(0, 0, 1, 90deg);
+}
 .tmw-in .morph-shape
 {
     position: absolute;
@@ -1369,6 +1409,28 @@ main
         margin-right: 10px;
         margin-left: 10px;
     }
+}
+/*尾部*/
+footer
+{
+    font-family: 'VD','微软雅黑';
+    margin-top: 40px;
+}
+footer div
+{
+    line-height: 2 ;
+
+    letter-spacing: 1px;
+
+    color: #fff;
+}
+footer div a
+{
+    color: #fff;
+}
+footer div a:hover
+{
+    color: #aaa;
 }
 /*新闻*/
 .news .title
@@ -1452,7 +1514,7 @@ main
 .news main
 {
     padding-top: 30px;
-    padding-bottom: 140px;
+    padding-bottom: 60px;
 
     background: url(../img/bg.jpg) center;
     background-size: cover;
