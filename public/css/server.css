@@ -1,0 +1,138 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+body
+{
+    font-family: 'VD','Arial','微软雅黑';
+}
+header
+{
+    line-height: 50px;
+
+    height: 50px;
+    padding-right: 50px;
+    padding-left: 50px;
+
+    background: rgb(44, 62, 80);
+}
+header h4
+{
+    line-height: 50px;
+
+    height: 100%;
+    margin-right: 30px;
+}
+header h4,
+header h6
+{
+    display: inline-block;
+
+    color: rgb(236, 240, 241);
+}
+header h6
+{
+    margin-right: 10px;
+}
+nav
+{
+    float: left;
+
+    width: 10%;
+    height:         calc(100vh - 50px);
+    height: -webkit-calc(100vh - 50px);
+    padding-top: 15px;
+
+    background: #404040;
+}
+.editarea
+{
+    width: 90%;
+}
+nav li
+{
+    font-size: 14px;
+
+    position: relative;
+
+    -webkit-transition: all .3s;
+            transition: all .3s;
+}
+nav li .maina
+{
+    font-size: 16px;
+
+    position: relative;
+}
+.fa
+{
+    margin-right: 5px;
+    margin-left: -30px;
+
+    color: #999;
+}
+nav li a
+{
+    display: inline-block;
+
+    color: #404040;
+}
+nav .mainli a
+{
+    line-height: 40px;
+
+    width: 100%;
+    height: 40px;
+    padding-left: 64px;
+
+    color: #999;
+}
+nav .mainli ul
+{
+    display: none;
+}
+nav .mainli:first-of-type ul
+{
+    display: block;
+}
+nav .mainli li.act,
+nav .mainli li:hover
+{
+    background: #4c4c4c;
+}
+nav .mainli li.act::after,
+nav .mainli li:hover::after
+{
+    opacity: 1;
+}
+nav .mainli li::after
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 5px;
+    height: 100%;
+
+    content: '';
+    -webkit-transition: all .3s;
+            transition: all .3s;
+
+    opacity: 0;
+    background: #dcdcdc;
+}
+nav .mainli li.act a,
+nav .mainli li:hover a
+{
+    color: #efefef;
+}
+nav .mainli li a
+{
+    padding-left: 64px;
+}

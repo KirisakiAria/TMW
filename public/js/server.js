@@ -1,0 +1,12 @@
+$(function(){
+	$("a").click(function(e){
+		e.preventDefault();
+	});
+	$(".maina").click(function(){
+		$(this).next().slideToggle();
+	});
+	$(".mainul").find("a").click(function(){
+		$(".mainul").find("a").parent().removeClass("act");
+		$(this).parent().addClass("act");
+	})
+})

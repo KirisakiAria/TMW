@@ -1,164 +1,5 @@
 ﻿@charset 'utf-8';
 /* CSS Document */
-html
-{
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-*,
-*::after,
-*::before
-{
-    line-height: 1;
-
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-
-    -webkit-font-smoothing: subpixel-antialiased;
-}
-a
-{
-    -webkit-transition: all .3s ease-out 0s;
-       -moz-transition: all .3s ease-out 0s;
-        -ms-transition: all .3s ease-out 0s;
-         -o-transition: all .3s ease-out 0s;
-            transition: all .3s ease-out 0s;
-    text-decoration: none;
-}
-a:hover
-{
-    text-decoration: none;
-}
-a:focus
-{
-    text-decoration: none;
-
-    outline: none;
-}
-ul,
-ol,
-li
-{
-    margin: 0;
-
-    list-style-type: none;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-{
-    font-weight: normal;
-
-    margin: 0;
-}
-body,
-button,
-input,
-select,
-textarea
-{
-    font-family: 'Arial','微软雅黑';
-    font-size: 14px;
-    line-height: 1;
-
-    margin: 0;
-
-    color: #000;
-    border: 0;
-    outline: none;
-    background: none;
-}
-body
-{
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-label
-{
-    font-weight: normal;
-
-    margin-bottom: 0;
-}
-img
-{
-    vertical-align: middle;
-}
-.text-center
-{
-    text-align: center;
-}
-.disnone
-{
-    display: none !important;
-}
-.clearfix:after
-{
-    display: block;
-    clear: both;
-
-    height: 0;
-
-    content: ' ';
-}
-.clearfix
-{
-    zoom: 1;
-}
-.cp
-{
-    cursor: pointer;
-}
-.fb
-{
-    font-weight: bold;
-}
-.fl
-{
-    float: left;
-}
-.fr
-{
-    float: right;
-}
-.l,
-.r
-{
-    width: 50%;
-}
-.c_333
-{
-    color: #333;
-}
-.c_666
-{
-    color: #666;
-}
-.c_999
-{
-    color: #999;
-}
-.c_w
-{
-    color: #fff;
-}
-.bg_w
-{
-    background: #fff;
-}
-.c_b
-{
-    color: #000;
-}
-.bg_b
-{
-    background: #000;
-}
 /*按钮*/
 .btn--hidden
 {
@@ -1211,7 +1052,8 @@ main
 
     overflow-y: auto;
 
-    width: calc(100% + 25px);
+    width:         calc(100% + 25px);
+    width: -webkit-calc(100% + 25px);
     height: 100%;
     padding: 0 140px 2em 0;
 }
@@ -1414,6 +1256,7 @@ main
 footer
 {
     font-family: 'VD','微软雅黑';
+
     margin-top: 40px;
 }
 footer div
@@ -1439,7 +1282,8 @@ footer div a:hover
     display: -webkit-flex;
             flex-direction: column;
 
-    width: calc(100vw - 15px);
+    width:         calc(100vw - 15px);
+    width: -webkit-calc(100vw - 15px);
     height: 100vh;
 
     background: url(../img/ed2.jpg) center;
