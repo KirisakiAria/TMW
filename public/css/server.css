@@ -326,7 +326,11 @@ nav .mainli li a
 }
 .editarea form label
 {
-    margin-bottom: 15px;
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+.editarea .form-group {
+    margin-bottom: 30px;
 }
 .editarea button
 {

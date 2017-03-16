@@ -23,7 +23,7 @@ $(function() {
 					var date = moment(data[i].date).utc().zone(-8).format('YYYY-MM-DD HH:mm:ss');
 					var html = "<li class='clearfix'>" +
 						"<div>" + (i + 1) + "</div>" +
-						"<div>" + data[i].title + "</div>" +
+						"<div>" + data[i].titlel + "</div>" +
 						"<div>" + data[i].author + "</div>" +
 						"<div>" + date + "</div>" +
 						"<div>" + "<input type='checkbox' name=''>" +
@@ -34,7 +34,7 @@ $(function() {
 				}
 			},
 			error: function() {
-
+				alert("ajax好像出了些问题");
 			}
 		});
 	});
@@ -44,11 +44,20 @@ $(function() {
 		$(".addnews").removeClass("disnone");
 	});
 	//发表新闻
-	$("#submitnews").click(function(){
-		alert($(".addnews").find("form").serialize())
-		// $.ajax({
-		// 	url: window.location.href + "/createnews",
-		// 	data:$(".addnews").find("form").serialize()
-		// });
+	$("#submitnews").click(function(e) {
+		e.preventDefault();
+		$.ajax({
+			url: window.location.href + "/createnews",
+			data: $(".addnews").find("form").serialize(),
+			type: "POST",
+			success: function(data) {
+				if (data) {
+					alert(data);
+				}
+			},
+			error: function() {
+				alert("保存出错");
+			}
+		});
 	})
 })

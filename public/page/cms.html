@@ -23,7 +23,7 @@
 	<!--Favicons-->
 	<script src="../lib/jquery-3.1.1.min.js"></script>
 </head>
-<body class="tmw">
+<body>
 	<header class="clearfix">
 		<div class="fl">
 			<h4>That's My Way</h4>
@@ -114,22 +114,24 @@
 					</div>
 				</div>
 				<div class="addnews item">
-					<form>
+					<form enctype="multipart/form-data">
 						<div class="form-group">
 							<label for="titles">文章短标题</label>
-							<input type="text" class="form-control" id="titles" placeholder=""></div>
+							<input type="text" class="form-control" id="titles" name="titles" placeholder=""></div>
 						<div class="form-group">
 							<label for="listimg">文章列表图片</label>
 							<div class="filediv">
 								<i class="fa fa-file-image-o"></i>
-								<input type="file" id="listimg"><label for="listimg">添加图片</label></div>
+								<input type="file" id="listimg" name="listimg">
+								<label for="listimg">添加图片</label>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="titlel">文章长标题</label>
-							<input type="text" class="form-control" id="titlel" placeholder=""></div>
+							<input type="text" class="form-control" id="titlel" name="titlel" placeholder=""></div>
 						<div class="form-group">
 							<label for="content">文章内容</label>
-							<textarea class="form-control" id="content" rows="5"></textarea>
+							<textarea class="form-control" id="content" name="content" rows="5"></textarea>
 						</div>
 						<button id="submitnews" type="submit" class="btn btn-success">保存</button>
 					</form>
