@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 
 module.exports = function() {
 	var db = mongoose.connect(config.mongodb);
-	require("../models/increment.modle.js");
-	require("../models/news.server.modle.js");
+	require("../models/increment.model");
+	require("../models/news.server.model");
 	return db;
 }
