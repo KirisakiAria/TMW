@@ -22,6 +22,7 @@
 	<![endif]-->
 	<!--Favicons-->
 	<script src="../lib/jquery-3.1.1.min.js"></script>
+	<script src="../lib/moment.min.js"></script>
 </head>
 <body class="tmw">
 	<header class="clearfix">
@@ -62,11 +63,14 @@
 							账户管理
 						</a>
 						<ul class="mainul">
-							<li>
+							<li class="act">
 								<a href="">查看账户</a>
 							</li>
 							<li>
 								<a href="">添加账户</a>
+							</li>
+							<li>
+								<a href="">删除账户</a>
 							</li>
 						</ul>
 					</li>
@@ -76,18 +80,24 @@
 							新闻管理
 						</a>
 						<ul class="mainul">
-							<li class="act">
+							<li>
 								<a id="watchnews" href="">查看新闻</a>
 							</li>
 							<li>
-								<a id="addnews" href="">添加新闻</a>
+								<a href="">添加新闻</a>
+							</li>
+							<li>
+								<a href="">修改新闻</a>
+							</li>
+							<li>
+								<a href="">删除新闻</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 			</nav>
 			<div class="editarea">
-				<div class="news item disnone">
+				<div class="news">
 					<div class="listheader">
 						<ul class="clearfix">
 							<li>ID</li>
@@ -99,40 +109,8 @@
 					</div>
 					<div class="listbody">
 						<ul>
-							<li class="clearfix">
-								<div>1</div>
-								<div>啊啊啊啊啊啊</div>
-								<div>admin</div>
-								<div>2017-03-16</div>
-								<div>
-									<input type="checkbox" name="">
-									<a href="">编辑</a>
-									<a href="">删除</a>
-								</div>
-							</li>
 						</ul>
 					</div>
-				</div>
-				<div class="addnews item">
-					<form>
-						<div class="form-group">
-							<label for="titles">文章短标题</label>
-							<input type="text" class="form-control" id="titles" placeholder=""></div>
-						<div class="form-group">
-							<label for="listimg">文章列表图片</label>
-							<div class="filediv">
-								<i class="fa fa-file-image-o"></i>
-								<input type="file" id="listimg"><label for="listimg">添加图片</label></div>
-						</div>
-						<div class="form-group">
-							<label for="titlel">文章长标题</label>
-							<input type="text" class="form-control" id="titlel" placeholder=""></div>
-						<div class="form-group">
-							<label for="content">文章内容</label>
-							<textarea class="form-control" id="content" rows="5"></textarea>
-						</div>
-						<button id="submitnews" type="submit" class="btn btn-success">保存</button>
-					</form>
 				</div>
 			</div>
 		</div>

@@ -1,3 +1,7 @@
+.disnone
+{
+    display: none;
+}
 h1,
 h2,
 h3,
@@ -10,50 +14,143 @@ h6
 }
 body
 {
-    font-family: 'VD','Arial','微软雅黑';
+    font-family: 'HB','Arial','微软雅黑';
+
+    letter-spacing: 1px;
 }
 header
 {
-    line-height: 50px;
+    line-height: 70px;
 
-    height: 50px;
-    padding-right: 50px;
-    padding-left: 50px;
+    height: 70px;
 
-    background: rgb(44, 62, 80);
+    background: #eaeaea;
 }
 header h4
 {
-    line-height: 50px;
+    line-height: 70px;
 
+    width: 200px;
     height: 100%;
-    margin-right: 30px;
+
+    text-align: center;
+
+    background: #ea2e49;
+}
+header h4 .fa
+{
+    font-size: 12px;
 }
 header h4,
-header h6
+header h5
 {
     display: inline-block;
 
     color: rgb(236, 240, 241);
 }
-header h6
+header h5
 {
-    margin-right: 10px;
+    font-family: 'VD';
+    font-weight: bold;
+
+    margin-left: 34px;
+
+    color: #9c9c9c;
+}
+header .fa
+{
+    margin-right: 20px;
+    margin-left: 3px;
+
+    color: #fff;
+}
+header form
+{
+    position: relative;
+
+    display: inline-block;
+
+    width: 300px;
+    height: 100%;
+    margin-left: 25px;
+}
+header form input
+{
+    width: 100%;
+    height: 40px;
+    padding: 5px 15px;
+    padding-right: 60px;
+
+    color: #666;
+    border: 1px solid #d1d1d1;
+    border-radius: 20px;
+}
+header form button
+{
+    position: absolute;
+    top: 9px;
+    right: 0;
+}
+header form button .fa
+{
+    font-size: 20px;
+
+    margin-right: 20px;
+}
+header .fr
+{
+    line-height: 70px;
+
+    height: 100%;
+    padding-right: 20px;
+    padding-left: 20px;
+
+    background: #77c4d3;
+}
+header .fr i
+{
+    font-size: 18px;
+
+    margin-right: 12px;
+    margin-left: 12px;
+
+    color: #fff;
+}
+header .user
+{
+    background: transparent;
+}
+header .avatar
+{
+    display: inline-block;
+    overflow: hidden;
+
+    width: 40px;
+    height: 40px;
+    margin-right: 30px;
+    margin-bottom: 7px;
+    margin-left: 20px;
+
+    vertical-align: middle;
+
+    border-radius: 50%;
+    background: #fff;
+}
+header .avatar img
+{
+    max-width: 100%;
 }
 nav
 {
     float: left;
 
-    width: 10%;
-    height:         calc(100vh - 50px);
-    height: -webkit-calc(100vh - 50px);
+    width: 200px;
+    height:         calc(100vh - 70px);
+    height: -webkit-calc(100vh - 70px);
+    min-height: 600px;
     padding-top: 15px;
 
-    background: #404040;
-}
-.editarea
-{
-    width: 90%;
+    background: #eaeaea;
 }
 nav li
 {
@@ -70,10 +167,13 @@ nav li .maina
 
     position: relative;
 }
-.fa
+nav .fa
 {
+    width: 20px;
     margin-right: 5px;
     margin-left: -30px;
+
+    text-align: center;
 
     color: #999;
 }
@@ -91,20 +191,20 @@ nav .mainli a
     height: 40px;
     padding-left: 64px;
 
-    color: #999;
+    color: #555;
 }
-nav .mainli ul
+/*nav .mainli ul
 {
     display: none;
 }
 nav .mainli:first-of-type ul
 {
     display: block;
-}
+}*/
 nav .mainli li.act,
 nav .mainli li:hover
 {
-    background: #4c4c4c;
+    background: #ead7da;
 }
 nav .mainli li.act::after,
 nav .mainli li:hover::after
@@ -125,14 +225,144 @@ nav .mainli li::after
             transition: all .3s;
 
     opacity: 0;
-    background: #dcdcdc;
+    background: #ea2e49;
 }
 nav .mainli li.act a,
 nav .mainli li:hover a
 {
-    color: #efefef;
+    color: #ea2e49;
 }
 nav .mainli li a
 {
     padding-left: 64px;
+}
+.editarea
+{
+    font-family: 'VD','微软雅黑';
+
+    float: left;
+
+    width:         calc(100% - 200px);
+    width: -webkit-calc(100% - 200px);
+    padding: 30px;
+}
+.editarea li
+{
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    color: #666;
+}
+.editarea .listheader li
+{
+    font-size: 16px;
+
+    float: left;
+
+    text-align: center;
+    letter-spacing: .3px;
+
+    border-right: 1px solid #e2e2e2;
+    background: #f2f2f2;
+}
+.editarea .listheader li:first-child,
+.editarea .listbody li > div:first-child
+{
+    width: 100px;
+}
+.editarea .listheader li:nth-child(2),
+.editarea .listbody li > div:nth-child(2)
+{
+    overflow: hidden;
+
+    width:         calc(100% - 670px);
+    width: -webkit-calc(100% - 670px);
+    padding-right: 15px;
+    padding-left: 15px;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.editarea .listbody li > div:nth-child(2)
+{
+    text-align: left;
+}
+.editarea .listheader li:nth-child(3),
+.editarea .listbody li > div:nth-child(3)
+{
+    width: 150px;
+}
+.editarea .listheader li:nth-child(4),
+.editarea .listbody li > div:nth-child(4)
+{
+    width: 200px;
+}
+.editarea .listheader li:nth-child(5),
+.editarea .listbody li > div:nth-child(5)
+{
+    width: 220px;
+
+    border-right: none;
+}
+.editarea .listbody li > div
+{
+    float: left;
+
+    text-align: center;
+}
+.editarea .listbody li > div a,
+.editarea .listbody li > div input
+{
+    margin-right: 5px;
+    margin-left: 5px;
+
+    vertical-align: bottom;
+
+    color: #ea2e49;
+}
+.editarea .listbody li
+{
+    border-bottom: 1px solid #f1f1f1;
+}
+.editarea form label
+{
+    margin-bottom: 15px;
+}
+.editarea button
+{
+    -webkit-transition: all .3s ease 0s;
+            transition: all .3s ease 0s;
+}
+.editarea textarea
+{
+    resize: none;
+}
+.editarea .filediv
+{
+    line-height: 59px;
+
+    position: relative;
+
+    height: 59px;
+    padding-left: 70px;
+}
+.editarea .filediv input,
+.editarea .filediv i
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: inline-block;
+}
+.editarea .filediv i
+{
+    font-size: 60px;
+}
+.editarea .filediv input
+{
+    width: 52px;
+    height: 60px;
+
+    opacity: 0;
 }
