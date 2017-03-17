@@ -6,7 +6,7 @@ $(function() {
 		outDuration: 800,
 		linkElement: '.animsition-link',
 		loading: true,
-		loadingParentElement: 'html',
+		loadingParentElement: 'body',
 		loadingClass: 'loading',
 		loadingInner:'<img src="../img/loader.gif">',
 	 	timeout: false,
