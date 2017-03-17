@@ -1,5 +1,5 @@
 $(function() {
-	
+
 	$(".animsition").animsition({
 		inClass: 'zoom-in',
 		outClass: 'zoom-out',
@@ -9,8 +9,14 @@ $(function() {
 		loading: true,
 		loadingParentElement: 'body',
 		loadingClass: 'loading',
-		loadingInner:'<img src="../img/loader.gif">',
-	 	timeout: false,
+		loadingInner: '<div class="loader">' +
+			'<div class="loader-inner ball-scale-ripple-multiple">' +
+			'<div></div>' +
+			'<div></div>' +
+			'<div></div>' +
+			' </div>' +
+			' </div>',
+		timeout: false,
 		timeoutCountdown: 5000,
 		onLoadEvent: true,
 		browser: ['animation-duration', '-webkit-animation-duration'],
