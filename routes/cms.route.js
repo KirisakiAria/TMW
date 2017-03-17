@@ -23,14 +23,22 @@ router.get('/watchnews', function(req, res, next) {
 	});
 });
 
-//创建计数器实体，序列为0
-var inc = new Increment({
-	index: 0
-});
-
-inc.save(function(err, doc) {
+//先查一下有没有计数器
+Increment.find({}, function(err, doc) {
 	if (err) {
-		return console.log(err);
+		console.log(err);
+		return;
+	} 
+	//如果没有则创建计数器实体，index设置为0
+	if (!doc[0]) {
+		var inc = new Increment({
+			index: 0
+		});
+		inc.save(function(err, doc) {
+			if (err) {
+				return console.log(err);
+			}
+		});
 	}
 });
 //添加新闻
@@ -39,7 +47,7 @@ router.post('/createnews', function(req, res, next) {
 	if (req) {
 		res.send(success);
 	}
-	//查询出实体
+	//查询出计数器实体
 	Increment.findOne(function(err, doc) {
 		if (err) {
 			console.log(err);

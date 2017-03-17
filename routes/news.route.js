@@ -16,7 +16,6 @@ router.get('/', function(req, res, next) {
 			title: "NEWS",
 			docs:docs
 		});
-
 	});
 });
 module.exports = router;

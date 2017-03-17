@@ -1,5 +1,9 @@
 ﻿@charset 'utf-8';
 /* CSS Document */
+html {
+    background: #f0f0f0;
+}
+
 /*按钮*/
 .btn--hidden
 {
@@ -853,95 +857,6 @@ main
 {
     -webkit-animation-name: rubberBand;
             animation-name: rubberBand;
-}
-@-webkit-keyframes rubberBand
-{
-    from
-    {
-        -webkit-transform: scale3d(1, 1, 1);
-                transform: scale3d(1, 1, 1);
-    }
-
-    30%
-    {
-        -webkit-transform: scale3d(1.25, .75, 1);
-                transform: scale3d(1.25, .75, 1);
-    }
-
-    40%
-    {
-        -webkit-transform: scale3d(.75, 1.25, 1);
-                transform: scale3d(.75, 1.25, 1);
-    }
-
-    50%
-    {
-        -webkit-transform: scale3d(1.15, .85, 1);
-                transform: scale3d(1.15, .85, 1);
-    }
-
-    65%
-    {
-        -webkit-transform: scale3d(.95, 1.05, 1);
-                transform: scale3d(.95, 1.05, 1);
-    }
-
-    75%
-    {
-        -webkit-transform: scale3d(1.05, .95, 1);
-                transform: scale3d(1.05, .95, 1);
-    }
-
-    to
-    {
-        -webkit-transform: scale3d(1, 1, 1);
-                transform: scale3d(1, 1, 1);
-    }
-}
-
-@keyframes rubberBand
-{
-    from
-    {
-        -webkit-transform: scale3d(1, 1, 1);
-                transform: scale3d(1, 1, 1);
-    }
-
-    30%
-    {
-        -webkit-transform: scale3d(1.25, .75, 1);
-                transform: scale3d(1.25, .75, 1);
-    }
-
-    40%
-    {
-        -webkit-transform: scale3d(.75, 1.25, 1);
-                transform: scale3d(.75, 1.25, 1);
-    }
-
-    50%
-    {
-        -webkit-transform: scale3d(1.15, .85, 1);
-                transform: scale3d(1.15, .85, 1);
-    }
-
-    65%
-    {
-        -webkit-transform: scale3d(.95, 1.05, 1);
-                transform: scale3d(.95, 1.05, 1);
-    }
-
-    75%
-    {
-        -webkit-transform: scale3d(1.05, .95, 1);
-                transform: scale3d(1.05, .95, 1);
-    }
-
-    to
-    {
-        -webkit-transform: scale3d(1, 1, 1);
-                transform: scale3d(1, 1, 1);
-    }
 }
 .tmw .menu__handle::before,
 .tmw .menu__handle::after

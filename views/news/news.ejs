@@ -1,5 +1,5 @@
 <%- include('../public/header') %>
-<body class="news tmw-in">
+<body class="news tmw-in animsition">
 <%- include('../public/nav') %>
 <div class="title">
 	<h1>NEWS</h1>
@@ -12,7 +12,8 @@
 	<div class="mask-in"></div>
 	<section class="content">
 		<%var length = docs.length<6?docs.length:6; for(var i=0; i<length; i++) { %>
-		<a href="#" class="tilter tilter">
+		<a href="javascript:;" data-href=<%="acticle"+docs[i].id%>
+			class="tilter tilter">
 			<figure class="tilter__figure">
 				<img class="tilter__image" src="../img/1.jpg" alt="" />
 				<div class="tilter__deco tilter__deco--shine">
@@ -53,7 +54,6 @@
 		</ul>
 	</section>
 	<%- include('../public/footer') %></main>
-<script src="../js/imagesloaded.pkgd.min.js"></script>
 <script src="../js/hovereffect.js"></script>
 <script src="../js/nav.js"></script>
 <script src="../js/common.js"></script>
