@@ -7,7 +7,7 @@ $(function() {
 		linkElement: '.animsition-link',
 		loading: true,
 		loadingParentElement: 'html',
-		loadingClass: 'animsition-loading',
+		loadingClass: 'loading',
 		loadingInner:'<img src="../img/loader.gif">',
 	 	timeout: false,
 		timeoutCountdown: 5000,
