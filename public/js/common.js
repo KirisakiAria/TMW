@@ -1,4 +1,5 @@
 $(function() {
+	
 	$(".animsition").animsition({
 		inClass: 'zoom-in',
 		outClass: 'zoom-out',
