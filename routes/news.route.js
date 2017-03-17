@@ -7,7 +7,7 @@ var News = mongoose.model("News");
 
 //新闻列表页
 router.get('/', function(req, res, next) {
-	News.find({}, function(err, docs) {
+	News.find({title:"test1"}, function(err, docs) {
 		if (err) {
 			console.log(err);
 			return next();
@@ -16,6 +16,7 @@ router.get('/', function(req, res, next) {
 			title: "NEWS",
 			docs:docs
 		});
+
 	});
 });
 module.exports = router;
