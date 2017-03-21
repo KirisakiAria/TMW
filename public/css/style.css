@@ -126,6 +126,10 @@ html
     -webkit-animation-fill-mode: both;
             animation-fill-mode: both;
 }
+.overflow-hidden
+{
+    overflow: hidden !important;
+}
 
 /*按钮*/
 .btn--hidden
@@ -1337,7 +1341,6 @@ footer div a:hover
 .news h4
 {
     font-family: 'HB';
-    font-size: 48px;
 
     position: relative;
 
@@ -1348,6 +1351,8 @@ footer div a:hover
 }
 .news h1
 {
+    font-size: 60px;
+
     margin-bottom: 20px;
 }
 .news .h4div
@@ -1359,7 +1364,7 @@ footer div a:hover
 .news h4
 {
     font-family: 'VD';
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 100;
 
     position: relative;
@@ -1530,6 +1535,8 @@ footer div a:hover
     position: relative;
 
     margin: 0;
+
+    white-space: nowrap;
 }
 .tilter__description
 {
@@ -1694,12 +1701,12 @@ footer div a:hover
 .cd-modal
 {
     position: fixed;
-    z-index: 3000;
+    z-index: 88;
     top: 0;
     left: 0;
 
     visibility: hidden;
-    overflow: hidden;
+    overflow-x: hidden;
 
     width: 100%;
     height: 100%;
@@ -1730,10 +1737,11 @@ footer div a:hover
     width: 45px;
     height: 45px;
 
-    -webkit-transition: visibility 0s .3s, opacity .3s 0s, -webkit-transform .3s 0s;
-            transition: visibility 0s .3s, opacity .3s 0s, -webkit-transform .3s 0s;
-            transition: transform .3s 0s, visibility 0s .3s, opacity .3s 0s;
-            transition: transform .3s 0s, visibility 0s .3s, opacity .3s 0s, -webkit-transform .3s 0s;
+    cursor: pointer;
+    -webkit-transition: visibility 0s .3s, opacity .3s 0s, -webkit-transform .3s 0s,background .3s 0s;
+            transition: visibility 0s .3s, opacity .3s 0s, -webkit-transform .3s 0s,background .3s 0s;
+            transition: transform .3s 0s, visibility 0s .3s, opacity .3s 0s,background .3s 0s;
+            transition: transform .3s 0s, visibility 0s .3s, opacity .3s 0s, -webkit-transform .3s 0s,background .3s 0s;
     -webkit-transform: scale(0);
             transform: scale(0);
     white-space: nowrap;
@@ -1752,10 +1760,12 @@ footer div a:hover
 
     display: inline-block;
 
-    width: 20px;
     height: 2px;
 
     content: '';
+    -webkit-transition: -webkit-transform .3s 0s;
+            transition:         transform .3s 0s,
+    width: 20px;
 }
 .cd-modal .modal-close::before
 {
@@ -1785,12 +1795,10 @@ footer div a:hover
 {
     visibility: visible;
 
-    -webkit-transition: visibility 0s 0s, opacity .3s 0s, -webkit-transform .3s 0s;
-            transition: visibility 0s 0s, opacity .3s 0s, -webkit-transform .3s 0s;
-            transition: transform .3s 0s, visibility 0s 0s, opacity .3s 0s;
-            transition: transform .3s 0s, visibility 0s 0s, opacity .3s 0s, -webkit-transform .3s 0s;
+    -webkit-transition: visibility 0s 0s, all .3s 0s;
+            transition: all .3s 0s
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
 
     opacity: 1;
 }
@@ -1813,10 +1821,6 @@ footer div a:hover
 
         width: 26px;
         height: 2px;
-    }
-    .cd-modal p
-    {
-        font-size: 2rem;
     }
 }
 
@@ -1876,50 +1880,32 @@ footer div a:hover
 {
     display: none;
 }
-.extinguisher-transition
-{
-    font-family: 'Merriweather Sans', sans-serif;
-
-    color: #f1faee;
-}
-.extinguisher-transition h1,
-.extinguisher-transition h2
-{
-    font-family: 'Merriweather', serif;
-    font-size: 3.2rem;
-
-    margin-bottom: .4em;
-}
-.extinguisher-transition .cd-btn
-{
-    color: #f1faee;
-    border-radius: 50em;
-    background: #1c3458;
-}
-.extinguisher-transition .cd-main-content
-{
-    background: #e93741;
-}
 .extinguisher-transition .cd-modal
 {
-    background: #f1faee;
-}
-.extinguisher-transition .cd-modal .modal-content
-{
-    color: #437a9f;
+    background: #fff;
 }
 .extinguisher-transition .cd-modal .modal-close::before,
 .extinguisher-transition .cd-modal .modal-close::after
 {
-    background: #f1faee;
+    background: #666;
 }
 .extinguisher-transition .cd-modal .modal-close
 {
-    background: #cdd5ca;
+    background: #fff;
 }
 .extinguisher-transition .cd-modal .modal-close:hover
 {
-    background: #a9afa7;
+    background: #ccc;
+}
+.extinguisher-transition .cd-modal .modal-close:hover::before
+{
+    -webkit-transform: scale(.8) rotate(45deg);
+            transform: scale(.8) rotate(45deg);
+}
+.extinguisher-transition .cd-modal .modal-close:hover::after
+{
+    -webkit-transform: scale(.8) rotate(-45deg);
+            transform: scale(.8) rotate(-45deg);
 }
 .extinguisher-transition .cd-transition-layer .bg-layer
 {
@@ -1937,18 +1923,6 @@ footer div a:hover
 {
     -webkit-animation: cd-sequence .8s steps(24) forwards reverse;
             animation: cd-sequence .8s steps(24) forwards reverse;
-}
-@media only screen and (min-width: 768px)
-{
-    .extinguisher-transition h1
-    {
-        font-size: 6rem;
-    }
-    .extinguisher-transition h2
-    {
-        font-size: 5.4rem;
-        font-weight: 700;
-    }
 }
 @-webkit-keyframes cd-sequence
 {
@@ -1979,4 +1953,29 @@ footer div a:hover
         -webkit-transform: translateY(-50%) translateX(-98%);
                 transform: translateY(-50%) translateX(-98%);
     }
+}
+.news .cd-modal h3
+{
+    text-align: center;
+
+    color: #404040;
+}
+.news .cd-modal p
+{
+    font-size: 16px;
+    line-height: 1.6;
+
+    color: #818181;
+}
+.news .modalbg
+{
+    height: 400px;
+
+    background: url(../img/zedd.jpg) center ;
+    background-size: cover;
+}
+.cd-modal .modal-content
+{
+    padding-right: 300px;
+    padding-left: 300px;
 }

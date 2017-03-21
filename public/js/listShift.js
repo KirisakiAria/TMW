@@ -1,9 +1,9 @@
 jQuery(document).ready(function($) {
 	//cache some jQuery objects
 	var modalTrigger = $('.cd-modal-trigger'),
-		transitionLayer = $('.cd-transition-layer'),
-		transitionBackground = transitionLayer.children(),
-		modalWindow = $('.cd-modal');
+	transitionLayer = $('.cd-transition-layer'),
+	transitionBackground = transitionLayer.children(),
+	modalWindow = $('.cd-modal');
 
 	var frameProportion = 1.78, //png frame aspect ratio
 		frames = transitionLayer.data('frame'), //number of png frames
@@ -21,6 +21,7 @@ jQuery(document).ready(function($) {
 	//open modal window
 	modalTrigger.on('click', function(event) {
 		event.preventDefault();
+		$("html,body").addClass('overflow-hidden');
 		var modalId = $(event.target).attr('href');
 		transitionLayer.addClass('visible opening');
 		setTimeout(function() {
@@ -29,17 +30,26 @@ jQuery(document).ready(function($) {
 		}, 1000);
 		//过渡结束进行ajax
 		modalWindow.filter(modalId).get(0).addEventListener("transitionend", function() {
-			var json = {
-				time: new Date().getTime()
-			};
-			window.history.pushState(json, "", "/index");
+
 		});
+	});
+
+	//close modal window
+	modalWindow.on('click', '.modal-close', function(event) {
+		event.preventDefault();
+		transitionLayer.addClass('closing');
+		modalWindow.removeClass('visible');
+		transitionBackground.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function() {
+			transitionLayer.removeClass('closing opening visible');
+			transitionBackground.off('webkitAnimationEnd oanimationend msAnimationEnd animationend');
+		});
+		$("html,body").removeClass('overflow-hidden');
 	});
 
 	function setLayerDimensions() {
 		var windowWidth = $(window).width(),
-			windowHeight = $(window).height(),
-			layerHeight, layerWidth;
+		windowHeight = $(window).height(),
+		layerHeight, layerWidth;
 
 		if (windowWidth / windowHeight > frameProportion) {
 			layerWidth = windowWidth;

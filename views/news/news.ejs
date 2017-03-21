@@ -10,14 +10,21 @@
 		<h4 class="lasttitle">传说永不凋零</h4>
 	</div>
 	<main>
-		<div class="mask-in"></div>
-		<div  class="cd-modal" id="modal-1"></div>
-		<div class="cd-transition-layer" data-frame="25">
+		<section class="mask-in"></section>
+		<section class="cd-modal" id="cd-modal">
+			<div class="modal-close"></div>
+			<div class="modalbg"></div>
+			<div class="modal-content">
+				<h3>标题</h3>
+				<p>啊啊啊啊啊啊啊啊啊啊啊啊</p>
+			</div>
+		</section>
+		<section class="cd-transition-layer" data-frame="25">
 			<div class="bg-layer"></div>
-		</div>
+		</section>
 		<section class="content">
 			<%var length = docs.length<6?docs.length:6; for(var i=0; i<length; i++) { %>
-			<a href="#modal-1" class="tilter tilter cd-modal-trigger">
+			<a href="#cd-modal" class="tilter tilter cd-modal-trigger">
 				<figure class="tilter__figure">
 					<img class="tilter__image" src="../img/1.jpg" alt="" />
 					<div class="tilter__deco tilter__deco--shine">
