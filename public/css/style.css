@@ -1,9 +1,5 @@
 ﻿@charset 'utf-8';
 /* CSS Document */
-html
-{
-    background: #404040;
-}
 .loading
 {
     position: fixed;
@@ -120,7 +116,7 @@ html
     -webkit-animation: ball-scale-ripple-multiple 1.25s 0s infinite cubic-bezier(.21, .53, .56, .8);
             animation: ball-scale-ripple-multiple 1.25s 0s infinite cubic-bezier(.21, .53, .56, .8);
 
-    border: 2px solid #fff;
+    border: 2px solid #999;
     border-radius: 100%;
 
     -webkit-animation-fill-mode: both;

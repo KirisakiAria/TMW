@@ -18,6 +18,38 @@ body
 
     letter-spacing: 1px;
 }
+/*登录、注册页面*/
+.login
+{
+    background: url(../img/zedd2.jpg) center;
+    background-size: cover;
+}
+.signup
+{
+    background: url(../img/zedd3.jpg) center;
+    background-size: cover;
+}
+.con
+{
+    display:         flex;
+    display: -webkit-flex;
+
+    height: 100vh;
+
+    color: #fff;
+
+            align-items: center;
+    -webkit-align-items: center;
+            justify-content: center;
+    -webkit-justify-content: center;
+}
+.form
+{
+    font-family: 'VD','Arial','微软雅黑';
+
+    width: 50%;
+}
+/*CMS*/
 header
 {
     line-height: 70px;
@@ -253,6 +285,10 @@ nav .mainli li a
 
     color: #666;
 }
+.editarea .listheader ul
+{
+    margin-bottom: 0;
+}
 .editarea .listheader li
 {
     font-size: 16px;
@@ -304,6 +340,23 @@ nav .mainli li a
 
     border-right: none;
 }
+.editarea .listheader .oper
+{
+    border-top: 1px solid #e2e2e2;
+}
+.editarea .listheader .oper li
+{
+    float: right;
+
+    width: 80px;
+
+    border-right: none;
+    background: transparent;
+}
+.editarea .listheader .oper li a
+{
+    color: #ea2e49;
+}
 .editarea .listbody li > div
 {
     float: left;
@@ -326,10 +379,12 @@ nav .mainli li a
 }
 .editarea form label
 {
-    margin-bottom: 30px;
     font-size: 16px;
+
+    margin-bottom: 30px;
 }
-.editarea .form-group {
+.editarea .form-group
+{
     margin-bottom: 30px;
 }
 .editarea button

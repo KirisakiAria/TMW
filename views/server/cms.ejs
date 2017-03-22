@@ -21,7 +21,7 @@
 	<script src="http://cdn.bootcss.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 	<!--Favicons-->
-	<script src="../lib/jquery-3.1.1.min.js"></script>
+	<script src="../lib/jquery-3.2.0.min.js"></script>
 	<script src="../lib/moment.min.js"></script>
 </head>
 <body class="tmw">
@@ -63,7 +63,7 @@
 							账户管理
 						</a>
 						<ul class="mainul">
-							<li class="act">
+							<li>
 								<a href="">查看账户</a>
 							</li>
 							<li>
@@ -77,18 +77,18 @@
 							新闻管理
 						</a>
 						<ul class="mainul">
-							<li>
-								<a id="watchnews" href="">查看新闻</a>
+							<li class="act">
+								<a id="watchnews" href="javascript:;">查看新闻</a>
 							</li>
 							<li>
-								<a id="addnews" href="">添加新闻</a>
+								<a id="addnews" href="javascript:;">添加新闻</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 			</nav>
 			<div class="editarea">
-				<div class="news item disnone">
+				<div class="news item">
 					<div class="listheader">
 						<ul class="clearfix">
 							<li>ID</li>
@@ -97,13 +97,23 @@
 							<li>添加时间</li>
 							<li>操作</li>
 						</ul>
-					</div>
-					<div class="listbody">
-						<ul>
+						<ul class="clearfix oper">
+							<li>
+								<a href="javascript:;" id="del">删除</a>
+							</li>
+							<li>
+								<a href="javascript:;" id="res">反选</a>
+							</li>
+							<li>
+								<a href="javascript:;" id="all">全选</a>
+							</li>
 						</ul>
 					</div>
+					<div class="listbody">
+						<ul></ul>
+					</div>
 				</div>
-				<div class="addnews item">
+				<div class="addnews item disnone">
 					<form enctype="multipart/form-data" method="post" action="/createnews">
 						<div class="form-group">
 							<label for="titles">文章短标题</label>

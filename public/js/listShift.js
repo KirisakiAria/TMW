@@ -1,9 +1,9 @@
 jQuery(document).ready(function($) {
 	//cache some jQuery objects
 	var modalTrigger = $('.cd-modal-trigger'),
-	transitionLayer = $('.cd-transition-layer'),
-	transitionBackground = transitionLayer.children(),
-	modalWindow = $('.cd-modal');
+		transitionLayer = $('.cd-transition-layer'),
+		transitionBackground = transitionLayer.children(),
+		modalWindow = $('.cd-modal');
 
 	var frameProportion = 1.78, //png frame aspect ratio
 		frames = transitionLayer.data('frame'), //number of png frames
@@ -21,6 +21,7 @@ jQuery(document).ready(function($) {
 	//open modal window
 	modalTrigger.on('click', function(event) {
 		event.preventDefault();
+		var href = $(this).data("href");
 		$("html,body").addClass('overflow-hidden');
 		var modalId = $(event.target).attr('href');
 		transitionLayer.addClass('visible opening');
@@ -28,9 +29,15 @@ jQuery(document).ready(function($) {
 			modalWindow.filter(modalId).addClass('visible');
 			transitionLayer.removeClass('opening');
 		}, 1000);
-		//过渡结束进行ajax
-		modalWindow.filter(modalId).get(0).addEventListener("transitionend", function() {
-
+		//获取单页内容
+		$.ajax({
+			url: "/news/" +
+				href,
+			type: "get",
+			success: function(data) {
+				$(".modal-content").find("h3").html(data[0].titlel);
+				$(".modal-content").find("p").html(data[0].content);
+			}
 		});
 	});
 
@@ -44,12 +51,13 @@ jQuery(document).ready(function($) {
 			transitionBackground.off('webkitAnimationEnd oanimationend msAnimationEnd animationend');
 		});
 		$("html,body").removeClass('overflow-hidden');
+		$(".modal-content").find("h3,p"), empty();
 	});
 
 	function setLayerDimensions() {
 		var windowWidth = $(window).width(),
-		windowHeight = $(window).height(),
-		layerHeight, layerWidth;
+			windowHeight = $(window).height(),
+			layerHeight, layerWidth;
 
 		if (windowWidth / windowHeight > frameProportion) {
 			layerWidth = windowWidth;

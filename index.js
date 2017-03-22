@@ -4,11 +4,13 @@ var express = require('express');
 // var MongoStore = require('connect-mongo')(session);
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
+//此模块会检测环境变量的设置，如无特殊设置则自动执行default.js
 var config = require('config-lite');
 var routes = require('./routes');
 var pkg = require('./package');
 var mongoose = require("./config/mongoose");
 
+//执行数据库模型操作
 var db = mongoose();
 
 var app = express();
@@ -50,7 +52,7 @@ app.locals.site = {
   description: pkg.description
 };
 
-// 路由
+// 设置路由
 routes(app);
 
 // 监听端口，启动程序

@@ -11,11 +11,25 @@ router.get('/', function(req, res, next) {
 		if (err) {
 			console.log(err);
 			return next();
-		} 
+		}
 		res.status(200).render('../views/news/news.ejs', {
 			title: "NEWS",
-			docs:docs
+			docs: docs
 		});
+	});
+});
+//单独文章页
+router.get('/:newsid', function(req, res, next) {
+	//获取:xxx
+	var newsid = req.params.newsid
+	News.find({
+		id: newsid
+	}, function(err, docs) {
+		if (err) {
+			console.log(err);
+			return next();
+		}
+		res.send(docs);
 	});
 });
 module.exports = router;
