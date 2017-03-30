@@ -1,4 +1,8 @@
+"use strict";
+
 module.exports = function(app) {
+	//注册
+	// app.use('/signup', require('./signup.route'));
 	//cms
 	app.use('/tmwcms', require('./cms.route'));
 	//主页

@@ -1,11 +1,20 @@
+"use strict";
+
 $(function() {
 	$("a").click(function(e) {
 		e.preventDefault();
 	});
 	//登录页
-	
+	$("#regester").click(function() {
+		$.ajax({
+			url: window.location.href + "/watchnews",
+			datatype: "json",
+			type: POST,
+			success: function() {
 
-
+			}
+		});
+	});
 	//CMS
 	$(".maina").click(function() {
 		$(this).next().slideToggle();
@@ -24,9 +33,9 @@ $(function() {
 			datatype: "json",
 			success: function(data) {
 				$(".listbody").find("ul").empty();
-				for (var i = 0; i < data.length; i++) {
-					var date = moment(data[i].time).utc().utcOffset(+8).format('YYYY-MM-DD HH:mm:ss');
-					var html = "<li class='clearfix'>" +
+				for (let i = 0; i < data.length; i++) {
+					let date = moment(data[i].time).utc().utcOffset(+8).format('YYYY-MM-DD HH:mm:ss');
+					let html = "<li class='clearfix'>" +
 						"<div class='newsid'>" + data[i].id + "</div>" +
 						"<div>" + data[i].titlel + "</div>" +
 						"<div>" + data[i].author + "</div>" +
@@ -38,7 +47,7 @@ $(function() {
 					$(".listbody").find("ul").append(html);
 					$(".del").off().click(function() {
 						if (confirm("确定删除吗？")) {
-							var newsid = $(this).parent().parent().find(".newsid").html();
+							let newsid = $(this).parent().parent().find(".newsid").html();
 							$.ajax({
 								url: window.location.href + "/news/" + newsid + "/del",
 								type: "POST",
@@ -64,13 +73,13 @@ $(function() {
 	});
 	//反选
 	$("#res").off().click(function() {
-		$(".listbody").find("input:checkbox").each(function(index, el) {
+		$(".listbody").find("input:checkbox").each(function(el, index) {
 			$(this).prop("checked", !$(this).prop("checked"));
 		});
 	});
 	//批量删除
 	$("#del").off().click(function() {
-		var list = [];
+		let list = [];
 		if (confirm("确定删除吗？")) {
 			$(".listbody").find("input:checkbox").each(function(index, el) {
 				if ($(this).prop("checked")) {

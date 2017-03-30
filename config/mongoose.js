@@ -1,9 +1,12 @@
-var config = require('config-lite');
-var mongoose = require('mongoose');
+"use strict";
+
+let config = require('config-lite');
+let mongoose = require('mongoose');
 
 module.exports = function() {
-	var db = mongoose.connect(config.mongodb);
+	let db = mongoose.connect(config.mongodb);
 	require("../models/increment.model");
 	require("../models/news.server.model");
+	require("../models/user.server.model");
 	return db;
 }

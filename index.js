@@ -1,19 +1,21 @@
-var path = require('path');
-var express = require('express');
-// var session = require('express-session');
-// var MongoStore = require('connect-mongo')(session);
-var bodyParser = require('body-parser');
-var flash = require('connect-flash');
+"use strict";
+
+let path = require('path');
+let express = require('express');
+// let session = require('express-session');
+// let MongoStore = require('connect-mongo')(session);
+let bodyParser = require('body-parser');
+let flash = require('connect-flash');
 //此模块会检测环境变量的设置，如无特殊设置则自动执行default.js
-var config = require('config-lite');
-var routes = require('./routes');
-var pkg = require('./package');
-var mongoose = require("./config/mongoose");
+let config = require('config-lite');
+let routes = require('./routes');
+let pkg = require('./package');
+let mongoose = require("./config/mongoose");
 
 //执行数据库模型操作
-var db = mongoose();
+let db = mongoose();
 
-var app = express();
+let app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

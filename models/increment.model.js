@@ -1,6 +1,8 @@
-var mongoose = require("mongoose");
+"use strict";
 
-var IncrementSchema = new mongoose.Schema({
+let mongoose = require("mongoose");
+
+let IncrementSchema = new mongoose.Schema({
 	index: {
 		type: Number,
 		default: 0

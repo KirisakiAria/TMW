@@ -1,8 +1,10 @@
-var express = require("express");
-var router = express.Router();
+"use strict";
 
-var mongoose = require("mongoose");
-var News = mongoose.model("News");
+let express = require("express");
+let router = express.Router();
+
+let mongoose = require("mongoose");
+let News = mongoose.model("News");
 
 
 //新闻列表页
@@ -21,7 +23,7 @@ router.get('/', function(req, res, next) {
 //单独文章页
 router.get('/:newsid', function(req, res, next) {
 	//获取:xxx
-	var newsid = req.params.newsid
+	let newsid = req.params.newsid
 	News.find({
 		id: newsid
 	}, function(err, docs) {
