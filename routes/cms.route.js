@@ -101,8 +101,8 @@ router.post('/createnews', function(req, res, next) {
 			}
 			console.log(typeof step1);
 		});
-	}, function(error) {
-		console.log(error);
+	}).catch(function(error) {
+		console.log('发生错误！', error);
 	}).then(function(doc) {
 		Increment.findOne(function(err, doc) {
 			let news = new News({
@@ -122,8 +122,8 @@ router.post('/createnews', function(req, res, next) {
 				res.send('发表成功！');
 			});
 		});
-	}, function(error) {
-		console.log(error);
+	}).catch(function(error) {
+		console.log('发生错误！', error);
 	});
 });
 
