@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-let mongoose = require("mongoose");
+let mongoose = require('mongoose');
 
 let NewsSchema = new mongoose.Schema({
 	id:Number,     //文章ID
@@ -12,4 +12,4 @@ let NewsSchema = new mongoose.Schema({
 	content:String //内容
 });
 
-mongoose.model("News",NewsSchema);
+mongoose.model('News',NewsSchema);

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 let path = require('path');
 let express = require('express');
@@ -10,7 +10,7 @@ let flash = require('connect-flash');
 let config = require('config-lite');
 let routes = require('./routes');
 let pkg = require('./package');
-let mongoose = require("./config/mongoose");
+let mongoose = require('./config/mongoose');
 
 //执行数据库模型操作
 let db = mongoose();

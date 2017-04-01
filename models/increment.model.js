@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-let mongoose = require("mongoose");
+let mongoose = require('mongoose');
 
 let IncrementSchema = new mongoose.Schema({
 	index: {
@@ -9,4 +9,4 @@ let IncrementSchema = new mongoose.Schema({
 	}
 });
 
-mongoose.model("Increment", IncrementSchema);
+mongoose.model('Increment', IncrementSchema);

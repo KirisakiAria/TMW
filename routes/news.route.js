@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
-let express = require("express");
+let express = require('express');
 let router = express.Router();
 
-let mongoose = require("mongoose");
-let News = mongoose.model("News");
+let mongoose = require('mongoose');
+let News = mongoose.model('News');
 
 
 //新闻列表页
@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 			return next();
 		}
 		res.status(200).render('../views/news/news.ejs', {
-			title: "NEWS",
+			title: 'NEWS',
 			docs: docs
 		});
 	});

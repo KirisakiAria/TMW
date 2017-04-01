@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 const configs = {
 	port: 80,
 	session: {

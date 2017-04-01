@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 module.exports = function(app) {
 	//注册
@@ -15,7 +15,7 @@ module.exports = function(app) {
 	//404
 	app.use(function(req, res) {
 		if (!res.headersSent) {
-			res.status(404).send("404");
+			res.status(404).send('404');
 		}
 	});
 };

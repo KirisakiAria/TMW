@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-let mongoose = require("mongoose");
+let mongoose = require('mongoose');
 
 let UserSchema = new mongoose.Schema({
 	username:String,
@@ -9,4 +9,4 @@ let UserSchema = new mongoose.Schema({
 	authority:String
 });
 
-mongoose.model("User",UserSchema);
+mongoose.model('User',UserSchema);

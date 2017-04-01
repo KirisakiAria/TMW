@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
-let express = require("express");
+let express = require('express');
 let router = express.Router();
 
-let mongoose = require("mongoose");
-let News = mongoose.model("News");
-let Increment = mongoose.model("Increment");
+let mongoose = require('mongoose');
+let News = mongoose.model('News');
+let Increment = mongoose.model('Increment');
 
 let app = express();
 
@@ -34,8 +34,8 @@ router.post('/news/:newsid/del', function(req, res, next) {
 		if (err) {
 			console.log(err);
 		} else {
-			console.log("删除ID为" + newsid + "的文章");
-			res.send("删除成功！");
+			console.log('删除ID为' + newsid + '的文章');
+			res.send('删除成功！');
 		}
 	});
 
@@ -43,7 +43,7 @@ router.post('/news/:newsid/del', function(req, res, next) {
 //批量删除新闻
 router.post('/news/muldel/:list', function(req, res, next) {
 	//获取:xxx
-	let list = req.params.list.split(",");
+	let list = req.params.list.split(',');
 	News.remove({
 		id: {
 			$in: list
@@ -52,7 +52,7 @@ router.post('/news/muldel/:list', function(req, res, next) {
 		if (err) {
 			console.log(err);
 		} else {
-			res.send("批量删除成功！");
+			res.send('批量删除成功！');
 		}
 	});
 });
@@ -77,57 +77,54 @@ Increment.find({}, function(err, doc) {
 //添加新闻
 
 router.post('/createnews', function(req, res, next) {
-	let an = addNews();
-
-	function* addNews() {
-			let result;
-			result = yield Increment.findOne(function(err, doc) {
+	let promise = new Promise(function(resolve, reject) {
+		Increment.findOne(function(err, doc) {
+			if (err) {
+				reject(error);
+			} else {
+				resolve(doc);
+			}
+		});
+	});
+	promise.then(function(doc) {
+		Increment.update({
+			index: doc.index
+		}, {
+			$inc: {
+				index: 1
+			}
+		}, function(err, doc) {
+			if (err) {
+				return console.log(err);
+			} else {
+				return doc;
+			}
+			console.log(typeof step1);
+		});
+	}, function(error) {
+		console.log(error);
+	}).then(function(doc) {
+		Increment.findOne(function(err, doc) {
+			let news = new News({
+				id: doc.index,
+				titles: req.body.titles,
+				titlel: req.body.titlel,
+				author: 'admin',
+				listimg: 'none',
+				time: new Date(),
+				content: req.body.content
+			});
+			news.save(function(err) {
 				if (err) {
 					console.log(err);
-				} else {
-					an.next(doc);
-				}
-			});
-			result = yield Increment.update({
-				index: result.index
-			}, {
-				$inc: {
-					index: 1
-				}
-			}, function(err, doc) {
-				if (err) {
 					return;
-				} else {
-					an.next(doc);
 				}
-				console.log(typeof step1);
+				res.send('发表成功！');
 			});
-			result = Increment.findOne(function(err, doc) {
-				let news = new News({
-					id: result.index,
-					titles: req.body.titles,
-					titlel: req.body.titlel,
-					author: "admin",
-					listimg: "none",
-					time: new Date(),
-					content: req.body.content
-				});
-				news.save(function(err) {
-					if (err) {
-						console.log(err);
-						return;
-					}
-					res.send("发表成功！");
-				});
-			});
-		}
-		//查询出计数器实体
-
-	//更新实体，index增加1
-
-	//再次查询实体，将查询结果的index字段赋给文章id
-
-	an.next();
+		});
+	}, function(error) {
+		console.log(error);
+	});
 });
 
 module.exports = router;
