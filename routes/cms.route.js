@@ -76,7 +76,7 @@ Increment.find({}, function(err, doc) {
 });
 //添加新闻
 
-router.post('/createnews', function(req, res, next) {
+router.post('/createnews', function(req, res, next) {		
 	function createNews() {
 		let promise = new Promise(function(resolve, reject) {
 			Increment.findOne(function(err, doc) {
@@ -89,7 +89,7 @@ router.post('/createnews', function(req, res, next) {
 		});
 		return promise;
 	}
-	promise.then(function(doc) {
+	createNews().then(function(doc) {
 		Increment.update({
 			index: doc.index
 		}, {
@@ -105,7 +105,7 @@ router.post('/createnews', function(req, res, next) {
 			console.log(typeof step1);
 		});
 	}).catch(function(error) {
-		console.log('发生错误！', error);
+		console.log(error);
 	}).then(function(doc) {
 		Increment.findOne(function(err, doc) {
 			let news = new News({
@@ -126,7 +126,7 @@ router.post('/createnews', function(req, res, next) {
 			});
 		});
 	}).catch(function(error) {
-		console.log('发生错误！', error);
+		console.log(error);
 	});
 });
 
