@@ -77,15 +77,18 @@ Increment.find({}, function(err, doc) {
 //添加新闻
 
 router.post('/createnews', function(req, res, next) {
-	let promise = new Promise(function(resolve, reject) {
-		Increment.findOne(function(err, doc) {
-			if (err) {
-				reject(error);
-			} else {
-				resolve(doc);
-			}
+	function createNews() {
+		let promise = new Promise(function(resolve, reject) {
+			Increment.findOne(function(err, doc) {
+				if (err) {
+					reject(error);
+				} else {
+					resolve(doc);
+				}
+			});
 		});
-	});
+		return promise;
+	}
 	promise.then(function(doc) {
 		Increment.update({
 			index: doc.index
