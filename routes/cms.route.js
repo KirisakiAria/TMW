@@ -76,58 +76,52 @@ Increment.find({}, function(err, doc) {
 });
 //添加新闻
 
-router.post('/createnews', function(req, res, next) {		
-	function createNews() {
-		let promise = new Promise(function(resolve, reject) {
-			Increment.findOne(function(err, doc) {
-				if (err) {
-					reject(error);
-				} else {
-					resolve(doc);
-				}
-			});
-		});
-		return promise;
-	}
-	createNews().then(function(doc) {
-		Increment.update({
-			index: doc.index
-		}, {
-			$inc: {
-				index: 1
-			}
-		}, function(err, doc) {
-			if (err) {
-				return console.log(err);
-			} else {
-				return doc;
-			}
-			console.log(typeof step1);
-		});
-	}).catch(function(error) {
-		console.log(error);
-	}).then(function(doc) {
-		Increment.findOne(function(err, doc) {
-			let news = new News({
-				id: doc.index,
-				titles: req.body.titles,
-				titlel: req.body.titlel,
-				author: 'admin',
-				listimg: 'none',
-				time: new Date(),
-				content: req.body.content
-			});
-			news.save(function(err) {
+router.post('/createnews', function(req, res, next) {
+	async function createNews() {
+		try {
+			let doc = await Increment.findOne(function(err, doc) {
 				if (err) {
 					console.log(err);
-					return;
+				} else {
+					return doc;
 				}
-				res.send('发表成功！');
 			});
-		});
-	}).catch(function(error) {
-		console.log(error);
-	});
+			doc = await Increment.update({
+				index: doc.index
+			}, {
+				$inc: {
+					index: 1
+				}
+			}, function(err, doc) {
+				if (err) {
+					return console.log(err);
+				} else {
+					return doc;
+				}
+			});
+			let result = await Increment.findOne(function(err, doc) {
+				let news = new News({
+					id: doc.index,
+					titles: req.body.titles,
+					titlel: req.body.titlel,
+					author: 'admin',
+					listimg: 'none',
+					time: new Date(),
+					content: req.body.content
+				});
+				news.save(function(err) {
+					if (err) {
+						console.log(err);
+						return;
+					}
+					res.send('发表成功！');
+				});
+			});
+		} catch (e) {
+			console.log(e);
+		}
+	}
+	createNews();
 });
 
 module.exports = router;
