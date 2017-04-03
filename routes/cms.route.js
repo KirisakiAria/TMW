@@ -79,6 +79,7 @@ Increment.find({}, function(err, doc) {
 router.post('/createnews', function(req, res, next) {
 	async function createNews() {
 		try {
+			
 			let doc = await Increment.findOne(function(err, doc) {
 				if (err) {
 					console.log(err);
