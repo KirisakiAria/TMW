@@ -10,12 +10,8 @@ $(function() {
 		loadingParentElement: 'body',
 		loadingClass: 'loading',
 		loadingInner: '<div class="loader">' +
-			'<div class="loader-inner ball-scale-ripple-multiple">' +
-			'<div></div>' +
-			'<div></div>' +
-			'<div></div>' +
-			' </div>' +
-			' </div>',
+			'<div class="loader"></div>' +
+			'</div>',
 		timeout: false,
 		timeoutCountdown: 5000,
 		onLoadEvent: true,

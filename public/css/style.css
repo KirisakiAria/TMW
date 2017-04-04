@@ -7,44 +7,34 @@
     top: 0;
     left: 0;
 
+    display:         flex;
+    display: -webkit-flex;
+
     width: 100vw;
     height: 100vh;
+
     background: #4c4c4c;
+
+            justify-content: center;
+    -webkit-justify-content: center;
 }
 .loading .loader
 {
     font-size: 90px;
 
-    position: absolute;
     position: relative;
-    top: 50%;
-    left: 50%;
 
-    display: flex;
     overflow: hidden;
-    flex-direction: column;
 
-    box-sizing: border-box;
     width: 1em;
-    max-width: 25%;
-    height: 200px;
     height: 1em;
     margin: .8em auto;
 
-    -webkit-transform: translate(-50%,-50%);
-            transform: translate(-50%,-50%);
     -webkit-animation: load 1.7s infinite ease;
             animation: load 1.7s infinite ease;
     text-indent: -9999em;
 
     border-radius: 50%;
-
-    flex: 0 1 auto;
-    flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: 25%;
-    align-items: center;
-    justify-content: center;
 }
 @-webkit-keyframes load
 {
