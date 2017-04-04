@@ -29,6 +29,8 @@ video
 {
     font-family: sans-serif;
 
+    background: #4c4c4c;
+
         -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
 }body
