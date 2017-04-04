@@ -9,9 +9,7 @@ $(function() {
 		loading: true,
 		loadingParentElement: 'body',
 		loadingClass: 'loading',
-		loadingInner: '<div class="loader">' +
-			'<div class="loader"></div>' +
-			'</div>',
+		loadingInner: '<div class="loader"></div>',
 		timeout: false,
 		timeoutCountdown: 5000,
 		onLoadEvent: true,
