@@ -75,7 +75,6 @@ Increment.find({}, function(err, doc) {
 	}
 });
 //添加新闻
-
 router.post('/createnews', function(req, res, next) {
 	async function createNews() {
 		try {
