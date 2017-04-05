@@ -98,12 +98,12 @@ $(function() {
 			});
 		}
 	});
-	//添加新闻
+	//导航栏添加新闻
 	$("#addnews").click(function() {
 		$(".item").addClass("disnone");
 		$(".addnews").removeClass("disnone");
 	});
-	//批量删除
+	//导航栏批量删除
 	$("#addnews").click(function() {
 		$(".item").addClass("disnone");
 		$(".addnews").removeClass("disnone");

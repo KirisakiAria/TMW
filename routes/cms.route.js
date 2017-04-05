@@ -94,20 +94,25 @@ router.post('/createnews', function(req, res, next) {
 					return doc;
 				}
 			});
-			doc = await Increment.update({
+			await Increment.update({
 				index: doc.index
 			}, {
 				$inc: {
 					index: 1
 				}
-			}, function(err, doc) {
+			}, function(err) {
 				if (err) {
 					return console.log(err);
+				}
+			});
+			doc = await Increment.findOne(function(err, doc) {
+				if (err) {
+					console.log(err);
 				} else {
 					return doc;
 				}
 			});
-			let result = await Increment.findOne(function(err, doc) {
+			await Increment.findOne(function(err, doc) {
 				let news = new News({
 					id: doc.index,
 					titles: req.body.titles,
@@ -122,7 +127,7 @@ router.post('/createnews', function(req, res, next) {
 						console.log(err);
 						return;
 					}
-					res.send('发表成功！');
+					res.send("发表成功！")
 				});
 			});
 		} catch (e) {
