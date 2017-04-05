@@ -8,7 +8,7 @@ let bodyParser = require('body-parser');
 let flash = require('connect-flash');
 //此模块会检测环境变量的设置，如无特殊设置则自动执行default.js
 let config = require('config-lite');
-let routes = require('./routes');
+let routes = require('./routes/route.index');
 let pkg = require('./package');
 let mongoose = require('./config/mongoose');
 

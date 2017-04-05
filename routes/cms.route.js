@@ -57,26 +57,35 @@ router.post('/news/muldel/:list', function(req, res, next) {
 	});
 });
 //先查一下有没有计数器
-Increment.find({}, function(err, doc) {
-	if (err) {
-		console.log(err);
-		return;
-	}
-	//如果没有则创建计数器实体，index设置为0
-	if (!doc[0]) {
-		let inc = new Increment({
-			index: 0
-		});
-		inc.save(function(err, doc) {
+(async function() {
+	try {
+		let doc = await Increment.find({}, function(err, doc) {
 			if (err) {
-				return console.log(err);
+				console.log(err);
+				return;
+			} else {
+				return doc;
 			}
 		});
+		await (() => {
+			if (!doc[0]) {
+				let inc = new Increment({
+					index: 0
+				});
+				inc.save(function(err, doc) {
+					if (err) {
+						return console.log(err);
+					}
+				});
+			}
+		})();
+	} catch (e) {
+		console.log(e);
 	}
-});
+})();
 //添加新闻
 router.post('/createnews', function(req, res, next) {
-	async function createNews() {
+	(async function() {
 		try {
 			let doc = await Increment.findOne(function(err, doc) {
 				if (err) {
@@ -119,8 +128,7 @@ router.post('/createnews', function(req, res, next) {
 		} catch (e) {
 			console.log(e);
 		}
-	}
-	createNews();
+	})();
 });
 
 module.exports = router;
