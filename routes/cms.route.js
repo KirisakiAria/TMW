@@ -2,12 +2,10 @@
 
 let express = require('express');
 let router = express.Router();
-
 let mongoose = require('mongoose');
 let News = mongoose.model('News');
 let Increment = mongoose.model('Increment');
 
-let app = express();
 
 //cms
 router.get('/', function(req, res, next) {

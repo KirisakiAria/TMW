@@ -22,35 +22,37 @@
 	<script src="http://cdn.bootcss.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 	<!--Favicons-->
-	<script src="../lib/jquery-3.1.1.min.js"></script>
+	<script src="../lib/jquery-3.2.0.min.js"></script>
 </head>
 <body class="signup">
 	<div class="con">
 		<div class="form">
-			<form class="form-horizontal">
+			<form class="form-horizontal" id="form">
 				<div class="form-group">
 					<label for="username" class="col-sm-1 control-label">Username</label>
 					<div class="col-sm-offset-1 col-sm-10">
-						<input required type="text" class="form-control" id="username" placeholder="Username"></div>
+						<input required type="text" class="form-control" id="username" placeholder="Username" name="username"></div>
 				</div>
 				<div class="form-group">
 					<label for="password" class="col-sm-1 control-label">Password</label>
 					<div class="col-sm-offset-1 col-sm-10">
-						<input required type="password" class="form-control" id="password" placeholder="Password"></div>
+						<input required type="password" class="form-control" id="password" placeholder="Password" name="password"></div>
 				</div>
 				<div class="form-group">
 					<label for="password" class="col-sm-1 control-label">Repeat Password</label>
 					<div class="col-sm-offset-1 col-sm-10">
-						<input required type="password" class="form-control" id="password" placeholder="Password"></div>
+						<input required type="password" class="form-control" id="repeatpassword" placeholder="Password"></div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-success">Sign Up</button>
+						<button id="signup" type="submit" class="btn btn-success">Sign Up</button>
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
+	
+	<script></script>
 	<script src="../js/server.js"></script>
 </body>
 </html>

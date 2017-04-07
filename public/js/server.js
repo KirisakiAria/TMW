@@ -5,13 +5,18 @@ $(function() {
 		e.preventDefault();
 	});
 	//登录页
-	$("#regester").click(function() {
+	$("#signup").click(function(e) {
+		if ($("#repeatpassword").val() !== $("#password").val()) {
+			return alert("两次密码输入一致！");
+		}
+		e.preventDefault();
 		$.ajax({
-			url: window.location.href + "/watchnews",
+			url: window.location.href + "/sign",
+			data: $("#form").serialize(),
 			datatype: "json",
-			type: POST,
-			success: function() {
-
+			type: "POST",
+			success: function(data) {
+				alert(data);
 			}
 		});
 	});
