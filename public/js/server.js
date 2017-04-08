@@ -4,12 +4,18 @@ $(function() {
 	$("a").click(function(e) {
 		e.preventDefault();
 	});
-	//登录页
+	//注册页
 	$("#signup").click(function(e) {
-		if ($("#repeatpassword").val() !== $("#password").val()) {
-			return alert("两次密码输入一致！");
-		}
 		e.preventDefault();
+		if (!($("#username").val().length >= 1 && $("#username").val().length <= 16)) {
+			return alert('用户名请在1-16个字符之内');
+		}
+		if (!($("#password").val().length >= 1 && $("#password").val().length <= 16)) {
+			return alert('密码请在1-16个字符之内');
+		}
+		if ($("#repeatpassword").val() !== $("#password").val()) {
+			return alert("两次密码输入不一致！");
+		}
 		$.ajax({
 			url: window.location.href + "/sign",
 			data: $("#form").serialize(),
@@ -17,6 +23,34 @@ $(function() {
 			type: "POST",
 			success: function(data) {
 				alert(data);
+				if (data.includes("成功")) {
+					window.location.href = "/signin"
+				}
+			},
+			error: function() {
+				alert("好像出了点小问题")
+			}
+		});
+	});
+	//登录页
+	$("#signin").click(function(e) {
+		e.preventDefault();
+		if (!($("#username").val().length >= 1 && $("#username").val().length <= 16)) {
+			return alert('用户名请在1-16个字符之内');
+		}
+		if (!($("#password").val().length >= 1 && $("#password").val().length <= 16)) {
+			return alert('密码请在1-16个字符之内');
+		}
+		$.ajax({
+			url: window.location.href + "/sign",
+			data: $("#form").serialize(),
+			datatype: "json",
+			type: "POST",
+			success: function(data) {
+				window.location.href = data
+			},
+			error: function() {
+				alert("好像出了点小问题")
 			}
 		});
 	});
@@ -28,8 +62,21 @@ $(function() {
 		$(".mainul").find("a").parent().removeClass("act");
 		$(this).parent().addClass("act");
 	});
-
-	//查看新闻
+	//登出
+	$(".logout").click(function() {
+			$.ajax({
+				url: window.location.href + "/signout",
+				datatype: "json",
+				type: "GET",
+				success: function() {
+					window.location.href = "/signin"
+				},
+				error: function() {
+					alert("好像出了点小问题")
+				}
+			});
+		})
+		//查看新闻
 	$("#watchnews").click(function() {
 		$(".item").addClass("disnone");
 		$(".news").removeClass("disnone");
@@ -60,7 +107,7 @@ $(function() {
 									alert(data);
 								},
 								error: function() {
-									alert("ajax好像出了些问题");
+									alert("好像出了点小问题");
 								}
 							});
 						}
@@ -68,7 +115,7 @@ $(function() {
 				}
 			},
 			error: function() {
-				alert("ajax好像出了些问题");
+				alert("好像出了点小问题");
 			}
 		});
 	});
@@ -98,7 +145,7 @@ $(function() {
 					alert(data);
 				},
 				error: function() {
-					alert("ajax好像出了些问题");
+					alert("好像出了点小问题");
 				}
 			});
 		}
@@ -126,7 +173,7 @@ $(function() {
 				}
 			},
 			error: function() {
-				alert("保存出错");
+				alert("保存出错了");
 			}
 		});
 	})

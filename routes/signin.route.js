@@ -3,15 +3,15 @@
 let express = require('express');
 let router = express.Router();
 let crypto = require('crypto');
-let sha512 = crypto.createHash('sha512');
 let mongoose = require('mongoose');
 let User = mongoose.model('User');
 
 router.get('/', function(req, res, err) {
-	res.status(200).render('../views/server/signup.ejs');
+	res.status(200).render('../views/server/signin.ejs');
 })
 
 router.post('/sign', function(req, res, err) {
+	let sha512 = crypto.createHash('sha512');
 	let username = req.body.username;
 	let password = req.body.password;
 	//先查一下用户名是不是已存在
@@ -28,25 +28,15 @@ router.post('/sign', function(req, res, err) {
 				}
 			});
 			await (() => {
-				if (re) {
-					res.send("用户名已存在");
+				if (!re) {
+					return res.send("用户名不存在！请检查您的输入");
 				} else {
 					password = sha512.digest(password).toString();
-					console.log(password);
-					let user = new User({
-						username: username,
-						password: password,
-						avatar: '',
-						authority: 'normal'
-					});
-					user.save(function(err) {
-						if (err) {
-							console.log(err);
-							return;
-						}
-						req.session.user = username;
-						res.redirect("/singin");
-					});
+					if(re.password!==password){
+						return res.send("密码错误！");
+					}
+					req.session.user = username;
+					res.send("/tmwcms");
 				}
 			})();
 		} catch (e) {

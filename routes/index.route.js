@@ -4,6 +4,8 @@
 module.exports = function(app) {
 	//注册
 	app.use('/signup', require('./signup.route'));
+	//登录
+	app.use('/signin', require('./signin.route'));
 	//cms
 	app.use('/tmwcms', require('./cms.route'));
 	//主页

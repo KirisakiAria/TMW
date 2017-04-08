@@ -5,11 +5,17 @@ let router = express.Router();
 let mongoose = require('mongoose');
 let News = mongoose.model('News');
 let Increment = mongoose.model('Increment');
-
+let checkLogin = require('../lib/checkLogin').checkLogin;
 
 //cms
-router.get('/', function(req, res, next) {
+router.get('/', checkLogin, function(req, res, next) {
 	res.status(200).render('../views/server/cms.ejs');
+});
+
+//登出
+router.get('/signout', function(req, res, next) {
+	req.session.user = null;
+	return res.send("success");
 });
 
 //查看新闻
