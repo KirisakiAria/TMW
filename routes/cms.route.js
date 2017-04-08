@@ -4,12 +4,15 @@ let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
 let News = mongoose.model('News');
-let Increment = mongoose.model('Increment');
+let NewsIncrement = mongoose.model('NewsIncrement');
 let checkLogin = require('../lib/checkLogin').checkLogin;
+let checkAuth = require('../lib/checkLogin').checkAuth;
 
 //cms
 router.get('/', checkLogin, function(req, res, next) {
-	res.status(200).render('../views/server/cms.ejs');
+	res.status(200).render('../views/server/cms.ejs', {
+		username: req.session.user
+	});
 });
 
 //登出
@@ -19,7 +22,7 @@ router.get('/signout', function(req, res, next) {
 });
 
 //查看新闻
-router.get('/watchnews', function(req, res, next) {
+router.get('/watchnews', checkLogin, function(req, res, next) {
 	News.find({}, function(err, docs) {
 		if (err) {
 			console.log(err);
@@ -29,7 +32,7 @@ router.get('/watchnews', function(req, res, next) {
 	});
 });
 //删除新闻
-router.post('/news/:newsid/del', function(req, res, next) {
+router.post('/news/:newsid/del', checkLogin, function(req, res, next) {
 	//获取:xxx
 	let newsid = req.params.newsid;
 	News.remove({
@@ -45,7 +48,7 @@ router.post('/news/:newsid/del', function(req, res, next) {
 
 });
 //批量删除新闻
-router.post('/news/muldel/:list', function(req, res, next) {
+router.post('/news/muldel/:list', checkLogin, function(req, res, next) {
 	//获取:xxx
 	let list = req.params.list.split(',');
 	News.remove({
@@ -63,7 +66,7 @@ router.post('/news/muldel/:list', function(req, res, next) {
 //先查一下有没有计数器
 (async function() {
 	try {
-		let doc = await Increment.find({}, function(err, doc) {
+		let doc = await NewsIncrement.find({}, function(err, doc) {
 			if (err) {
 				console.log(err);
 				return;
@@ -73,7 +76,7 @@ router.post('/news/muldel/:list', function(req, res, next) {
 		});
 		await (() => {
 			if (!doc[0]) {
-				let inc = new Increment({
+				let inc = new NewsIncrement({
 					index: 0
 				});
 				inc.save(function(err, doc) {
@@ -88,17 +91,17 @@ router.post('/news/muldel/:list', function(req, res, next) {
 	}
 })();
 //添加新闻
-router.post('/createnews', function(req, res, next) {
+router.post('/createnews', checkLogin, function(req, res, next) {
 	(async function() {
 		try {
-			let doc = await Increment.findOne(function(err, doc) {
+			let doc = await NewsIncrement.findOne(function(err, doc) {
 				if (err) {
 					console.log(err);
 				} else {
 					return doc;
 				}
 			});
-			await Increment.update({
+			await NewsIncrement.update({
 				index: doc.index
 			}, {
 				$inc: {
@@ -109,14 +112,14 @@ router.post('/createnews', function(req, res, next) {
 					return console.log(err);
 				}
 			});
-			doc = await Increment.findOne(function(err, doc) {
+			doc = await NewsIncrement.findOne(function(err, doc) {
 				if (err) {
 					console.log(err);
 				} else {
 					return doc;
 				}
 			});
-			await Increment.findOne(function(err, doc) {
+			await NewsIncrement.findOne(function(err, doc) {
 				let news = new News({
 					id: doc.index,
 					titles: req.body.titles,

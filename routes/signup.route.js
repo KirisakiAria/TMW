@@ -32,7 +32,6 @@ router.post('/sign', function(req, res, err) {
 					res.send("用户名已存在");
 				} else {
 					password = sha512.digest(password).toString();
-					console.log(password);
 					let user = new User({
 						username: username,
 						password: password,
@@ -45,7 +44,7 @@ router.post('/sign', function(req, res, err) {
 							return;
 						}
 						req.session.user = username;
-						res.redirect("/singin");
+						res.send("注册成功！请登录");
 					});
 				}
 			})();

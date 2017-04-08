@@ -28,7 +28,7 @@ $(function() {
 				}
 			},
 			error: function() {
-				alert("好像出了点小问题")
+				alert("好像出了点小问题");
 			}
 		});
 	});
@@ -47,10 +47,14 @@ $(function() {
 			datatype: "json",
 			type: "POST",
 			success: function(data) {
-				window.location.href = data
+				if (data.includes("cms")) {
+					window.location.href = data;
+				} else {
+					alert(data);
+				}
 			},
 			error: function() {
-				alert("好像出了点小问题")
+				alert("好像出了点小问题");
 			}
 		});
 	});
@@ -64,6 +68,7 @@ $(function() {
 	});
 	//登出
 	$(".logout").click(function() {
+		if (confirm("确定要登出吗?")) {
 			$.ajax({
 				url: window.location.href + "/signout",
 				datatype: "json",
@@ -75,8 +80,9 @@ $(function() {
 					alert("好像出了点小问题")
 				}
 			});
-		})
-		//查看新闻
+		}
+	});
+	//查看新闻
 	$("#watchnews").click(function() {
 		$(".item").addClass("disnone");
 		$(".news").removeClass("disnone");
