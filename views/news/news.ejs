@@ -24,8 +24,7 @@
 		</section>
 		<section class="content">
 			<%var length = docs.length<6?docs.length:6; for(var i=0; i<length; i++) { %>
-			<a href="#cd-modal" data-href=<%=docs[i].id%>
-				class="tilter tilter cd-modal-trigger">
+			<a href="#cd-modal" data-href=<%=docs[i].id%> class="tilter cd-modal-trigger">
 				<figure class="tilter__figure">
 					<img class="tilter__image" src="../img/1.jpg" alt="" />
 					<div class="tilter__deco tilter__deco--shine">
@@ -36,9 +35,7 @@
 						<h3 class="tilter__title" data-title=<%=docs[i].titles%>
 							>
 							<%=docs[i].titles%></h3>
-						<p class="tilter__description" data-title=<%=docs[i].author%>
-							>
-							<%=docs[i].author%></p>
+						<p class="tilter__description" data-title=<%=docs[i].author%>><%=docs[i].author%></p>
 					</figcaption>
 					<svg class="tilter__deco tilter__deco--lines" viewBox="0 0 300 415">
 						<path d="M20.5,20.5h260v375h-260V20.5z" />

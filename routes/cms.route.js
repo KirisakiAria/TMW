@@ -35,7 +35,6 @@ router.get('/watchnews', checkLogin, function(req, res, next) {
 
 //删除新闻
 router.post('/news/:newsid/del', checkLogin, function(req, res, next) {
-	//获取:xxx
 	let newsid = req.params.newsid;
 	News.removeById(newsid, next, function() {
 		res.send('删除成功！');
@@ -43,8 +42,7 @@ router.post('/news/:newsid/del', checkLogin, function(req, res, next) {
 });
 
 //批量删除新闻
-router.post('/news/muldel/:list', checkLogin, function(req, res, next) {
-	//获取:xxx
+router.post('/news/:list/mutidel/', checkLogin, function(req, res, next) {
 	let list = req.params.list.split(',');
 	News.removeByIdList(list, next, function() {
 		res.send('删除成功！');
@@ -125,4 +123,6 @@ router.post('/createnews', checkLogin, function(req, res, next) {
 	})();
 });
 
+//编辑新闻
+router.post('/news/:newsid/edit', checkLogin, function(req, res, next) {})
 module.exports = router;

@@ -145,7 +145,7 @@ $(function() {
 				}
 			});
 			$.ajax({
-				url: window.location.href + "/news/muldel/" + list,
+				url: window.location.href + "/news/" + list + "/mutidel/",
 				type: "POST",
 				success: function(data) {
 					alert(data);

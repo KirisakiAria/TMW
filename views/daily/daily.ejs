@@ -16,8 +16,9 @@
 			<div class="bg-layer"></div>
 		</div>
 		<section class="content">
+		<%var length = docs.length<(12/3)?docs.length:12/3; for(var i=0; i<length; i++) { %>
 			<div class="grid grid--effect-pollux">
-				<a href="#" class="grid__item grid__item--c1">
+				<a href="#" class="grid__item grid__item--c1 cd-modal-trigger" data-href=<%=docs[i].id%>>
 					<div class="stack">
 						<div class="stack__deco"></div>
 						<div class="stack__deco"></div>
@@ -28,7 +29,7 @@
 						</div>
 					</div>
 					<div class="grid__item-caption">
-						<h3 class="grid__item-title">node.js学习笔记（一）</h3>
+						<h3 class="grid__item-title" data-title=<%=docs[i].titles%>><%=docs[i].titles%></h3>
 					</div>
 				</a>
 				<a href="#" class="grid__item grid__item--c2">
@@ -42,7 +43,7 @@
 						</div>
 					</div>
 					<div class="grid__item-caption">
-						<h3 class="grid__item-title">anime.js学习笔记（一）</h3>
+						<h3 class="grid__item-title" data-title=<%=docs[i].titles%>><%=docs[i].titles%></h3>
 					</div>
 				</a>
 				<a href="#" class="grid__item grid__item--c3">
@@ -56,98 +57,11 @@
 						</div>
 					</div>
 					<div class="grid__item-caption">
-						<h3 class="grid__item-title">create.js学习笔记（一）</h3>
+						<h3 class="grid__item-title" data-title=<%=docs[i].titles%>><%=docs[i].titles%></h3>
 					</div>
 				</a>
 			</div>
-			<div class="grid grid--effect-pollux">
-				<a href="#" class="grid__item grid__item--c1">
-					<div class="stack">
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__figure">
-							<img class="stack__img" src="../img/1.png" alt="Image"/>
-						</div>
-					</div>
-					<div class="grid__item-caption">
-						<h3 class="grid__item-title">node.js学习笔记（一）</h3>
-					</div>
-				</a>
-				<a href="#" class="grid__item grid__item--c2">
-					<div class="stack">
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__figure">
-							<img class="stack__img" src="../img/2.png" alt="Image"/>
-						</div>
-					</div>
-					<div class="grid__item-caption">
-						<h3 class="grid__item-title">anime.js学习笔记（一）</h3>
-					</div>
-				</a>
-				<a href="#" class="grid__item grid__item--c3">
-					<div class="stack">
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__figure">
-							<img class="stack__img" src="../img/3.png" alt="Image"/>
-						</div>
-					</div>
-					<div class="grid__item-caption">
-						<h3 class="grid__item-title">create.js学习笔记（一）</h3>
-					</div>
-				</a>
-			</div>
-			<div class="grid grid--effect-pollux">
-				<a href="#" class="grid__item grid__item--c1">
-					<div class="stack">
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__figure">
-							<img class="stack__img" src="../img/1.png" alt="Image"/>
-						</div>
-					</div>
-					<div class="grid__item-caption">
-						<h3 class="grid__item-title">node.js学习笔记（一）</h3>
-					</div>
-				</a>
-				<a href="#" class="grid__item grid__item--c2">
-					<div class="stack">
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__figure">
-							<img class="stack__img" src="../img/2.png" alt="Image"/>
-						</div>
-					</div>
-					<div class="grid__item-caption">
-						<h3 class="grid__item-title">anime.js学习笔记（一）</h3>
-					</div>
-				</a>
-				<a href="#" class="grid__item grid__item--c3">
-					<div class="stack">
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__deco"></div>
-						<div class="stack__figure">
-							<img class="stack__img" src="../img/3.png" alt="Image"/>
-						</div>
-					</div>
-					<div class="grid__item-caption">
-						<h3 class="grid__item-title">create.js学习笔记（一）</h3>
-					</div>
-				</a>
-			</div>
+			<% } %>
 		</section>
 		<section class="page text-center">
 			<ul>
@@ -171,7 +85,6 @@
 		<%- include('../public/footer') %></main>
 </div>
 <script src="../js/card.js"></script>
-<script src="../js/hovereffect.js"></script>
 <script src="../js/nav.js"></script>
 <script src="../js/listShift.js"></script>
 <script src="../js/common.js"></script>
