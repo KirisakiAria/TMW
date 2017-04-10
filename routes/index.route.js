@@ -12,7 +12,8 @@ module.exports = function(app) {
 	app.use('/', require('./main.route'));
 	//新闻
 	app.use('/news', require('./news.route'));
-	// app.use('/daily', require('./daily'));
+	//日志
+	app.use('/daily', require('./daily.route'));
 	// app.use('/share', require('./share'));
 	// app.use('/project', require('./project'));
 	//404

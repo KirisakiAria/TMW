@@ -27,42 +27,30 @@ router.get('/watchnews', checkLogin, function(req, res, next) {
 		if (err) {
 			console.log(err);
 			return next();
+		} else {
+			res.json(docs);
 		}
-		res.json(docs);
 	});
 });
+
 //删除新闻
 router.post('/news/:newsid/del', checkLogin, function(req, res, next) {
 	//获取:xxx
 	let newsid = req.params.newsid;
-	News.remove({
-		id: newsid
-	}, function(err) {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log('删除ID为' + newsid + '的文章');
-			res.send('删除成功！');
-		}
+	News.removeById(newsid, next, function() {
+		res.send('删除成功！');
 	});
-
 });
+
 //批量删除新闻
 router.post('/news/muldel/:list', checkLogin, function(req, res, next) {
 	//获取:xxx
 	let list = req.params.list.split(',');
-	News.remove({
-		id: {
-			$in: list
-		}
-	}, function(err) {
-		if (err) {
-			console.log(err);
-		} else {
-			res.send('批量删除成功！');
-		}
+	News.removeByIdList(list, next, function() {
+		res.send('删除成功！');
 	});
 });
+
 //先查一下有没有计数器
 (async function() {
 	try {
@@ -90,6 +78,7 @@ router.post('/news/muldel/:list', checkLogin, function(req, res, next) {
 		console.log(e);
 	}
 })();
+
 //添加新闻
 router.post('/createnews', checkLogin, function(req, res, next) {
 	(async function() {
@@ -97,24 +86,16 @@ router.post('/createnews', checkLogin, function(req, res, next) {
 			let doc = await NewsIncrement.findOne(function(err, doc) {
 				if (err) {
 					console.log(err);
+					return next();
 				} else {
 					return doc;
 				}
 			});
-			await NewsIncrement.update({
-				index: doc.index
-			}, {
-				$inc: {
-					index: 1
-				}
-			}, function(err) {
-				if (err) {
-					return console.log(err);
-				}
-			});
+			await NewsIncrement.addOne(doc, next);
 			doc = await NewsIncrement.findOne(function(err, doc) {
 				if (err) {
 					console.log(err);
+					return next();
 				} else {
 					return doc;
 				}
@@ -132,13 +113,14 @@ router.post('/createnews', checkLogin, function(req, res, next) {
 				news.save(function(err) {
 					if (err) {
 						console.log(err);
-						return;
+						return next();
 					}
 					res.send("发表成功！")
 				});
 			});
 		} catch (e) {
 			console.log(e);
+			next();
 		}
 	})();
 });

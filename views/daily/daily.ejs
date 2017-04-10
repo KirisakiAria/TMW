@@ -1,5 +1,6 @@
 <%- include('../public/header') %>
 <body class="daily tmw-in extinguisher-transition">
+<div class="animsition">
 	<%- include('../public/nav') %>
 	<div class="title">
 		<h1>DAILY</h1>
@@ -168,12 +169,13 @@
 			</ul>
 		</section>
 		<%- include('../public/footer') %></main>
-	</main>
-	<script src="../js/card.js"></script>
-	<script src="../js/hovereffect.js"></script>
-	<script src="../js/nav.js"></script>
-	<script src="../js/listShift.js"></script>
-	<script>
+</div>
+<script src="../js/card.js"></script>
+<script src="../js/hovereffect.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/listShift.js"></script>
+<script src="../js/common.js"></script>
+<script>
 		$(function() {
 			$("#menu").fadeIn(500);
 			[].slice.call(document.querySelectorAll('.grid--effect-pollux > .grid__item')).forEach(function(stackEl) {

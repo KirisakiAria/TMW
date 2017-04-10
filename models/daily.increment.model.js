@@ -2,13 +2,14 @@
 
 let mongoose = require('mongoose');
 
-let NewsIncrementSchema = new mongoose.Schema({
+let DailyIncrementSchema = new mongoose.Schema({
 	index: {
 		type: Number,
 		default: 0
 	}
 });
-NewsIncrementSchema.statics.addOne = function(doc,next) {
+
+DailyIncrementSchema.statics.addOne = function(doc,next) {
 	this.update({
 		index: doc.index
 	}, {
@@ -22,4 +23,5 @@ NewsIncrementSchema.statics.addOne = function(doc,next) {
 		}
 	});
 }
-mongoose.model('NewsIncrement', NewsIncrementSchema);
+
+mongoose.model('DailyIncrement', DailyIncrementSchema);

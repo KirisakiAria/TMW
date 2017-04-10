@@ -17,6 +17,7 @@ let db = mongoose();
 
 let app = express();
 
+//body-parser中间件处理表单
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: true

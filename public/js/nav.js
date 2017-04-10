@@ -53,6 +53,33 @@
 		this.isOpen = !this.isOpen;
 	};
 
-	new SVGMenu(document.getElementById('menu'));
+
+	$(".mask-in,.mask").click(function() {
+		var $el = $(SM.el);
+		if (SM.isOpen) {
+			$el.removeClass('menu--anim');
+			setTimeout(function() {
+				$el.removeClass('menu--open');
+				$(".mask-in").removeClass("act");
+			}, 250);
+		} else {
+			$el.addClass('menu--anim');
+			setTimeout(function() {
+				$el.addClass('menu--open');
+				$(".mask-in").addClass("act");
+			}, 250);
+		}
+		SM.pathEl.stop().animate({
+			'path': SM.isOpen ? SM.paths.close : SM.paths.open
+		}, 350, mina.easeout, function() {
+			SM.pathEl.stop().animate({
+				'path': SM.paths.reset
+			}, 800, mina.elastic);
+		});
+
+		SM.isOpen = !SM.isOpen;
+	});
+
+	var SM = new SVGMenu(document.getElementById('menu'));
 
 })();

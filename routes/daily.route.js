@@ -7,19 +7,20 @@ let mongoose = require('mongoose');
 let Daily = mongoose.model('Daily');
 
 
-//新闻列表页
+//日志列表页
 router.get('/', function(req, res, next) {
-	News.find({}, function(err, docs) {
+	Daily.find({}, function(err, docs) {
 		if (err) {
 			console.log(err);
 			return next();
 		}
-		res.status(200).render('../views/news/daily.ejs', {
+		res.status(200).render('../views/daily/daily.ejs', {
 			title: 'DAILY',
 			docs: docs
 		});
 	});
 });
+
 //单独文章页
 router.get('/:dailyid', function(req, res, next) {
 	//获取:xxx
