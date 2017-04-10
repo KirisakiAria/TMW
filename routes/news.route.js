@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
 //单独文章页
 router.get('/:newsid', function(req, res, next) {
 	//获取:xxx
-	let newsid = req.params.newsid
+	let newsid = req.params.newsid;
 	News.find({
 		id: newsid
 	}, function(err, docs) {
