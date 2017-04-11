@@ -19,7 +19,15 @@
 		<% var length = docs.length<9?docs.length:9; for(var i=0;i<length;i=i+3) { 
 		 %>
 			<div class="grid grid--effect-pollux">
-				<a href="#" class="trigger grid__item grid__itemc1" data-href=<%=docs[i].id%> >
+			<% var max = 0;
+			if(length-i < 3){
+				max = length-i
+			}
+			else {
+				max=3;
+			}
+			for(var j=0;j<max;j++) { %>
+				<a href="#" class="trigger grid__item grid__item--c2" data-href=<%=docs[j].id%> >
 					<div class="stack">
 						<div class="stack__deco"></div>
 						<div class="stack__deco"></div>
@@ -30,9 +38,9 @@
 						</div>
 					</div>
 					<div class="grid__item-caption">
-						<h3 class="grid__item-title" data-title=<%=docs[i].titles%>> <%=docs[i].titles%></h3>
+						<h3 class="grid__item-title" data-title=<%=docs[j].titles%>> <%=docs[j].titles%> </h3>
 					</div>
-				</a>
+				</a><% } %>
 			</div>
 			<% } %>
 		</section>
