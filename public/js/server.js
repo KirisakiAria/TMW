@@ -2,7 +2,7 @@
 
 $(function() {
 	//阻止a链接跳转
-	$("a").click(function(e) {
+	$(".tmw").find("a").click(function(e) {
 		e.preventDefault();
 	});
 
@@ -66,6 +66,7 @@ $(function() {
 	$(".maina").click(function() {
 		$(this).next().slideToggle();
 	});
+
 	$(".mainul").find("a").click(function() {
 		$(".mainul").find("a").parent().removeClass("act");
 		$(this).parent().addClass("act");
@@ -88,19 +89,17 @@ $(function() {
 		}
 	});
 
-	//查看新闻
-	function watchNews() {
-		$(".item,#editnews,.aid,.addnews").addClass("disnone");
-		$(".news,#submitnews").removeClass("disnone");
+	//查看文章
+	function showArticle(arturl1, arturl2, fn) {
 		$.ajax({
-			url: window.location.href + "/watchnews",
+			url: window.location.href + arturl1,
 			datatype: "json",
 			success: function(data) {
 				$(".listbody").find("ul").empty();
 				for (let i = 0; i < data.length; i++) {
 					let date = moment(data[i].time).utc().utcOffset(+8).format('YYYY-MM-DD HH:mm:ss');
 					let html = "<li class='clearfix'>" +
-						"<div class='newsid'>" + data[i].id + "</div>" +
+						"<div class='aid'>" + data[i].id + "</div>" +
 						"<div>" + data[i].titlel + "</div>" +
 						"<div>" + data[i].author + "</div>" +
 						"<div>" + data[i].editor + "</div>" +
@@ -112,18 +111,18 @@ $(function() {
 
 					$(".listbody").find("ul").append(html);
 
-					//删除单条新闻
+					//删除单条文章
 					$(".del").off().click(function() {
 						if (confirm("确定删除吗？")) {
-							let newsid = $(this).parents("li").find(".newsid").html();
+							let aid = $(this).parents("li").find(".aid").html();
 							$.ajax({
-								url: window.location.href + "/news/" + newsid + "/del",
+								url: window.location.href + "/" + arturl2 + "/" + aid + "/del",
 								type: "POST",
 								success: function(data) {
 									if (data) {
 										alert(data);
 									}
-									watchNews()
+									showArticle(arturl1, arturl2, fn);
 								},
 								error: function() {
 									alert("好像出了点小问题");
@@ -132,14 +131,12 @@ $(function() {
 						}
 					});
 
-					//编辑新闻
+					//编辑文章
 					$(".edit").click(function() {
-						var newsid = $(this).parents("li").find(".newsid").html();
-						$("#submitnews,.news").addClass("disnone");
-						$("#editnews,.addnews,.aid").removeClass("disnone");
-						console.log(newsid);
+						var aid = $(this).parents("li").find(".aid").html();
+						fn();
 						$.ajax({
-							url: window.location.href + "/editnews/" + newsid,
+							url: window.location.href + "/edit" + arturl2 + "/" + aid,
 							type: "POST",
 							success: function(data) {
 								$("#aid").val(data.id);
@@ -153,6 +150,31 @@ $(function() {
 							}
 						});
 					});
+
+					//批量删除文章
+					$(".groupdel").off().click(function() {
+						let list = [];
+						if (confirm("确定删除吗？")) {
+							$(".listbody").find("input:checkbox").each(function(index, el) {
+								if ($(this).prop("checked")) {
+									list.push($(this).parents("li").find(".aid").html());
+								}
+							});
+							$.ajax({
+								url: window.location.href + "/" + arturl2 + "/" + list + "/mutidel/",
+								type: "POST",
+								success: function(data) {
+									if (data) {
+										alert(data);
+									}
+									showArticle(arturl1, arturl2, fn);
+								},
+								error: function() {
+									alert("好像出了点小问题");
+								}
+							});
+						}
+					});
 				}
 			},
 			error: function() {
@@ -161,64 +183,47 @@ $(function() {
 		});
 	}
 
-	//绑定查看新闻
-	$("#watchnews").click(function() {
-		watchNews();
+	/*------新闻------*/
+
+	//查看新闻
+	$(".shownews").click(function() {
+		$(".item,#editbtn-news,.aid,.editartarea,.dailybtn").addClass("disnone");
+		$(".article,#subbtn-news").removeClass("disnone");
+		showArticle("/shownews", "news", function() {
+			$("#subbtn-news,.article").addClass("disnone");
+			$("#editbtn-news,.editartarea,.aid").removeClass("disnone");
+		});
 	});
 
 	//全选
-	$("#all").off().click(function() {
+	$(".groupall").off().click(function() {
 		$(".listbody").find("input:checkbox").prop("checked", true);
 	});
 	//反选
-	$("#res").off().click(function() {
+	$(".groupres").off().click(function() {
 		$(".listbody").find("input:checkbox").each(function(el, index) {
 			$(this).prop("checked", !$(this).prop("checked"));
 		});
 	});
-	//批量删除
-	$("#del").off().click(function() {
-		let list = [];
-		if (confirm("确定删除吗？")) {
-			$(".listbody").find("input:checkbox").each(function(index, el) {
-				if ($(this).prop("checked")) {
-					list.push($(this).parents("li").find(".newsid").html());
-				}
-			});
-			$.ajax({
-				url: window.location.href + "/news/" + list + "/mutidel/",
-				type: "POST",
-				success: function(data) {
-					if (data) {
-						alert(data);
-					}
-					watchNews();
-				},
-				error: function() {
-					alert("好像出了点小问题");
-				}
-			});
-		}
-	});
 
 	//导航栏添加新闻
-	$("#addnews").click(function() {
-		$(".item,#editnews,.aid").addClass("disnone");
-		$(".addnews,#submitnews").removeClass("disnone");
+	$(".addnews").click(function() {
+		$(".item,#editbtn,.aid,.dailybtn").addClass("disnone");
+		$(".editartarea,#subbtn-news,.newsbtn").removeClass("disnone");
 	});
 
-	//导航栏批量删除
-	$("#addnews").click(function() {
-		$(".item").addClass("disnone");
-		$(".addnews").removeClass("disnone");
+	//查看/编辑单条新闻
+	$(".addnews").click(function() {
+		$(".item,#editbtn,.aid,.dailybtn").addClass("disnone");
+		$(".editartarea,#subbtn-news,.newsbtn").removeClass("disnone");
 	});
 
 	//发表新闻
-	$("#submitnews").off().click(function(e) {
+	$("#subbtn-news").off().click(function(e) {
 		e.preventDefault();
 		$.ajax({
 			url: window.location.href + "/createnews",
-			data: $(".addnews").find("form").serialize(),
+			data: $(".editartarea").find("form").serialize(),
 			type: "POST",
 			success: function(data) {
 				if (data) {
@@ -232,22 +237,93 @@ $(function() {
 	});
 
 	//编辑提交新闻
-	$("#editnews").off().click(function(e) {
+	$("#editbtn-news").off().click(function(e) {
 		e.preventDefault();
 		var newsid = $("#aid").val();
 		$.ajax({
 			url: window.location.href + "/news/" + newsid + "/edit",
-			data: $(".addnews").find("form").serialize(),
+			data: $(".editartarea").find("form").serialize(),
 			type: "POST",
 			success: function(data) {
 				if (data) {
 					alert(data);
 				}
-				watchNews();
+				$(".item,#editbtn-news,.aid,.editartarea").addClass("disnone");
+				$(".article,#subbtn-news").removeClass("disnone");
+				showArticle("/shownews", "news", function() {
+					$("#subbtn-news,.article").addClass("disnone");
+					$("#editbtn-news,.editartarea,.aid").removeClass("disnone");
+				});
 			},
 			error: function() {
 				alert("保存出错了");
 			}
 		});
 	});
-})
+	/*------新闻结束------*/
+
+
+
+	/*------日志------*/
+
+	//查看日志
+	$(".showdailies").click(function() {
+		$(".item,#editbtn-daily,.aid,.editartarea,.newsbtn").addClass("disnone");
+		$(".article,#subbtn-daily").removeClass("disnone");
+		showArticle("/showdailies", "daily", function() {
+			$("#subbtn-daily,.article").addClass("disnone");
+			$("#editbtn-daily,.editartarea,.aid").removeClass("disnone");
+		});
+	});
+
+	//导航栏添加日志
+	$(".adddaily").click(function() {
+		$(".item,#editbtn,.aid,.newsbtn").addClass("disnone");
+		$(".editartarea,#subbtn-daily,.dailybtn").removeClass("disnone");
+	});
+
+	//发表日志
+	$("#subbtn-daily").off().click(function(e) {
+		e.preventDefault();
+		$.ajax({
+			url: window.location.href + "/createdaily",
+			data: $(".editartarea").find("form").serialize(),
+			type: "POST",
+			success: function(data) {
+				if (data) {
+					alert(data);
+				}
+			},
+			error: function() {
+				alert("保存出错了");
+			}
+		});
+	});
+
+	//编辑提交日志
+	$("#editbtn-daily").off().click(function(e) {
+		e.preventDefault();
+		var dailyid = $("#aid").val();
+		$.ajax({
+			url: window.location.href + "/daily/" + dailyid + "/edit",
+			data: $(".editartarea").find("form").serialize(),
+			type: "POST",
+			success: function(data) {
+				if (data) {
+					alert(data);
+				}
+				$(".item,#editbtn-daily,.aid,.editartarea").addClass("disnone");
+				$(".article,#subbtn-daily").removeClass("disnone");
+				showArticle("/showdailies", "daily", function() {
+					$("#subbtn-daily,.article").addClass("disnone");
+					$("#editbtn-daily,.editartarea,.aid").removeClass("disnone");
+				});
+			},
+			error: function() {
+				alert("保存出错了");
+			}
+		});
+	});
+
+	/*------日志结束------*/
+});

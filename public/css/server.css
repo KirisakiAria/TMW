@@ -29,6 +29,11 @@ body
     background: url(../img/zedd3.jpg) center;
     background-size: cover;
 }
+.login a,
+.signup a
+{
+    color: #fff;
+}
 .con
 {
     display:         flex;

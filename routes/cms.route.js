@@ -4,14 +4,16 @@ let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
 let News = mongoose.model('News');
+let Daily = mongoose.model('Daily');
 let NewsIncrement = mongoose.model('NewsIncrement');
+let DailyIncrement = mongoose.model('DailyIncrement');
 let checkLogin = require('../lib/checkLogin').checkLogin;
 let checkAuth = require('../lib/checkLogin').checkAuth;
 
 //cms
 router.get('/', checkLogin, function(req, res, next) {
 	res.status(200).render('../views/server/cms.ejs', {
-		username: req.session.user
+		username: req.session.user.username
 	});
 });
 
@@ -21,8 +23,10 @@ router.get('/signout', function(req, res, next) {
 	return res.send("success");
 });
 
+/*------新闻------*/
+
 //查看所有新闻
-router.get('/watchnews', checkLogin, function(req, res, next) {
+router.get('/shownews', checkLogin, function(req, res, next) {
 	News.find({}, function(err, docs) {
 		if (err) {
 			console.log(err);
@@ -118,8 +122,8 @@ router.post('/createnews', checkLogin, function(req, res, next) {
 					id: doc.index,
 					titles: req.body.titles,
 					titlel: req.body.titlel,
-					author: req.session.user,
-					editor: req.session.user,
+					author: req.session.user.username,
+					editor: req.session.user.username,
 					listimg: 'none',
 					time: new Date(),
 					content: req.body.content
@@ -142,14 +146,13 @@ router.post('/createnews', checkLogin, function(req, res, next) {
 //编辑新闻
 router.post('/news/:newsid/edit', checkLogin, function(req, res, next) {
 	let newsid = req.params.newsid;
-	console.log(req.body.titles)
 	News.updateOne({
 			id: newsid
 		}, {
 			$set: {
 				titles: req.body.titles,
 				titlel: req.body.titlel,
-				editor: req.session.user,
+				editor: req.session.user.username,
 				time: new Date(),
 				content: req.body.content,
 			}
@@ -161,4 +164,150 @@ router.post('/news/:newsid/edit', checkLogin, function(req, res, next) {
 			return res.send("修改成功！")
 		});
 });
+
+/*------新闻结束------*/
+
+/*------日志------*/
+
+//查看所有日志
+router.get('/showdailies', checkLogin, function(req, res, next) {
+	Daily.find({}, function(err, docs) {
+		if (err) {
+			console.log(err);
+			return next();
+		} else {
+			res.json(docs);
+		}
+	});
+});
+
+//编辑单条日志
+router.post('/editdaily/:dailyid', checkLogin, function(req, res, next) {
+	let dailysid = req.params.dailyid;
+	Daily.findOne({
+		id: dailyid
+	}, function(err, docs) {
+		if (err) {
+			console.log(err);
+			return next();
+		} else {
+			res.json(docs);
+		}
+	});
+});
+
+//删除日志
+router.post('/daily/:dailyid/del', checkLogin, function(req, res, next) {
+	let dailyid = req.params.dailyid;
+	Daily.removeById(dailyid, next, function() {
+		res.send('删除成功！');
+	});
+});
+
+//批量删除日志
+router.post('/daily/:list/mutidel/', checkLogin, function(req, res, next) {
+	let list = req.params.list.split(',');
+	Daily.removeByIdList(list, next, function() {
+		res.send('删除成功！');
+	});
+});
+
+(async function() {
+	try {
+		let doc = await DailyIncrement.find({}, function(err, doc) {
+			if (err) {
+				console.log(err);
+				return;
+			} else {
+				return doc;
+			}
+		});
+		await (() => {
+			if (!doc[0]) {
+				let inc = new DailyIncrement({
+					index: 0
+				});
+				inc.save(function(err, doc) {
+					if (err) {
+						return console.log(err);
+					}
+				});
+			}
+		})();
+	} catch (e) {
+		console.log(e);
+	}
+})();
+
+//添加日志
+router.post('/createdaily', checkLogin, function(req, res, next) {
+	(async function() {
+		try {
+			let doc = await DailyIncrement.findOne(function(err, doc) {
+				if (err) {
+					console.log(err);
+					return next();
+				} else {
+					return doc;
+				}
+			});
+			await DailyIncrement.addOne(doc, next);
+			doc = await DailyIncrement.findOne(function(err, doc) {
+				if (err) {
+					console.log(err);
+					return next();
+				} else {
+					return doc;
+				}
+			});
+			await DailyIncrement.findOne(function(err, doc) {
+				let daily = new Daily({
+					id: doc.index,
+					titles: req.body.titles,
+					titlel: req.body.titlel,
+					author: req.session.user,
+					editor: req.session.user,
+					listimg: 'none',
+					time: new Date(),
+					content: req.body.content
+				});
+				daily.save(function(err) {
+					if (err) {
+						console.log(err);
+						return next();
+					}
+					res.send("发表成功！")
+				});
+			});
+		} catch (e) {
+			console.log(e);
+			next();
+		}
+	})();
+});
+
+//编辑日志
+router.post('/daily/:dailyid/edit', checkLogin, function(req, res, next) {
+	let dailyid = req.params.dailyid;
+	Daily.updateOne({
+			id: dailyid
+		}, {
+			$set: {
+				titles: req.body.titles,
+				titlel: req.body.titlel,
+				editor: req.session.user.username,
+				time: new Date(),
+				content: req.body.content,
+			}
+		},
+		function(err) {
+			if (err) {
+				return console.log(err);
+			}
+			return res.send("修改成功！")
+		});
+});
+
+/*------日志结束------*/
+
 module.exports = router;

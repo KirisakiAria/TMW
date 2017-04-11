@@ -22,7 +22,7 @@ NewsSchema.statics.removeById = function(newsid, next, fn) {
 			console.log(err);
 			return next();
 		} else {
-			console.log('删除ID为' + newsid + '的文章');
+			console.log('删除ID为' + newsid + '的新闻');
 			fn();
 		}
 	});
@@ -40,7 +40,7 @@ NewsSchema.statics.removeByIdList = function(idList, next, fn) {
 			return next();
 		} else {
 			idList.forEach(function(e, i) {
-				console.log('删除ID为' + e + '的文章');
+				console.log('删除ID为' + e + '的新闻');
 			});
 			fn();
 		}

@@ -48,7 +48,8 @@
 			</a>
 		</div>
 		<div class="fr user">
-			<span id="username"><%=username %></span>
+			<span id="username">
+				<%=username %></span>
 			<a class="avatar" href="">
 				<img src="../img/avatar.jpg"></a>
 		</div>
@@ -78,10 +79,10 @@
 						</a>
 						<ul class="mainul">
 							<li class="act">
-								<a id="watchnews" href="javascript:;">查看新闻</a>
+								<a class="shownews" href="javascript:;">查看新闻</a>
 							</li>
 							<li>
-								<a id="addnews" href="javascript:;">添加新闻</a>
+								<a class="addnews" href="javascript:;">添加新闻</a>
 							</li>
 						</ul>
 					</li>
@@ -92,17 +93,17 @@
 						</a>
 						<ul class="mainul">
 							<li>
-								<a id="watchnews" href="javascript:;">查看日志</a>
+								<a class="showdailies" href="javascript:;">查看日志</a>
 							</li>
 							<li>
-								<a id="addnews" href="javascript:;">添加日志</a>
+								<a class="adddaily" href="javascript:;">添加日志</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 			</nav>
 			<div class="editarea">
-				<div class="news item">
+				<div class="article item">
 					<div class="listheader">
 						<ul class="clearfix">
 							<li>ID</li>
@@ -114,13 +115,13 @@
 						</ul>
 						<ul class="clearfix oper">
 							<li>
-								<a href="javascript:;" id="del">删除</a>
+								<a href="javascript:;" class="groupdel">删除</a>
 							</li>
 							<li>
-								<a href="javascript:;" id="res">反选</a>
+								<a href="javascript:;" class="groupres">反选</a>
 							</li>
 							<li>
-								<a href="javascript:;" id="all">全选</a>
+								<a href="javascript:;" class="groupall">全选</a>
 							</li>
 						</ul>
 					</div>
@@ -128,8 +129,8 @@
 						<ul></ul>
 					</div>
 				</div>
-				<div class="addnews item disnone">
-					<form enctype="multipart/form-data" method="post" action="/createnews">
+				<div class="editartarea item disnone">
+					<form enctype="multipart/form-data" method="post">
 						<div class="form-group aid disnone">
 							<label for="aid">文章ID</label>
 							<input type="text" class="form-control" id="aid" name="aid" readonly="readonly" placeholder=""></div>
@@ -151,8 +152,14 @@
 							<label for="content">文章内容</label>
 							<textarea class="form-control" id="content" name="content" rows="5"></textarea>
 						</div>
-						<button id="submitnews" type="submit" class="btn btn-success">保存</button>
-						<button id="editnews" type="submit" class="btn btn-success disnone">修改</button>
+						<div class="newsbtn">
+							<button id="subbtn-news" type="submit" class="btn btn-success">保存</button>
+							<button id="editbtn-news" type="submit" class="btn btn-success disnone">修改</button>
+						</div>
+						<div class="dailybtn">
+							<button id="subbtn-daily" type="submit" class="btn btn-success">保存</button>
+							<button id="editbtn-daily" type="submit" class="btn btn-success disnone">修改</button>
+						</div>
 					</form>
 				</div>
 			</div>

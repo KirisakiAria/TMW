@@ -27,7 +27,8 @@ router.post('/sign', function(req, res, next) {
 					if (re.password !== password) {
 						return res.send("密码错误！");
 					}
-					req.session.user = username;
+					re.password = "";
+					req.session.user = re;
 					res.send("/tmwcms");
 				}
 			})();
