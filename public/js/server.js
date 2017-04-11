@@ -1,9 +1,11 @@
 "use strict";
 
 $(function() {
+	//阻止a链接跳转
 	$("a").click(function(e) {
 		e.preventDefault();
 	});
+
 	//注册页
 	$("#signup").click(function(e) {
 		e.preventDefault();
@@ -32,6 +34,7 @@ $(function() {
 			}
 		});
 	});
+
 	//登录页
 	$("#signin").click(function(e) {
 		e.preventDefault();
@@ -58,6 +61,7 @@ $(function() {
 			}
 		});
 	});
+
 	//CMS
 	$(".maina").click(function() {
 		$(this).next().slideToggle();
@@ -66,6 +70,7 @@ $(function() {
 		$(".mainul").find("a").parent().removeClass("act");
 		$(this).parent().addClass("act");
 	});
+
 	//登出
 	$(".logout").click(function() {
 		if (confirm("确定要登出吗?")) {
@@ -82,10 +87,11 @@ $(function() {
 			});
 		}
 	});
+
 	//查看新闻
-	$("#watchnews").click(function() {
-		$(".item").addClass("disnone");
-		$(".news").removeClass("disnone");
+	function watchNews() {
+		$(".item,#editnews,.aid,.addnews").addClass("disnone");
+		$(".news,#submitnews").removeClass("disnone");
 		$.ajax({
 			url: window.location.href + "/watchnews",
 			datatype: "json",
@@ -97,20 +103,27 @@ $(function() {
 						"<div class='newsid'>" + data[i].id + "</div>" +
 						"<div>" + data[i].titlel + "</div>" +
 						"<div>" + data[i].author + "</div>" +
+						"<div>" + data[i].editor + "</div>" +
 						"<div>" + date + "</div>" +
 						"<div>" + "<input type='checkbox' name=''>" +
 						"<a href='javascript:;' class='edit'>编辑</a>" +
 						"<a href='javascript:;' class='del'>删除</a>" +
 						"</div></li>";
+
 					$(".listbody").find("ul").append(html);
+
+					//删除单条新闻
 					$(".del").off().click(function() {
 						if (confirm("确定删除吗？")) {
-							let newsid = $(this).parent().parent().find(".newsid").html();
+							let newsid = $(this).parents("li").find(".newsid").html();
 							$.ajax({
 								url: window.location.href + "/news/" + newsid + "/del",
 								type: "POST",
 								success: function(data) {
-									alert(data);
+									if (data) {
+										alert(data);
+									}
+									watchNews()
 								},
 								error: function() {
 									alert("好像出了点小问题");
@@ -118,13 +131,41 @@ $(function() {
 							});
 						}
 					});
+
+					//编辑新闻
+					$(".edit").click(function() {
+						var newsid = $(this).parents("li").find(".newsid").html();
+						$("#submitnews,.news").addClass("disnone");
+						$("#editnews,.addnews,.aid").removeClass("disnone");
+						console.log(newsid);
+						$.ajax({
+							url: window.location.href + "/editnews/" + newsid,
+							type: "POST",
+							success: function(data) {
+								$("#aid").val(data.id);
+								$("#titles").val(data.titles);
+								// $("#titles").val(data.title);
+								$("#titlel").val(data.titlel);
+								$("#content").val(data.content);
+							},
+							error: function() {
+								alert("好像出了点小问题");
+							}
+						});
+					});
 				}
 			},
 			error: function() {
 				alert("好像出了点小问题");
 			}
 		});
+	}
+
+	//绑定查看新闻
+	$("#watchnews").click(function() {
+		watchNews();
 	});
+
 	//全选
 	$("#all").off().click(function() {
 		$(".listbody").find("input:checkbox").prop("checked", true);
@@ -141,14 +182,17 @@ $(function() {
 		if (confirm("确定删除吗？")) {
 			$(".listbody").find("input:checkbox").each(function(index, el) {
 				if ($(this).prop("checked")) {
-					list.push($(this).parent().parent().find(".newsid").html());
+					list.push($(this).parents("li").find(".newsid").html());
 				}
 			});
 			$.ajax({
 				url: window.location.href + "/news/" + list + "/mutidel/",
 				type: "POST",
 				success: function(data) {
-					alert(data);
+					if (data) {
+						alert(data);
+					}
+					watchNews();
 				},
 				error: function() {
 					alert("好像出了点小问题");
@@ -156,16 +200,19 @@ $(function() {
 			});
 		}
 	});
+
 	//导航栏添加新闻
 	$("#addnews").click(function() {
-		$(".item").addClass("disnone");
-		$(".addnews").removeClass("disnone");
+		$(".item,#editnews,.aid").addClass("disnone");
+		$(".addnews,#submitnews").removeClass("disnone");
 	});
+
 	//导航栏批量删除
 	$("#addnews").click(function() {
 		$(".item").addClass("disnone");
 		$(".addnews").removeClass("disnone");
 	});
+
 	//发表新闻
 	$("#submitnews").off().click(function(e) {
 		e.preventDefault();
@@ -182,5 +229,25 @@ $(function() {
 				alert("保存出错了");
 			}
 		});
-	})
+	});
+
+	//编辑提交新闻
+	$("#editnews").off().click(function(e) {
+		e.preventDefault();
+		var newsid = $("#aid").val();
+		$.ajax({
+			url: window.location.href + "/news/" + newsid + "/edit",
+			data: $(".addnews").find("form").serialize(),
+			type: "POST",
+			success: function(data) {
+				if (data) {
+					alert(data);
+				}
+				watchNews();
+			},
+			error: function() {
+				alert("保存出错了");
+			}
+		});
+	});
 })

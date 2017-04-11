@@ -7,6 +7,7 @@ let NewsSchema = new mongoose.Schema({
 	titles: String, //短标题
 	titlel: String, //长标题
 	author: String, //作者
+	editor: String, //修改人
 	listimg: String, //列表图片
 	time: Date, //发表时间
 	content: String //内容

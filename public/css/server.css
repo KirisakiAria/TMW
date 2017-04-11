@@ -311,8 +311,8 @@ nav .mainli li a
 {
     overflow: hidden;
 
-    width:         calc(100% - 670px);
-    width: -webkit-calc(100% - 670px);
+    width:         calc(100% - 820px);
+    width: -webkit-calc(100% - 820px);
     padding-right: 15px;
     padding-left: 15px;
 
@@ -331,10 +331,15 @@ nav .mainli li a
 .editarea .listheader li:nth-child(4),
 .editarea .listbody li > div:nth-child(4)
 {
-    width: 200px;
+    width: 150px;
 }
 .editarea .listheader li:nth-child(5),
 .editarea .listbody li > div:nth-child(5)
+{
+    width: 200px;
+}
+.editarea .listheader li:nth-child(6),
+.editarea .listbody li > div:nth-child(6)
 {
     width: 220px;
 

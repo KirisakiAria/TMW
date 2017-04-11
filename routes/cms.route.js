@@ -21,9 +21,24 @@ router.get('/signout', function(req, res, next) {
 	return res.send("success");
 });
 
-//查看新闻
+//查看所有新闻
 router.get('/watchnews', checkLogin, function(req, res, next) {
 	News.find({}, function(err, docs) {
+		if (err) {
+			console.log(err);
+			return next();
+		} else {
+			res.json(docs);
+		}
+	});
+});
+
+//编辑单条新闻
+router.post('/editnews/:newsid', checkLogin, function(req, res, next) {
+	let newsid = req.params.newsid;
+	News.findOne({
+		id: newsid
+	}, function(err, docs) {
 		if (err) {
 			console.log(err);
 			return next();
@@ -103,7 +118,8 @@ router.post('/createnews', checkLogin, function(req, res, next) {
 					id: doc.index,
 					titles: req.body.titles,
 					titlel: req.body.titlel,
-					author: 'admin',
+					author: req.session.user,
+					editor: req.session.user,
 					listimg: 'none',
 					time: new Date(),
 					content: req.body.content
@@ -124,5 +140,25 @@ router.post('/createnews', checkLogin, function(req, res, next) {
 });
 
 //编辑新闻
-router.post('/news/:newsid/edit', checkLogin, function(req, res, next) {})
+router.post('/news/:newsid/edit', checkLogin, function(req, res, next) {
+	let newsid = req.params.newsid;
+	console.log(req.body.titles)
+	News.updateOne({
+			id: newsid
+		}, {
+			$set: {
+				titles: req.body.titles,
+				titlel: req.body.titlel,
+				editor: req.session.user,
+				time: new Date(),
+				content: req.body.content,
+			}
+		},
+		function(err) {
+			if (err) {
+				return console.log(err);
+			}
+			return res.send("修改成功！")
+		});
+});
 module.exports = router;
