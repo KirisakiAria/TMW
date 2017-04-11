@@ -1,10 +1,10 @@
 'use strict';
 
-let express = require('express');
-let router = express.Router();
-let crypto = require('crypto');
-let mongoose = require('mongoose');
-let User = mongoose.model('User');
+const express = require('express');
+const router = express.Router();
+const crypto = require('crypto');
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
 
 router.get('/', function(req, res, next) {
 	res.status(200).render('../views/server/signup.ejs');

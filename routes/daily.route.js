@@ -1,10 +1,10 @@
 'use strict';
 
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-let mongoose = require('mongoose');
-let Daily = mongoose.model('Daily');
+const mongoose = require('mongoose');
+const Daily = mongoose.model('Daily');
 
 
 //日志列表页

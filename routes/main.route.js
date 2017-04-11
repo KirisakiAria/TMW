@@ -1,7 +1,7 @@
 'use strict';
 
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 //主页
 router.get('/', function(req, res, next) {

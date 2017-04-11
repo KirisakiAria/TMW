@@ -1,10 +1,10 @@
 'use strict';
 
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-let mongoose = require('mongoose');
-let News = mongoose.model('News');
+const mongoose = require('mongoose');
+const News = mongoose.model('News');
 
 
 //新闻列表页

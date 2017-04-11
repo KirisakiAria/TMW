@@ -1,8 +1,8 @@
 'use strict';
 
-let mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-let UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
 	username: String,
 	password: String,
 	avatar: String,

@@ -1,8 +1,8 @@
 'use strict';
 
-let mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-let DailySchema = new mongoose.Schema({
+const DailySchema = new mongoose.Schema({
 	id: Number, //文章ID
 	titles: String, //短标题
 	titlel: String, //长标题
@@ -22,10 +22,10 @@ DailySchema.statics.removeById = function(dailyid, next, fn) {
 			console.log(err);
 			return next();
 		} else {
-			console.log('删除ID为' + newsid + '的日志');
+			console.log('删除ID为' + dailyid + '的日志');
 			fn();
 		}
-	});
+	});  
 }
 
 //批量删除日志

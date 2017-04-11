@@ -1,14 +1,14 @@
 'use strict';
 
-let express = require('express');
-let router = express.Router();
-let mongoose = require('mongoose');
-let News = mongoose.model('News');
-let Daily = mongoose.model('Daily');
-let NewsIncrement = mongoose.model('NewsIncrement');
-let DailyIncrement = mongoose.model('DailyIncrement');
-let checkLogin = require('../lib/checkLogin').checkLogin;
-let checkAuth = require('../lib/checkLogin').checkAuth;
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+const News = mongoose.model('News');
+const Daily = mongoose.model('Daily');
+const NewsIncrement = mongoose.model('NewsIncrement');
+const DailyIncrement = mongoose.model('DailyIncrement');
+const checkLogin = require('../lib/checkLogin').checkLogin;
+const checkAuth = require('../lib/checkLogin').checkAuth;
 
 //cms
 router.get('/', checkLogin, function(req, res, next) {
@@ -265,8 +265,8 @@ router.post('/createdaily', checkLogin, function(req, res, next) {
 					id: doc.index,
 					titles: req.body.titles,
 					titlel: req.body.titlel,
-					author: req.session.user,
-					editor: req.session.user,
+					author: req.session.user.username,
+					editor: req.session.user.username,
 					listimg: 'none',
 					time: new Date(),
 					content: req.body.content

@@ -1,8 +1,8 @@
 'use strict';
 
-let mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-let DailyIncrementSchema = new mongoose.Schema({
+const DailyIncrementSchema = new mongoose.Schema({
 	index: {
 		type: Number,
 		default: 0

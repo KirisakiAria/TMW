@@ -1,7 +1,7 @@
 'use strict';
 
-let config = require('config-lite');
-let mongoose = require('mongoose');
+const config = require('config-lite');
+const mongoose = require('mongoose');
 
 module.exports = function() {
 	mongoose.Promise = global.Promise;

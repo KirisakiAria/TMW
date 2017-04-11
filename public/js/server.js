@@ -120,7 +120,7 @@ $(function() {
 								type: "POST",
 								success: function(data) {
 									if (data) {
-										alert(data);
+										console.log(data);
 									}
 									showArticle(arturl1, arturl2, fn);
 								},
@@ -165,7 +165,7 @@ $(function() {
 								type: "POST",
 								success: function(data) {
 									if (data) {
-										alert(data);
+										console.log(data);
 									}
 									showArticle(arturl1, arturl2, fn);
 								},

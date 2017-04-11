@@ -1,21 +1,21 @@
 'use strict';
 
-let path = require('path');
-let express = require('express');
-let session = require('express-session');
-let MongoStore = require('connect-mongo')(session);
-let bodyParser = require('body-parser');
-let flash = require('connect-flash');
+const path = require('path');
+const express = require('express');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const bodyParser = require('body-parser');
+const flash = require('connect-flash');
 //此模块会检测环境变量的设置，如无特殊设置则自动执行default.js
-let config = require('config-lite');
-let routes = require('./routes/index.route');
-let pkg = require('./package');
-let mongoose = require('./config/mongoose');
+const config = require('config-lite');
+const routes = require('./routes/index.route');
+const pkg = require('./package');
+const mongoose = require('./config/mongoose');
 
 //执行数据库模型操作
-let db = mongoose();
+const db = mongoose();
 
-let app = express();
+const app = express();
 
 //body-parser中间件处理表单
 app.use(bodyParser.json());
@@ -51,7 +51,7 @@ app.use(flash());
 // 设置模板全局常量
 app.locals.site = {
 	title: pkg.name,
-	author: pkg.author,
+	author: pkg.author, 
 	description: pkg.description
 };
 
