@@ -51,7 +51,7 @@ jQuery(document).ready(function($) {
 			transitionBackground.off('webkitAnimationEnd oanimationend msAnimationEnd animationend');
 		});
 		$("html,body").removeClass('overflow-hidden');
-		$(".modal-content").find("h3,p"), empty();
+		$(".modal-content").find("h3,p").empty();
 	});
 
 	function setLayerDimensions() {

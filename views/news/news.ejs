@@ -22,9 +22,10 @@
 		<section class="cd-transition-layer" data-frame="25">
 			<div class="bg-layer"></div>
 		</section>
-		<section class="content">
-			<%var length = docs.length<6?docs.length:6; for(var i=0; i<length; i++) { %>
-			<a href="#cd-modal" data-href=<%=docs[i].id%> class="tilter cd-modal-trigger">
+		<section class="content pagecontent">
+			<% for(var i=0; i<docs.length; i++) { %>
+			<a href="#cd-modal" data-href=<%=docs[i].id%>
+				class="tilter cd-modal-trigger">
 				<figure class="tilter__figure">
 					<img class="tilter__image" src="../img/1.jpg" alt="" />
 					<div class="tilter__deco tilter__deco--shine">
@@ -35,7 +36,9 @@
 						<h3 class="tilter__title" data-title=<%=docs[i].titles%>
 							>
 							<%=docs[i].titles%></h3>
-						<p class="tilter__description" data-title=<%=docs[i].author%>><%=docs[i].author%></p>
+						<p class="tilter__description" data-title=<%=docs[i].author%>
+							>
+							<%=docs[i].author%></p>
 					</figcaption>
 					<svg class="tilter__deco tilter__deco--lines" viewBox="0 0 300 415">
 						<path d="M20.5,20.5h260v375h-260V20.5z" />
@@ -43,30 +46,12 @@
 				</figure>
 			</a>
 			<% } %></section>
-		<section class="page text-center">
-			<ul>
-				<li>
-					<a href="">1</a>
-				</li>
-				<li>
-					<a href="">2</a>
-				</li>
-				<li>
-					<a href="">3</a>
-				</li>
-				<li>
-					<a href="">4</a>
-				</li>
-				<li>
-					<a href="">5</a>
-				</li>
-			</ul>
-		</section>
+		<%- include('../public/page') %>
 		<%- include('../public/footer') %></main>
 </div>
-<script src="../js/hovereffect.js"></script>
+<script id="src1" src="../js/hovereffect.js"></script>
 <script src="../js/nav.js"></script>
-<script src="../js/listShift.js"></script>
+<script id="src2" src="../js/listShift.js"></script>
 <script src="../js/common.js"></script>
 <script>
 		$(function() {
