@@ -161,6 +161,7 @@ $(function() {
 			}
 		});
 	});
+	
 	$(".daily").find(".page").find("a").click(function(e) {
 		var thisa = $(this);
 		var pageid = fn(e, thisa);

@@ -18,14 +18,7 @@
 		<section class="content pagecontent">
 			<%for(var i=0;i<9;i=i+3) { %>
 			<div class="grid grid--effect-pollux">
-				<% var max = 0;
-			if(docs.length-i < 3){
-				max = docs.length-i
-			}
-			else {
-				max=3;
-			}
-			for(var j=0;j<max;j++) { %>
+				<% var max = docs.length-i<3?docs.length-i:3; for(var j=0;j<max;j++) { %>
 				<a href="#" class="trigger grid__item" data-href=<%=docs[i+j].id%>
 					>
 					<div class="stack">

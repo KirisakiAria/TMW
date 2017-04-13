@@ -96,9 +96,9 @@ $(function() {
 			datatype: "json",
 			success: function(data) {
 				$(".listbody").find("ul").empty();
-				for (let i = 0; i < data.length; i++) {
-					let date = moment(data[i].time).utc().utcOffset(+8).format('YYYY-MM-DD HH:mm:ss');
-					let html = "<li class='clearfix'>" +
+				for (var i = 0; i < data.length; i++) {
+					var date = moment(data[i].time).utc().utcOffset(+8).format('YYYY-MM-DD HH:mm:ss');
+					var html = "<li class='clearfix'>" +
 						"<div class='aid'>" + data[i].id + "</div>" +
 						"<div>" + data[i].titlel + "</div>" +
 						"<div>" + data[i].author + "</div>" +
@@ -114,7 +114,7 @@ $(function() {
 					//删除单条文章
 					$(".del").off().click(function() {
 						if (confirm("确定删除吗？")) {
-							let aid = $(this).parents("li").find(".aid").html();
+							var aid = $(this).parents("li").find(".aid").html();
 							$.ajax({
 								url: window.location.href + "/" + arturl2 + "/" + aid + "/del",
 								type: "POST",
@@ -153,7 +153,7 @@ $(function() {
 
 					//批量删除文章
 					$(".groupdel").off().click(function() {
-						let list = [];
+						var list = [];
 						if (confirm("确定删除吗？")) {
 							$(".listbody").find("input:checkbox").each(function(index, el) {
 								if ($(this).prop("checked")) {
@@ -183,6 +183,39 @@ $(function() {
 		});
 	}
 
+	function addArticle(url) {
+		$.ajax({
+			url: window.location.href + url,
+			data: $(".editartarea").find("form").serialize(),
+			type: "POST",
+			success: function(data) {
+				if (data) {
+					alert(data);
+				}
+			},
+			error: function() {
+				alert("保存出错了");
+			}
+		});
+	}
+
+	function editArticle(url, fn) {
+		var id = $("#aid").val();
+		$.ajax({
+			url: window.location.href + "/" + url + "/" + id + "/edit",
+			data: $(".editartarea").find("form").serialize(),
+			type: "POST",
+			success: function(data) {
+				if (data) {
+					alert(data);
+				}
+				fn();
+			},
+			error: function() {
+				alert("保存出错了");
+			}
+		});
+	}
 	/*------新闻------*/
 
 	//查看新闻
@@ -221,44 +254,20 @@ $(function() {
 	//发表新闻
 	$("#subbtn-news").off().click(function(e) {
 		e.preventDefault();
-		$.ajax({
-			url: window.location.href + "/createnews",
-			data: $(".editartarea").find("form").serialize(),
-			type: "POST",
-			success: function(data) {
-				if (data) {
-					alert(data);
-				}
-			},
-			error: function() {
-				alert("保存出错了");
-			}
-		});
+		addArticle("/createnews");
 	});
 
 	//编辑提交新闻
 	$("#editbtn-news").off().click(function(e) {
 		e.preventDefault();
-		var newsid = $("#aid").val();
-		$.ajax({
-			url: window.location.href + "/news/" + newsid + "/edit",
-			data: $(".editartarea").find("form").serialize(),
-			type: "POST",
-			success: function(data) {
-				if (data) {
-					alert(data);
-				}
-				$(".item,#editbtn-news,.aid,.editartarea").addClass("disnone");
-				$(".article,#subbtn-news").removeClass("disnone");
-				showArticle("/shownews", "news", function() {
-					$("#subbtn-news,.article").addClass("disnone");
-					$("#editbtn-news,.editartarea,.aid").removeClass("disnone");
-				});
-			},
-			error: function() {
-				alert("保存出错了");
-			}
-		});
+		editArticle("news", function() {
+			$(".item,#editbtn-news,.aid,.editartarea").addClass("disnone");
+			$(".article,#subbtn-news").removeClass("disnone");
+			showArticle("/shownews", "news", function() {
+				$("#subbtn-news,.article").addClass("disnone");
+				$("#editbtn-news,.editartarea,.aid").removeClass("disnone");
+			});
+		})
 	});
 	/*------新闻结束------*/
 
@@ -285,45 +294,20 @@ $(function() {
 	//发表日志
 	$("#subbtn-daily").off().click(function(e) {
 		e.preventDefault();
-		$.ajax({
-			url: window.location.href + "/createdaily",
-			data: $(".editartarea").find("form").serialize(),
-			type: "POST",
-			success: function(data) {
-				if (data) {
-					alert(data);
-				}
-			},
-			error: function() {
-				alert("保存出错了");
-			}
-		});
+		addArticle("/createdaily");
 	});
 
 	//编辑提交日志
 	$("#editbtn-daily").off().click(function(e) {
 		e.preventDefault();
-		var dailyid = $("#aid").val();
-		$.ajax({
-			url: window.location.href + "/daily/" + dailyid + "/edit",
-			data: $(".editartarea").find("form").serialize(),
-			type: "POST",
-			success: function(data) {
-				if (data) {
-					alert(data);
-				}
-				$(".item,#editbtn-daily,.aid,.editartarea").addClass("disnone");
-				$(".article,#subbtn-daily").removeClass("disnone");
-				showArticle("/showdailies", "daily", function() {
-					$("#subbtn-daily,.article").addClass("disnone");
-					$("#editbtn-daily,.editartarea,.aid").removeClass("disnone");
-				});
-			},
-			error: function() {
-				alert("保存出错了");
-			}
+		editArticle("daily", function() {
+			$(".item,#editbtn-daily,.aid,.editartarea").addClass("disnone");
+			$(".article,#subbtn-daily").removeClass("disnone");
+			showArticle("/showdailies", "daily", function() {
+				$("#subbtn-daily,.article").addClass("disnone");
+				$("#editbtn-daily,.editartarea,.aid").removeClass("disnone");
+			});
 		});
 	});
-
 	/*------日志结束------*/
 });
