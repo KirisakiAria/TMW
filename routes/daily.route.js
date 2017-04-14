@@ -21,6 +21,23 @@ router.get('/', function(req, res, next) {
 	});
 });
 
+//日志分页
+router.get('/page/:pageid', function(req, res, next) {
+	let pageid = parseInt(req.params.pageid);
+	Daily.find({}, null, {
+			skip: (pageid - 1) * 9,
+			limit: 9
+		},
+		function(err, docs) {
+			if (err) {
+				console.log(err);
+				return next();
+			} else {
+				res.send(docs);
+			}
+		});
+});
+
 //单独文章页
 router.get('/:dailyid', function(req, res, next) {
 	//获取:xxx

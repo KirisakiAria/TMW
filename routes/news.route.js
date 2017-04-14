@@ -2,23 +2,42 @@
 
 const express = require('express');
 const router = express.Router();
-
 const mongoose = require('mongoose');
 const News = mongoose.model('News');
 
 
 //新闻列表页
 router.get('/', function(req, res, next) {
-	News.find({}, function(err, docs) {
-		if (err) {
-			console.log(err);
-			return next();
-		}
-		res.status(200).render('../views/news/news.ejs', {
-			title: 'NEWS',
-			docs: docs
+	News.find({}, null, {
+			limit: 6
+		},
+		function(err, docs) {
+			if (err) {
+				console.log(err);
+				return next();
+			}
+			res.status(200).render('../views/news/news.ejs', {
+				title: 'NEWS',
+				docs: docs
+			});
 		});
-	});
+});
+
+//新闻分页
+router.get('/page/:pageid', function(req, res, next) {
+	let pageid = parseInt(req.params.pageid);
+	News.find({}, null, {
+			skip: (pageid - 1) * 6,
+			limit: 6
+		},
+		function(err, docs) {
+			if (err) {
+				console.log(err);
+				return next();
+			} else {
+				res.send(docs);
+			}
+		});
 });
 
 //单独文章页

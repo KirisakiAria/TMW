@@ -103,7 +103,7 @@
 			(function() {
 				//背景
 				var segmenter = new Segmenter(document.getElementById('segmenter'), {
-					pieces: 7,
+					pieces: 7, 
 					animation: {
 						duration: 1500,
 						easing: 'easeOutQuad',
@@ -159,6 +159,7 @@
 							$(".trans").addClass("scale");
 							setTimeout(function() {
 								segmenter.animate();
+								//文字高斯模糊效果
 								$(".trigger-headline").addClass("gauss");
 								//文字动画
 								var basicTimeline = anime.timeline();
