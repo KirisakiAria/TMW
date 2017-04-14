@@ -28,14 +28,14 @@ router.post('/sign', function(req, res, next) {
 						username: username,
 						password: password,
 						avatar: '',
-						authority: 'normal'
+						authority: 'normal',
+						lastloginip: req.connection.remoteAddress
 					});
 					user.save(function(err) {
 						if (err) {
 							console.log(err);
 							return;
 						}
-						req.session.user = username;
 						res.send("注册成功！请登录");
 					});
 				}

@@ -6,7 +6,8 @@ const UserSchema = new mongoose.Schema({
 	username: String,
 	password: String,
 	avatar: String,
-	authority: String
+	authority: String,
+	lastloginip:String
 });
 
 UserSchema.statics.findByUsername = function(username) {

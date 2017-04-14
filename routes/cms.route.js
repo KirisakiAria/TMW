@@ -12,6 +12,7 @@ const checkAuth = require('../lib/checkLogin').checkAuth;
 
 //cms
 router.get('/', checkLogin, function(req, res, next) {
+	console.log(req.connection.remoteAddress);
 	res.status(200).render('../views/server/cms.ejs', {
 		username: req.session.user.username
 	});

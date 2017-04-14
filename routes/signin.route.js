@@ -29,6 +29,17 @@ router.post('/sign', function(req, res, next) {
 					}
 					re.password = "";
 					req.session.user = re;
+					User.update({
+						username: username
+					}, {
+						$set: {
+							lastloginip: req.connection.remoteAddress
+						}
+					}, function(err) {
+						if (err) {
+							console.log(err);
+						}
+					});
 					res.send("/tmwcms");
 				}
 			})();
