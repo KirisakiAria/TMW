@@ -183,6 +183,7 @@ $(function() {
 		});
 	}
 
+	//添加文章
 	function addArticle(url) {
 		$.ajax({
 			url: window.location.href + url,
@@ -199,6 +200,7 @@ $(function() {
 		});
 	}
 
+	//编辑文章
 	function editArticle(url, fn) {
 		var id = $("#aid").val();
 		$.ajax({
