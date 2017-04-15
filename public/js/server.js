@@ -121,8 +121,8 @@ $(function() {
 								success: function(data) {
 									if (data) {
 										console.log(data);
-									}
-									showArticle(arturl1, arturl2, fn);
+										showArticle(arturl1, arturl2, fn);
+									}	
 								},
 								error: function() {
 									alert("好像出了点小问题");
@@ -166,8 +166,8 @@ $(function() {
 								success: function(data) {
 									if (data) {
 										console.log(data);
-									}
-									showArticle(arturl1, arturl2, fn);
+										showArticle(arturl1, arturl2, fn);
+									}	
 								},
 								error: function() {
 									alert("好像出了点小问题");

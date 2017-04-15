@@ -5,6 +5,7 @@ const router = express.Router();
 const crypto = require('crypto');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const SecretCode = mongoose.model('SecretCode');
 
 router.get('/', function(req, res, next) {
 	res.status(200).render('../views/server/signup.ejs');
@@ -15,12 +16,19 @@ router.post('/sign', function(req, res, next) {
 	let sha512 = crypto.createHash('sha512');
 	let username = req.body.username;
 	let password = req.body.password;
+	let secretcode = req.body.secretcode;
 	//先查一下用户名是不是已存在
 	(async function() {
 		try {
-			let re = await User.findByUsername(username);
+			let code = await SecretCode.findByCode(secretcode);
+			let re1 = await (() => {
+				if(!code){
+					res.send("神秘代码有误");
+				}
+			})();
+			let re2 = await User.findByUsername(username);
 			await (() => {
-				if (re) {
+				if (re2) {
 					res.send("用户名已存在");
 				} else {
 					password = sha512.digest(password).toString();
