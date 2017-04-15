@@ -21,18 +21,16 @@ router.post('/sign', function(req, res, next) {
 	(async function() {
 		try {
 			let code = await SecretCode.findByCode(secretcode);
-			let re1 = await (() => {
-				if(!code){
-					res.send("神秘代码有误");
-				}
-			})();
+			if (!code) {
+				return res.send("神秘代码有误");
+			}
 			let re2 = await User.findByUsername(username);
 			await (() => {
 				if (re2) {
 					res.send("用户名已存在");
 				} else {
 					password = sha512.digest(password).toString();
-					let user = new User({ 
+					let user = new User({
 						username: username,
 						password: password,
 						avatar: '',
