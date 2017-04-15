@@ -29,6 +29,7 @@ router.post('/sign', function(req, res, next) {
 					}
 					re.password = "";
 					req.session.user = re;
+					let position = getPosition(req);
 					User.update({
 						username: username
 					}, {

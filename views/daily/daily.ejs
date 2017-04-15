@@ -11,16 +11,22 @@
 	</div>
 	<main>
 		<div class="mask-in"></div>
-		<div class="cd-modal" id="modal-1"></div>
-		<div class="cd-transition-layer" data-frame="25">
+		<section class="cd-modal" id="cd-modal">
+			<div class="modal-close"></div>
+			<div class="modalbg"></div>
+			<div class="modal-content">
+				<h3></h3>
+				<p></p>
+			</div>
+		</section>
+		<section class="cd-transition-layer" data-frame="30">
 			<div class="bg-layer"></div>
-		</div>
+		</section>
 		<section class="content pagecontent">
 			<%for(var i=0;i<9;i=i+3) { %>
 			<div class="grid grid--effect-pollux">
 				<% var max = docs.length-i<3?docs.length-i:3; for(var j=0;j<max;j++) { %>
-				<a href="#" class="trigger grid__item" data-href=<%=docs[i+j].id%>
-					>
+				<a href="javascript:;" class="cd-modal-trigger grid__item" data-url="daily"  data-href=<%=docs[i+j].id%>>
 					<div class="stack">
 						<div class="stack__deco"></div>
 						<div class="stack__deco"></div>
@@ -52,6 +58,6 @@
 				new PolluxFx(stackEl);
 			});
 		});
-	</script>
+</script>
 </body>
 </html>

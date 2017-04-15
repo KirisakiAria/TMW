@@ -24,7 +24,7 @@ router.post('/sign', function(req, res, next) {
 					res.send("用户名已存在");
 				} else {
 					password = sha512.digest(password).toString();
-					let user = new User({
+					let user = new User({ 
 						username: username,
 						password: password,
 						avatar: '',

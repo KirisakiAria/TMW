@@ -23,15 +23,15 @@ jQuery(document).ready(function($) {
 		event.preventDefault();
 		var href = $(this).data("href");
 		$("html,body").addClass('overflow-hidden');
-		var modalId = $(event.target).attr('href');
+		var url = $(this).data("url")
 		transitionLayer.addClass('visible opening');
 		setTimeout(function() {
-			modalWindow.filter(modalId).addClass('visible');
+			modalWindow.addClass('visible');
 			transitionLayer.removeClass('opening');
 		}, 1000);
 		//获取单页内容
 		$.ajax({
-			url: "/news/" +
+			url: "/" + url + "/" +
 				href,
 			type: "get",
 			success: function(data) {

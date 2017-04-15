@@ -15,17 +15,16 @@
 			<div class="modal-close"></div>
 			<div class="modalbg"></div>
 			<div class="modal-content">
-				<h3>标题</h3>
-				<p>啊啊啊啊啊啊啊啊啊啊啊啊</p>
+				<h3></h3>
+				<p></p>
 			</div>
 		</section>
-		<section class="cd-transition-layer" data-frame="25">
+		<section class="cd-transition-layer" data-frame="30">
 			<div class="bg-layer"></div>
 		</section>
 		<section class="content pagecontent">
 			<% for(var i=0; i<docs.length; i++) { %>
-			<a href="#cd-modal" data-href=<%=docs[i].id%>
-				class="tilter cd-modal-trigger">
+			<a href="javascript:;" class="tilter cd-modal-trigger" data-url="news" data-href=<%=docs[i].id%>>
 				<figure class="tilter__figure">
 					<img class="tilter__image" src="../img/1.jpg" alt="" />
 					<div class="tilter__deco tilter__deco--shine">
