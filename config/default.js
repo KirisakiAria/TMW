@@ -1,6 +1,8 @@
 'use strict';
 const configs = {
 	port: 80,
+	//是否开放注册
+	open:false,
 	session: {
 		secret: 'TMW',
 		key: 'TMW',

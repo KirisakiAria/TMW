@@ -5,6 +5,7 @@ const router = express.Router();
 const crypto = require('crypto');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const config = require('config-lite');
 const SecretCode = mongoose.model('SecretCode');
 
 router.get('/', function(req, res, next) {
@@ -13,8 +14,7 @@ router.get('/', function(req, res, next) {
 
 //注册请求
 router.post('/sign', function(req, res, next) {
-	let open = true;
-	if (open) {
+	if (config.open) {
 		let sha512 = crypto.createHash('sha512');
 		let username = req.body.username;
 		let password = req.body.password;
