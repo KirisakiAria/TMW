@@ -3,11 +3,11 @@
 const mongoose = require('mongoose');
 
 const SecretCodeSchema = new mongoose.Schema({
-	code:String
+	code: String
 });
 
 SecretCodeSchema.statics.findByCode = function(code) {
-	return this.findOne({
+	return this.find({
 		code: code
 	}, function(err, doc) {
 		if (err) {

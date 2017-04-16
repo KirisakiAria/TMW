@@ -12,5 +12,6 @@ module.exports = function() {
 	require('../models/news.increment.model');
 	require('../models/user.server.model');
 	require('../models/secretcode.server.model');
+	
 	return db;
 }
