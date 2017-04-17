@@ -21,7 +21,7 @@ router.get('/', checkLogin, function(req, res, next) {
 //登出
 router.get('/signout', function(req, res, next) {
 	req.session.user = null;
-	return res.send("success");
+	return res.send('success');
 });
 
 /*------新闻------*/
@@ -134,7 +134,7 @@ router.post('/createnews', checkLogin, function(req, res, next) {
 						console.log(err);
 						return next();
 					}
-					res.send("发表成功！")
+					res.send('发表成功！')
 				});
 			});
 		} catch (e) {
@@ -162,7 +162,7 @@ router.post('/news/:newsid/edit', checkLogin, function(req, res, next) {
 			if (err) {
 				return console.log(err);
 			}
-			return res.send("修改成功！")
+			return res.send('修改成功！')
 		});
 });
 
@@ -277,7 +277,7 @@ router.post('/createdaily', checkLogin, function(req, res, next) {
 						console.log(err);
 						return next();
 					}
-					res.send("发表成功！")
+					res.send('发表成功！')
 				});
 			});
 		} catch (e) {
@@ -305,7 +305,7 @@ router.post('/daily/:dailyid/edit', checkLogin, function(req, res, next) {
 			if (err) {
 				return console.log(err);
 			}
-			return res.send("修改成功！")
+			return res.send('修改成功！')
 		});
 });
 

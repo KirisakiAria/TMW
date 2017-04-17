@@ -161,7 +161,7 @@ $(function() {
 			}
 		});
 	});
-	
+
 	$(".daily").find(".page").find("a").click(function(e) {
 		var thisa = $(this);
 		var pageid = fn(e, thisa);
@@ -171,8 +171,22 @@ $(function() {
 			success: function(data) {
 				$("#src1,#src2").remove();
 				var html = "";
-				data.forEach(function(e, i) {
-					html = "";
+				data.forEach(function(e, i, array) {
+					var circle = "<a href='javascript:;' class='cd-modal-trigger grid__item' data-url='daily'  data-href=" + data[i].id + ">" +
+						"<div class='stack'>" +
+						"<div class='stack__deco'></div>" +
+						"<div class='stack__deco'></div>" +
+						"<div class='stack__deco'></div>" +
+						"<div class='stack__deco'></div>" +
+						"<div class='stack__figure'>" +
+						"<img class='stack__img' src='../img/1.png' alt='daily'/>" +
+						"</div>" +
+						"</div>" +
+						"<div class='grid__item-caption'>" +
+						"<h3 class='grid__item-title' data-title=" + data[i].titles + ">" +
+						data[i].titles + "</h3>" +
+						"</div>" +
+						"</a>";
 				});
 				$(".loader").fadeOut().remove();
 				$(".pagecontent").empty().append(html);

@@ -21,15 +21,14 @@ router.post('/sign', function(req, res, next) {
 			let re = await User.findByUsername(username);
 			await (() => {
 				if (!re) {
-					return res.send("用户名不存在！请检查您的输入");
+					return res.send('用户名不存在！请检查您的输入');
 				} else {
 					password = sha512.digest(password).toString();
 					if (re.password !== password) {
-						return res.send("密码错误！");
+						return res.send('密码错误！');
 					}
 					re.password = "";
 					req.session.user = re;
-					let position = getPosition(req);
 					User.update({
 						username: username
 					}, {
@@ -41,7 +40,7 @@ router.post('/sign', function(req, res, next) {
 							console.log(err);
 						}
 					});
-					res.send("/tmwcms");
+					res.send('/tmwcms');
 				}
 			})();
 		} catch (e) {

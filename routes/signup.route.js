@@ -3,14 +3,14 @@
 const express = require('express');
 const router = express.Router();
 const crypto = require('crypto');
+const config = require('config-lite');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-const config = require('config-lite');
 const SecretCode = mongoose.model('SecretCode');
 
 router.get('/', function(req, res, next) {
 	res.status(200).render('../views/server/signup.ejs');
-})
+});
 
 //注册请求
 router.post('/sign', function(req, res, next) {
@@ -24,13 +24,13 @@ router.post('/sign', function(req, res, next) {
 				//验证神秘代码
 				let code = await SecretCode.findByCode(secretcode);
 				if (!code[0]) {
-					return res.send("神秘代码有误！");
+					return res.send('神秘代码有误！');
 				}
 				//查一下用户名是不是已存在
 				let re2 = await User.findByUsername(username);
 				await (() => {
 					if (re2) {
-						res.send("用户名已存在");
+						res.send('用户名已存在');
 					} else {
 						password = sha512.digest(password).toString();
 						let user = new User({
@@ -45,7 +45,7 @@ router.post('/sign', function(req, res, next) {
 								console.log(err);
 								return;
 							}
-							res.send("注册成功！请登录");
+							res.send('注册成功！请登录');
 						});
 					}
 				})();
@@ -54,9 +54,8 @@ router.post('/sign', function(req, res, next) {
 				next();
 			}
 		})();
-	}
-	else {
-		res.send("抱歉，现在不开放注册！");
+	} else {
+		res.send('抱歉，现在不开放注册！');
 	}
 });
 
