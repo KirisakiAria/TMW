@@ -171,8 +171,14 @@ $(function() {
 			success: function(data) {
 				$("#src1,#src2").remove();
 				var html = "";
+				var circle = ""
 				data.forEach(function(e, i, array) {
-					var circle = "<a href='javascript:;' class='cd-modal-trigger grid__item' data-url='daily'  data-href=" + data[i].id + ">" +
+					if (i % 3 == 0) {
+						//每三个a标签外面套个div 循环三次清空一次变量circle以便进行下次循环
+						html += "<div class='grid grid--effect-pollux'>" + circle + "</div>";
+						circle = "";
+					}
+					circle += "<a href='javascript:;' class='cd-modal-trigger grid__item' data-url='daily'  data-href=" + data[i].id + ">" +
 						"<div class='stack'>" +
 						"<div class='stack__deco'></div>" +
 						"<div class='stack__deco'></div>" +
@@ -187,6 +193,10 @@ $(function() {
 						data[i].titles + "</h3>" +
 						"</div>" +
 						"</a>";
+					//循环到最后一个的时候就把剩下的全部加入到变量html中
+					if (i == array.length - 1) {
+						html += "<div class='grid grid--effect-pollux'>" + circle + "</div>";
+					}
 				});
 				$(".loader").fadeOut().remove();
 				$(".pagecontent").empty().append(html);

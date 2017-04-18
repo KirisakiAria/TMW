@@ -110,72 +110,72 @@ $(function() {
 						'</div></li>';
 
 					$('.listbody').find('ul').append(html);
-
-					//删除单条文章
-					$('.del').off().click(function() {
-						if (confirm('确定删除吗？')) {
-							var aid = $(this).parents('li').find('.aid').html();
-							$.ajax({
-								url: window.location.href + '/' + arturl2 + '/' + aid + '/del',
-								type: 'POST',
-								success: function(data) {
-									if (data) {
-										console.log(data);
-										showArticle(arturl1, arturl2, fn);
-									}
-								},
-								error: function() {
-									alert('好像出了点小问题');
-								}
-							});
-						}
-					});
-
-					//编辑文章
-					$('.edit').click(function() {
+				}
+				//删除单条文章
+				$('.del').click(function() {
+					if (confirm('确定删除吗？')) {
 						var aid = $(this).parents('li').find('.aid').html();
-						fn();
 						$.ajax({
-							url: window.location.href + '/edit' + arturl2 + '/' + aid,
+							url: window.location.href + '/' + arturl2 + '/' + aid + '/del',
 							type: 'POST',
 							success: function(data) {
-								$('#aid').val(data.id);
-								$('#titles').val(data.titles);
-								// $('#titles').val(data.title);
-								$('#titlel').val(data.titlel);
-								$('#content').val(data.content);
+								if (data) {
+									console.log(data);
+									showArticle(arturl1, arturl2, fn);
+								}
 							},
 							error: function() {
 								alert('好像出了点小问题');
 							}
 						});
-					});
+					}
+				});
 
-					//批量删除文章
-					$('.groupdel').off().click(function() {
-						var list = [];
-						if (confirm('确定删除吗？')) {
-							$('.listbody').find('input:checkbox').each(function(index, el) {
-								if ($(this).prop('checked')) {
-									list.push($(this).parents('li').find('.aid').html());
-								}
-							});
-							$.ajax({
-								url: window.location.href + '/' + arturl2 + '/' + list + '/mutidel/',
-								type: 'POST',
-								success: function(data) {
-									if (data) {
-										console.log(data);
-										showArticle(arturl1, arturl2, fn);
-									}
-								},
-								error: function() {
-									alert('好像出了点小问题');
-								}
-							});
+				//编辑文章
+				$('.edit').click(function() {
+					var aid = $(this).parents('li').find('.aid').html();
+					fn();
+					$.ajax({
+						url: window.location.href + '/edit' + arturl2 + '/' + aid,
+						type: 'POST',
+						success: function(data) {
+							$('#aid').val(data.id);
+							$('#titles').val(data.titles);
+							// $('#titles').val(data.title);
+							$('#titlel').val(data.titlel);
+							$('#content').val(data.content);
+						},
+						error: function() {
+							alert('好像出了点小问题');
 						}
 					});
-				}
+				});
+
+				//批量删除文章
+				$('.groupdel').click(function() {
+					var list = [];
+					if (confirm('确定删除吗？')) {
+						$('.listbody').find('input:checkbox').each(function(index, el) {
+							if ($(this).prop('checked')) {
+								list.push($(this).parents('li').find('.aid').html());
+							}
+						});
+						$.ajax({
+							url: window.location.href + '/' + arturl2 + '/' + list + '/mutidel/',
+							type: 'POST',
+							success: function(data) {
+								if (data) {
+									console.log(data);
+									showArticle(arturl1, arturl2, fn);
+								}
+							},
+							error: function() {
+								alert('好像出了点小问题');
+							}
+						});
+					}
+				});
+
 			},
 			error: function() {
 				alert('好像出了点小问题');

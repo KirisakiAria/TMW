@@ -184,7 +184,7 @@ router.get('/showdailies', checkLogin, function(req, res, next) {
 
 //编辑单条日志
 router.post('/editdaily/:dailyid', checkLogin, function(req, res, next) {
-	let dailysid = req.params.dailyid;
+	let dailyid = req.params.dailyid;
 	Daily.findOne({
 		id: dailyid
 	}, function(err, docs) {
