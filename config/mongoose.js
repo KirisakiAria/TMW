@@ -3,7 +3,7 @@
 const config = require('config-lite');
 const mongoose = require('mongoose');
 
-module.exports = function() {
+module.exports = () => {
 	mongoose.Promise = global.Promise;
 	let db = mongoose.connect(config.mongodb);
 	require('../models/daily.client.model');
@@ -12,6 +12,6 @@ module.exports = function() {
 	require('../models/news.increment.model');
 	require('../models/user.server.model');
 	require('../models/secretcode.server.model');
-	
+
 	return db;
 }

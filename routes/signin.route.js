@@ -6,17 +6,17 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
 	res.status(200).render('../views/server/signin.ejs');
 });
 
 //登录请求
-router.post('/sign', function(req, res, next) {
+router.post('/sign', (req, res, next) => {
 	let sha512 = crypto.createHash('sha512');
 	let username = req.body.username;
 	let password = req.body.password;
 	//先查一下用户名是不是已存在
-	(async function() {
+	(async() => {
 		try {
 			let re = await User.findByUsername(username);
 			await (() => {
@@ -35,7 +35,7 @@ router.post('/sign', function(req, res, next) {
 						$set: {
 							lastloginip: req.connection.remoteAddress
 						}
-					}, function(err) {
+					}, (err) => {
 						if (err) {
 							console.log(err);
 						}

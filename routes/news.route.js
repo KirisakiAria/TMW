@@ -7,11 +7,11 @@ const News = mongoose.model('News');
 
 
 //新闻列表页
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
 	News.find({}, null, {
 			limit: 6
 		},
-		function(err, docs) {
+		(err, docs) => {
 			if (err) {
 				console.log(err);
 				return next();
@@ -24,13 +24,13 @@ router.get('/', function(req, res, next) {
 });
 
 //新闻分页
-router.get('/page/:pageid', function(req, res, next) {
+router.get('/page/:pageid', (req, res, next) => {
 	let pageid = parseInt(req.params.pageid);
 	News.find({}, null, {
 			skip: (pageid - 1) * 6,
 			limit: 6
 		},
-		function(err, docs) {
+		(err, docs) => {
 			if (err) {
 				console.log(err);
 				return next();
@@ -41,12 +41,12 @@ router.get('/page/:pageid', function(req, res, next) {
 });
 
 //单独文章页
-router.get('/:newsid', function(req, res, next) {
+router.get('/:newsid', (req, res, next) => {
 	//获取:xxx
 	let newsid = req.params.newsid;
 	News.find({
 		id: newsid
-	}, function(err, docs) {
+	}, (err, docs) => {
 		if (err) {
 			console.log(err);
 			return next();

@@ -11,7 +11,7 @@ const checkLogin = require('../lib/checkLogin').checkLogin;
 const checkAuth = require('../lib/checkLogin').checkAuth;
 
 //cms
-router.get('/', checkLogin, function(req, res, next) {
+router.get('/', checkLogin, (req, res, next) => {
 	console.log(req.connection.remoteAddress);
 	res.status(200).render('../views/server/cms.ejs', {
 		username: req.session.user.username
@@ -19,7 +19,7 @@ router.get('/', checkLogin, function(req, res, next) {
 });
 
 //登出
-router.get('/signout', function(req, res, next) {
+router.get('/signout', (req, res, next) => {
 	req.session.user = null;
 	return res.send('success');
 });
@@ -27,8 +27,8 @@ router.get('/signout', function(req, res, next) {
 /*------新闻------*/
 
 //查看所有新闻
-router.get('/shownews', checkLogin, function(req, res, next) {
-	News.find({}, function(err, docs) {
+router.get('/shownews', checkLogin, (req, res, next) => {
+	News.find({}, (err, docs) => {
 		if (err) {
 			console.log(err);
 			return next();
@@ -39,11 +39,11 @@ router.get('/shownews', checkLogin, function(req, res, next) {
 });
 
 //编辑单条新闻
-router.post('/editnews/:newsid', checkLogin, function(req, res, next) {
+router.post('/editnews/:newsid', checkLogin, (req, res, next) => {
 	let newsid = req.params.newsid;
 	News.findOne({
 		id: newsid
-	}, function(err, docs) {
+	}, (err, docs) => {
 		if (err) {
 			console.log(err);
 			return next();
@@ -54,25 +54,25 @@ router.post('/editnews/:newsid', checkLogin, function(req, res, next) {
 });
 
 //删除新闻
-router.post('/news/:newsid/del', checkLogin, function(req, res, next) {
+router.post('/news/:newsid/del', checkLogin, (req, res, next) => {
 	let newsid = req.params.newsid;
-	News.removeById(newsid, next, function() {
+	News.removeById(newsid, next, () => {
 		res.send('删除成功！');
 	});
 });
 
 //批量删除新闻
-router.post('/news/:list/mutidel/', checkLogin, function(req, res, next) {
+router.post('/news/:list/mutidel/', checkLogin, (req, res, next) => {
 	let list = req.params.list.split(',');
-	News.removeByIdList(list, next, function() {
+	News.removeByIdList(list, next, () => {
 		res.send('删除成功！');
 	});
 });
 
 //先查一下有没有计数器
-(async function() {
+(async() => {
 	try {
-		let doc = await NewsIncrement.find({}, function(err, doc) {
+		let doc = await NewsIncrement.find({}, (err, doc) => {
 			if (err) {
 				console.log(err);
 				return;
@@ -85,7 +85,7 @@ router.post('/news/:list/mutidel/', checkLogin, function(req, res, next) {
 				let inc = new NewsIncrement({
 					index: 0
 				});
-				inc.save(function(err, doc) {
+				inc.save((err, doc) => {
 					if (err) {
 						return console.log(err);
 					}
@@ -98,10 +98,10 @@ router.post('/news/:list/mutidel/', checkLogin, function(req, res, next) {
 })();
 
 //添加新闻
-router.post('/createnews', checkLogin, function(req, res, next) {
-	(async function() {
+router.post('/createnews', checkLogin, (req, res, next) => {
+	(async() => {
 		try {
-			let doc = await NewsIncrement.findOne(function(err, doc) {
+			let doc = await NewsIncrement.findOne((err, doc) => {
 				if (err) {
 					console.log(err);
 					return next();
@@ -110,7 +110,7 @@ router.post('/createnews', checkLogin, function(req, res, next) {
 				}
 			});
 			await NewsIncrement.addOne(doc, next);
-			doc = await NewsIncrement.findOne(function(err, doc) {
+			doc = await NewsIncrement.findOne((err, doc) => {
 				if (err) {
 					console.log(err);
 					return next();
@@ -118,7 +118,7 @@ router.post('/createnews', checkLogin, function(req, res, next) {
 					return doc;
 				}
 			});
-			await NewsIncrement.findOne(function(err, doc) {
+			await NewsIncrement.findOne((err, doc) => {
 				let news = new News({
 					id: doc.index,
 					titles: req.body.titles,
@@ -129,7 +129,7 @@ router.post('/createnews', checkLogin, function(req, res, next) {
 					time: new Date(),
 					content: req.body.content
 				});
-				news.save(function(err) {
+				news.save((err) => {
 					if (err) {
 						console.log(err);
 						return next();
@@ -145,7 +145,7 @@ router.post('/createnews', checkLogin, function(req, res, next) {
 });
 
 //编辑新闻
-router.post('/news/:newsid/edit', checkLogin, function(req, res, next) {
+router.post('/news/:newsid/edit', checkLogin, (req, res, next) => {
 	let newsid = req.params.newsid;
 	News.updateOne({
 			id: newsid
@@ -158,7 +158,7 @@ router.post('/news/:newsid/edit', checkLogin, function(req, res, next) {
 				content: req.body.content,
 			}
 		},
-		function(err) {
+		(err) => {
 			if (err) {
 				return console.log(err);
 			}
@@ -171,8 +171,8 @@ router.post('/news/:newsid/edit', checkLogin, function(req, res, next) {
 /*------日志------*/
 
 //查看所有日志
-router.get('/showdailies', checkLogin, function(req, res, next) {
-	Daily.find({}, function(err, docs) {
+router.get('/showdailies', checkLogin, (req, res, next) => {
+	Daily.find({}, (err, docs) => {
 		if (err) {
 			console.log(err);
 			return next();
@@ -183,11 +183,11 @@ router.get('/showdailies', checkLogin, function(req, res, next) {
 });
 
 //编辑单条日志
-router.post('/editdaily/:dailyid', checkLogin, function(req, res, next) {
+router.post('/editdaily/:dailyid', checkLogin, (req, res, next) => {
 	let dailyid = req.params.dailyid;
 	Daily.findOne({
 		id: dailyid
-	}, function(err, docs) {
+	}, (err, docs) => {
 		if (err) {
 			console.log(err);
 			return next();
@@ -198,24 +198,24 @@ router.post('/editdaily/:dailyid', checkLogin, function(req, res, next) {
 });
 
 //删除日志
-router.post('/daily/:dailyid/del', checkLogin, function(req, res, next) {
+router.post('/daily/:dailyid/del', checkLogin, (req, res, next) => {
 	let dailyid = req.params.dailyid;
-	Daily.removeById(dailyid, next, function() {
+	Daily.removeById(dailyid, next, () => {
 		res.send('删除成功！');
 	});
 });
 
 //批量删除日志
-router.post('/daily/:list/mutidel/', checkLogin, function(req, res, next) {
+router.post('/daily/:list/mutidel/', checkLogin, (req, res, next) => {
 	let list = req.params.list.split(',');
-	Daily.removeByIdList(list, next, function() {
+	Daily.removeByIdList(list, next, () => {
 		res.send('删除成功！');
 	});
 });
 
-(async function() {
+(async() => {
 	try {
-		let doc = await DailyIncrement.find({}, function(err, doc) {
+		let doc = await DailyIncrement.find({}, (err, doc) => {
 			if (err) {
 				console.log(err);
 				return;
@@ -228,7 +228,7 @@ router.post('/daily/:list/mutidel/', checkLogin, function(req, res, next) {
 				let inc = new DailyIncrement({
 					index: 0
 				});
-				inc.save(function(err, doc) {
+				inc.save((err, doc) => {
 					if (err) {
 						return console.log(err);
 					}
@@ -241,10 +241,10 @@ router.post('/daily/:list/mutidel/', checkLogin, function(req, res, next) {
 })();
 
 //添加日志
-router.post('/createdaily', checkLogin, function(req, res, next) {
-	(async function() {
+router.post('/createdaily', checkLogin, (req, res, next) => {
+	(async() => {
 		try {
-			let doc = await DailyIncrement.findOne(function(err, doc) {
+			let doc = await DailyIncrement.findOne((err, doc) => {
 				if (err) {
 					console.log(err);
 					return next();
@@ -253,7 +253,7 @@ router.post('/createdaily', checkLogin, function(req, res, next) {
 				}
 			});
 			await DailyIncrement.addOne(doc, next);
-			doc = await DailyIncrement.findOne(function(err, doc) {
+			doc = await DailyIncrement.findOne((err, doc) => {
 				if (err) {
 					console.log(err);
 					return next();
@@ -261,7 +261,7 @@ router.post('/createdaily', checkLogin, function(req, res, next) {
 					return doc;
 				}
 			});
-			await DailyIncrement.findOne(function(err, doc) {
+			await DailyIncrement.findOne((err, doc) => {
 				let daily = new Daily({
 					id: doc.index,
 					titles: req.body.titles,
@@ -272,7 +272,7 @@ router.post('/createdaily', checkLogin, function(req, res, next) {
 					time: new Date(),
 					content: req.body.content
 				});
-				daily.save(function(err) {
+				daily.save((err) => {
 					if (err) {
 						console.log(err);
 						return next();
@@ -288,7 +288,7 @@ router.post('/createdaily', checkLogin, function(req, res, next) {
 });
 
 //编辑日志
-router.post('/daily/:dailyid/edit', checkLogin, function(req, res, next) {
+router.post('/daily/:dailyid/edit', checkLogin, (req, res, next) => {
 	let dailyid = req.params.dailyid;
 	Daily.updateOne({
 			id: dailyid
@@ -301,7 +301,7 @@ router.post('/daily/:dailyid/edit', checkLogin, function(req, res, next) {
 				content: req.body.content,
 			}
 		},
-		function(err) {
+		(err) => {
 			if (err) {
 				return console.log(err);
 			}

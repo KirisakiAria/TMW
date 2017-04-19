@@ -1,7 +1,7 @@
 'use strict';
 
 //两次回调以上用es7的async函数做异步
-module.exports = function(app) {
+module.exports = (app) => {
 	//注册
 	app.use('/tmwcms/signup', require('./signup.route'));
 	//登录
@@ -17,7 +17,7 @@ module.exports = function(app) {
 	// app.use('/share', require('./share'));
 	// app.use('/project', require('./project'));
 	//404
-	app.use(function(req, res) {
+	app.use((req, res) => {
 		if (!res.headersSent) {
 			res.status(404).send('404');
 		}

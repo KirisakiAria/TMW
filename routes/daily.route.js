@@ -8,8 +8,8 @@ const Daily = mongoose.model('Daily');
 
 
 //日志列表页
-router.get('/', function(req, res, next) {
-	Daily.find({}, function(err, docs) {
+router.get('/', (req, res, next) => {
+	Daily.find({}, (err, docs) => {
 		if (err) {
 			console.log(err);
 			return next();
@@ -22,13 +22,13 @@ router.get('/', function(req, res, next) {
 });
 
 //日志分页
-router.get('/page/:pageid', function(req, res, next) {
+router.get('/page/:pageid', (req, res, next) => {
 	let pageid = parseInt(req.params.pageid);
 	Daily.find({}, null, {
 			skip: (pageid - 1) * 9,
 			limit: 9
 		},
-		function(err, docs) {
+		(err, docs) => {
 			if (err) {
 				console.log(err);
 				return next();
@@ -39,12 +39,12 @@ router.get('/page/:pageid', function(req, res, next) {
 });
 
 //单独文章页
-router.get('/:dailyid', function(req, res, next) {
+router.get('/:dailyid', (req, res, next) => {
 	//获取:xxx
 	let dailyid = req.params.dailyid;
 	Daily.find({
 		id: dailyid
-	}, function(err, docs) {
+	}, (err, docs) => {
 		if (err) {
 			console.log(err);
 			return next();

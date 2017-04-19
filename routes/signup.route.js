@@ -8,18 +8,18 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const SecretCode = mongoose.model('SecretCode');
 
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
 	res.status(200).render('../views/server/signup.ejs');
 });
 
 //注册请求
-router.post('/sign', function(req, res, next) {
+router.post('/sign', (req, res, next) => {
 	if (config.open) {
 		let sha512 = crypto.createHash('sha512');
 		let username = req.body.username;
 		let password = req.body.password;
 		let secretcode = req.body.secretcode;
-		(async function() {
+		(async() => {
 			try {
 				//验证神秘代码
 				let code = await SecretCode.findByCode(secretcode);
@@ -40,7 +40,7 @@ router.post('/sign', function(req, res, next) {
 							authority: 'normal',
 							lastloginip: req.connection.remoteAddress
 						});
-						user.save(function(err) {
+						user.save((err) => {
 							if (err) {
 								console.log(err);
 								return;

@@ -51,7 +51,7 @@ app.use(flash());
 // 设置模板全局常量
 app.locals.site = {
 	title: pkg.name,
-	author: pkg.author, 
+	author: pkg.author,
 	description: pkg.description
 };
 
@@ -59,6 +59,6 @@ app.locals.site = {
 routes(app);
 
 // 监听端口，启动程序
-app.listen(config.port, function() {
+app.listen(config.port, () => {
 	console.log(`${pkg.name} listening on port ${config.port}`);
 });

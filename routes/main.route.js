@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 //主页
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
 	res.locals = {
 		title: "That's My Way"
 	}
