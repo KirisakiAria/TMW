@@ -14,8 +14,10 @@ module.exports = (app) => {
 	app.use('/news', require('./news.route'));
 	//日志
 	app.use('/daily', require('./daily.route'));
-	// app.use('/share', require('./share'));
-	// app.use('/project', require('./project'));
+	//分享
+	app.use('/share', require('./share.route'));
+	//个人
+	// app.use('/myself', require('./myself'));
 	//404
 	app.use((req, res) => {
 		if (!res.headersSent) {

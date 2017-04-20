@@ -7,7 +7,7 @@ const MongoStore = require('connect-mongo')(session);
 const bodyParser = require('body-parser');
 const flash = require('connect-flash');
 //此模块会检测环境变量的设置，如无特殊设置则自动执行default.js
-const config = require('config-lite');
+const config = require('config-lite')(__dirname);
 const routes = require('./routes/index.route');
 const pkg = require('./package');
 const mongoose = require('./config/mongoose');

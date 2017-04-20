@@ -10,6 +10,7 @@ module.exports = () => {
 	require('../models/daily.increment.model');
 	require('../models/news.client.model');
 	require('../models/news.increment.model');
+	require('../models/share.client.model');
 	require('../models/user.server.model');
 	require('../models/secretcode.server.model');
 
