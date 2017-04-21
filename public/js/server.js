@@ -88,9 +88,58 @@ $(function() {
 			});
 		}
 	});
+	//查看主内容
+	$('.maincontent').click(function() {
+		$(".item").addClass("disnone");
+		$(".article-mc").removeClass("disnone");
+		$.ajax({
+			url: window.location.href + "/maincontent",
+			datatype: 'json',
+			success: function(data) {
+				$('.listbody').find('ul').empty();
+				for (var i = 0; i < data.length; i++) {
+					var date = moment(data[i].time).utc().utcOffset(+8).format('YYYY-MM-DD HH:mm:ss');
+					var html = '<li class="clearfix">' +
+						'<div class="aid">' + data[i].id + '</div>' +
+						'<div>' + data[i].title + '</div>' +
+						'<div>' + data[i].author + '</div>' +
+						'<div>' + data[i].editor + '</div>' +
+						'<div>' + date + '</div>' +
+						'<div>' + '<a href="javascript:;" class="edit">编辑</a>' +
+						'</div></li>';
 
+					$('.listbody').find('ul').append(html);
+				}
+				//编辑主内容
+				$('.edit').click(function() {
+					var aid = $(this).parents('li').find('.aid').html();
+					$('.item,#editbtn,.aid,.dailybtn').addClass('disnone');
+					$('.editartarea-mc').removeClass('disnone');
+					$.ajax({
+						url: window.location.href + '/maincontentedit/' + aid,
+						type: 'POST',
+						success: function(data) {
+							$('#mcid').val(data.id);
+							$('#entitle').val(data.title);
+							$('#titlel').val(data.describle);
+						},
+						error: function() {
+							alert('好像出了点小问题');
+						}
+					});
+				});
+			},
+			error: function() {
+				alert('好像出了点小问题');
+			}
+		})
+	});
+	//修改组内容
+	$('#editbtn-main').click(function() {});
 	//查看文章
 	function showArticle(arturl1, arturl2, fn) {
+		$(".item").addClass("disnone");
+		$(".article-art").removeClass("disnone");
 		$.ajax({
 			url: window.location.href + arturl1,
 			datatype: 'json',
@@ -141,7 +190,6 @@ $(function() {
 						success: function(data) {
 							$('#aid').val(data.id);
 							$('#titles').val(data.titles);
-							// $('#titles').val(data.title);
 							$('#titlel').val(data.titlel);
 							$('#content').val(data.content);
 						},
@@ -223,10 +271,10 @@ $(function() {
 	//查看新闻
 	$('.shownews').click(function() {
 		$('.item,#editbtn-news,.aid,.editartarea,.dailybtn').addClass('disnone');
-		$('.article,#subbtn-news').removeClass('disnone');
+		$('.article-art,#subbtn-news').removeClass('disnone');
 		showArticle('/shownews', 'news', function() {
 			$('#subbtn-news,.article').addClass('disnone');
-			$('#editbtn-news,.editartarea,.aid').removeClass('disnone');
+			$('#editbtn-news,.editartarea-art,.aid').removeClass('disnone');
 		});
 	});
 
@@ -244,19 +292,19 @@ $(function() {
 	//导航栏添加新闻
 	$('.addnews').click(function() {
 		$('.item,#editbtn,.aid,.dailybtn').addClass('disnone');
-		$('.editartarea,#subbtn-news,.newsbtn').removeClass('disnone');
+		$('.editartarea-art,#subbtn-news,.newsbtn').removeClass('disnone');
 	});
 
 	//查看/编辑单条新闻
 	$('.addnews').click(function() {
 		$('.item,#editbtn,.aid,.dailybtn').addClass('disnone');
-		$('.editartarea,#subbtn-news,.newsbtn').removeClass('disnone');
+		$('.editartarea-art,#subbtn-news,.newsbtn').removeClass('disnone');
 	});
 
 	//发表新闻
 	$('#subbtn-news').off().click(function(e) {
 		e.preventDefault();
-		addArticle('/createnews');
+		addArticle('/news/create');
 	});
 
 	//编辑提交新闻
@@ -264,10 +312,10 @@ $(function() {
 		e.preventDefault();
 		editArticle('news', function() {
 			$('.item,#editbtn-news,.aid,.editartarea').addClass('disnone');
-			$('.article,#subbtn-news').removeClass('disnone');
+			$('.article-art,#subbtn-news').removeClass('disnone');
 			showArticle('/shownews', 'news', function() {
 				$('#subbtn-news,.article').addClass('disnone');
-				$('#editbtn-news,.editartarea,.aid').removeClass('disnone');
+				$('#editbtn-news,.editartarea-art,.aid').removeClass('disnone');
 			});
 		})
 	});
@@ -280,23 +328,23 @@ $(function() {
 	//查看日志
 	$('.showdailies').click(function() {
 		$('.item,#editbtn-daily,.aid,.editartarea,.newsbtn').addClass('disnone');
-		$('.article,#subbtn-daily').removeClass('disnone');
+		$('.article-art,#subbtn-daily').removeClass('disnone');
 		showArticle('/showdailies', 'daily', function() {
 			$('#subbtn-daily,.article').addClass('disnone');
-			$('#editbtn-daily,.editartarea,.aid').removeClass('disnone');
+			$('#editbtn-daily,.editartarea-art,.aid').removeClass('disnone');
 		});
 	});
 
 	//导航栏添加日志
 	$('.adddaily').click(function() {
 		$('.item,#editbtn,.aid,.newsbtn').addClass('disnone');
-		$('.editartarea,#subbtn-daily,.dailybtn').removeClass('disnone');
+		$('.editartarea-art,#subbtn-daily,.dailybtn').removeClass('disnone');
 	});
 
 	//发表日志
 	$('#subbtn-daily').off().click(function(e) {
 		e.preventDefault();
-		addArticle('/createdaily');
+		addArticle('/daily/create');
 	});
 
 	//编辑提交日志
@@ -304,10 +352,10 @@ $(function() {
 		e.preventDefault();
 		editArticle('daily', function() {
 			$('.item,#editbtn-daily,.aid,.editartarea').addClass('disnone');
-			$('.article,#subbtn-daily').removeClass('disnone');
+			$('.article-art,#subbtn-daily').removeClass('disnone');
 			showArticle('/showdailies', 'daily', function() {
 				$('#subbtn-daily,.article').addClass('disnone');
-				$('#editbtn-daily,.editartarea,.aid').removeClass('disnone');
+				$('#editbtn-daily,.editartarea-art,.aid').removeClass('disnone');
 			});
 		});
 	});

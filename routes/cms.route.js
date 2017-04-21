@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const MainContent = mongoose.model('MainContent');
 const News = mongoose.model('News');
 const Daily = mongoose.model('Daily');
 const NewsIncrement = mongoose.model('NewsIncrement');
@@ -12,7 +13,6 @@ const checkAuth = require('../lib/checkLogin').checkAuth;
 
 //cms
 router.get('/', checkLogin, (req, res, next) => {
-	console.log(req.connection.remoteAddress);
 	res.status(200).render('../views/server/cms.ejs', {
 		username: req.session.user.username
 	});
@@ -22,6 +22,36 @@ router.get('/', checkLogin, (req, res, next) => {
 router.get('/signout', (req, res, next) => {
 	req.session.user = null;
 	return res.send('success');
+});
+
+/*------主内容------*/
+
+//查看主内容
+router.get('/maincontent', checkLogin, (req, res, next) => {
+	MainContent.find({}, (err, docs) => {
+		if (err) {
+			console.log(err);
+			return next();
+		} else {
+			res.json(docs);
+		}
+	});
+});
+
+//编辑单条主内容
+router.get('/maincontentedit/:mcid', checkLogin, (req, res, next) => {
+	let mcid = req.params.mcid;
+	MainContent.find({
+		id: mcid
+	}, (err, docs) => {
+		if (err) {
+			console.log(err);
+			return next();
+		} else {
+			console.log(docs);
+			res.json(docs);
+		}
+	});
 });
 
 /*------新闻------*/
@@ -98,7 +128,7 @@ router.post('/news/:list/mutidel/', checkLogin, (req, res, next) => {
 })();
 
 //添加新闻
-router.post('/createnews', checkLogin, (req, res, next) => {
+router.post('/news/create', checkLogin, (req, res, next) => {
 	(async() => {
 		try {
 			let doc = await NewsIncrement.findOne((err, doc) => {
@@ -241,7 +271,7 @@ router.post('/daily/:list/mutidel/', checkLogin, (req, res, next) => {
 })();
 
 //添加日志
-router.post('/createdaily', checkLogin, (req, res, next) => {
+router.post('/daily/create', checkLogin, (req, res, next) => {
 	(async() => {
 		try {
 			let doc = await DailyIncrement.findOne((err, doc) => {

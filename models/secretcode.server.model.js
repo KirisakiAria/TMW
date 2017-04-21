@@ -6,8 +6,9 @@ const SecretCodeSchema = new mongoose.Schema({
 	code: String
 });
 
+//查询代码
 SecretCodeSchema.statics.findByCode = function(code) {
-	return this.find({
+	return this.findOne({
 		code: code
 	}, function(err, doc) {
 		if (err) {

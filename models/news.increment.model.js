@@ -8,6 +8,8 @@ const NewsIncrementSchema = new mongoose.Schema({
 		default: 0
 	}
 });
+
+//自增
 NewsIncrementSchema.statics.addOne = function(doc,next) {
 	this.update({
 		index: doc.index

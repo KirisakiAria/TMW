@@ -1,11 +1,12 @@
 'use strict';
 
-const config = require('config-lite');
+const config = require('config-lite')(__dirname);
 const mongoose = require('mongoose');
 
 module.exports = () => {
 	mongoose.Promise = global.Promise;
 	let db = mongoose.connect(config.mongodb);
+	require('../models/maincontent.client.model');
 	require('../models/daily.client.model');
 	require('../models/daily.increment.model');
 	require('../models/news.client.model');

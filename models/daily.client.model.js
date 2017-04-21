@@ -22,10 +22,10 @@ DailySchema.statics.removeById = function(dailyid, next, fn) {
 			console.log(err);
 			return next();
 		} else {
-			console.log('删除ID为' + dailyid + '的日志');
+			console.log(`删除ID为${dailyid}的日志`);
 			fn();
 		}
-	});  
+	});
 }
 
 //批量删除日志
@@ -40,7 +40,7 @@ DailySchema.statics.removeByIdList = function(idList, next, fn) {
 			return next();
 		} else {
 			idList.forEach(function(e, i) {
-				console.log('删除ID为' + e + '的日志');
+				console.log(`删除ID为${e}的日志`);
 			});
 			fn();
 		}

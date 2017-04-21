@@ -9,6 +9,7 @@ const DailyIncrementSchema = new mongoose.Schema({
 	}
 });
 
+//自增
 DailyIncrementSchema.statics.addOne = function(doc,next) {
 	this.update({
 		index: doc.index

@@ -2,23 +2,30 @@
 
 const express = require('express');
 const router = express.Router();
-
 const mongoose = require('mongoose');
+const MainContent = mongoose.model('MainContent');
 const Daily = mongoose.model('Daily');
 
 
 //日志列表页
 router.get('/', (req, res, next) => {
-	Daily.find({}, (err, docs) => {
-		if (err) {
-			console.log(err);
-			return next();
-		}
-		res.status(200).render('../views/daily/daily.ejs', {
-			title: 'DAILY',
-			docs: docs
+	(async() => {
+		let dailydocs = await Daily.find({}, null, {
+				limit: 9
+			},
+			(err, docs) => {
+				if (err) {
+					console.log(err);
+					return next();
+				}
+			});
+		let mcdocs = await MainContent.findByCode(1);
+		await res.status(200).render('../views/daily/daily.ejs', {
+			title: mcdocs.title,
+			describe: mcdocs.describe,
+			docs: dailydocs
 		});
-	});
+	})();
 });
 
 //日志分页

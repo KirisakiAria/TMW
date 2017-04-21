@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const crypto = require('crypto');
-const config = require('config-lite');
+const config = require('config-lite')(__dirname);
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const SecretCode = mongoose.model('SecretCode');
@@ -23,7 +23,7 @@ router.post('/sign', (req, res, next) => {
 			try {
 				//验证神秘代码
 				let code = await SecretCode.findByCode(secretcode);
-				if (!code[0]) {
+				if (!code) {
 					return res.send('神秘代码有误！');
 				}
 				//查一下用户名是不是已存在

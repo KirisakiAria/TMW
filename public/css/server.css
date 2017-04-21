@@ -293,6 +293,11 @@ nav .mainli li a
 .editarea .listheader ul
 {
     margin-bottom: 0;
+
+    border-bottom: 1px solid #e2e2e2;
+}
+.editarea .listheader ul.oper {
+    border-bottom: 0;
 }
 .editarea .listheader li
 {
@@ -349,10 +354,6 @@ nav .mainli li a
     width: 220px;
 
     border-right: none;
-}
-.editarea .listheader .oper
-{
-    border-top: 1px solid #e2e2e2;
 }
 .editarea .listheader .oper li
 {
@@ -434,4 +435,8 @@ nav .mainli li a
     height: 60px;
 
     opacity: 0;
+}
+.article-mc .listbody
+{
+    margin-top: 46px;
 }

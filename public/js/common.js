@@ -173,7 +173,7 @@ $(function() {
 				var html = "";
 				var circle = ""
 				data.forEach(function(e, i, array) {
-					if (i % 3 == 0) {
+					if (i >= 3 && i % 3 == 0) {
 						//每三个a标签外面套个div 循环三次清空一次变量circle以便进行下次循环
 						html += "<div class='grid grid--effect-pollux'>" + circle + "</div>";
 						circle = "";
