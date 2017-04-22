@@ -89,7 +89,7 @@ $(function() {
 		}
 	});
 	//查看主内容
-	$('.maincontent').click(function() {
+	function showMainContent() {
 		$(".item").addClass("disnone");
 		$(".article-mc").removeClass("disnone");
 		$.ajax({
@@ -117,11 +117,11 @@ $(function() {
 					$('.editartarea-mc').removeClass('disnone');
 					$.ajax({
 						url: window.location.href + '/maincontentedit/' + aid,
-						type: 'POST',
+						type: 'GET',
 						success: function(data) {
 							$('#mcid').val(data.id);
 							$('#entitle').val(data.title);
-							$('#titlel').val(data.describle);
+							$('#describe').val(data.describe);
 						},
 						error: function() {
 							alert('好像出了点小问题');
@@ -132,10 +132,18 @@ $(function() {
 			error: function() {
 				alert('好像出了点小问题');
 			}
-		})
+		});
+	}
+	$('.maincontent').click(function() {
+		showMainContent();
 	});
-	//修改组内容
-	$('#editbtn-main').click(function() {});
+	//修改主内容
+	$('#editbtn-main').click(function(e) {
+		e.preventDefault();
+		editArticle('#mcid', "maincontent", function() {
+			showMainContent();
+		});
+	});
 	//查看文章
 	function showArticle(arturl1, arturl2, fn) {
 		$(".item").addClass("disnone");
@@ -248,9 +256,9 @@ $(function() {
 		});
 	}
 
-	//编辑文章
-	function editArticle(url, fn) {
-		var id = $('#aid').val();
+	//编辑主内容/文章
+	function editArticle(id, url, fn) {
+		var id = $(id).val();
 		$.ajax({
 			url: window.location.href + '/' + url + '/' + id + '/edit',
 			data: $('.editartarea').find('form').serialize(),
@@ -310,7 +318,7 @@ $(function() {
 	//编辑提交新闻
 	$('#editbtn-news').off().click(function(e) {
 		e.preventDefault();
-		editArticle('news', function() {
+		editArticle('#aid', 'news', function() {
 			$('.item,#editbtn-news,.aid,.editartarea').addClass('disnone');
 			$('.article-art,#subbtn-news').removeClass('disnone');
 			showArticle('/shownews', 'news', function() {
@@ -350,7 +358,7 @@ $(function() {
 	//编辑提交日志
 	$('#editbtn-daily').off().click(function(e) {
 		e.preventDefault();
-		editArticle('daily', function() {
+		editArticle('#aid', 'daily', function() {
 			$('.item,#editbtn-daily,.aid,.editartarea').addClass('disnone');
 			$('.article-art,#subbtn-daily').removeClass('disnone');
 			showArticle('/showdailies', 'daily', function() {

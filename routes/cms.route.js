@@ -41,17 +41,38 @@ router.get('/maincontent', checkLogin, (req, res, next) => {
 //编辑单条主内容
 router.get('/maincontentedit/:mcid', checkLogin, (req, res, next) => {
 	let mcid = req.params.mcid;
-	MainContent.find({
+	MainContent.findOne({
 		id: mcid
 	}, (err, docs) => {
 		if (err) {
 			console.log(err);
 			return next();
 		} else {
-			console.log(docs);
 			res.json(docs);
 		}
 	});
+});
+
+//编辑单条主内容
+router.post('/maincontent/:mcid/edit', checkLogin, (req, res, next) => {
+	let mcid = req.params.mcid;
+	MainContent.updateOne({
+			id: mcid
+		}, {
+			$set: {
+				title: req.body.entitle,
+				describe: req.body.describe,
+				bgsrc: "",
+				editor: req.session.user.username,
+				time: new Date()
+			}
+		},
+		(err) => {
+			if (err) {
+				return console.log(err);
+			}
+			return res.send('修改成功！')
+		});
 });
 
 /*------新闻------*/
