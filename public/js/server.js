@@ -88,6 +88,7 @@ $(function() {
 			});
 		}
 	});
+
 	//查看主内容
 	function showMainContent() {
 		$(".item").addClass("disnone");
@@ -134,9 +135,11 @@ $(function() {
 			}
 		});
 	}
+
 	$('.maincontent').click(function() {
 		showMainContent();
 	});
+
 	//修改主内容
 	$('#editbtn-main').click(function(e) {
 		e.preventDefault();
@@ -144,6 +147,7 @@ $(function() {
 			showMainContent();
 		});
 	});
+
 	//查看文章
 	function showArticle(arturl1, arturl2, fn) {
 		$(".item").addClass("disnone");
@@ -168,68 +172,17 @@ $(function() {
 
 					$('.listbody').find('ul').append(html);
 				}
-				//删除单条文章
+
 				$('.del').click(function() {
-					if (confirm('确定删除吗？')) {
-						var aid = $(this).parents('li').find('.aid').html();
-						$.ajax({
-							url: window.location.href + '/' + arturl2 + '/' + aid + '/del',
-							type: 'POST',
-							success: function(data) {
-								if (data) {
-									console.log(data);
-									showArticle(arturl1, arturl2, fn);
-								}
-							},
-							error: function() {
-								alert('好像出了点小问题');
-							}
-						});
-					}
+					delOneArt(arturl1, arturl2, fn)
 				});
 
-				//编辑文章
 				$('.edit').click(function() {
-					var aid = $(this).parents('li').find('.aid').html();
-					fn();
-					$.ajax({
-						url: window.location.href + '/edit' + arturl2 + '/' + aid,
-						type: 'POST',
-						success: function(data) {
-							$('#aid').val(data.id);
-							$('#titles').val(data.titles);
-							$('#titlel').val(data.titlel);
-							$('#content').val(data.content);
-						},
-						error: function() {
-							alert('好像出了点小问题');
-						}
-					});
+					editPage(arturl2, fn);
 				});
 
-				//批量删除文章
 				$('.groupdel').click(function() {
-					var list = [];
-					if (confirm('确定删除吗？')) {
-						$('.listbody').find('input:checkbox').each(function(index, el) {
-							if ($(this).prop('checked')) {
-								list.push($(this).parents('li').find('.aid').html());
-							}
-						});
-						$.ajax({
-							url: window.location.href + '/' + arturl2 + '/' + list + '/mutidel/',
-							type: 'POST',
-							success: function(data) {
-								if (data) {
-									console.log(data);
-									showArticle(arturl1, arturl2, fn);
-								}
-							},
-							error: function() {
-								alert('好像出了点小问题');
-							}
-						});
-					}
+					delArts(arturl1, arturl2, fn);
 				});
 
 			},
@@ -237,6 +190,71 @@ $(function() {
 				alert('好像出了点小问题');
 			}
 		});
+	}
+
+	//编辑文章页
+	function editPage(arturl2, fn) {
+		var aid = $(this).parents('li').find('.aid').html();
+		fn();
+		$.ajax({
+			url: window.location.href + '/edit' + arturl2 + '/' + aid,
+			type: 'POST',
+			success: function(data) {
+				$('#aid').val(data.id);
+				$('#titles').val(data.titles);
+				$('#titlel').val(data.titlel);
+				$('#content').val(data.content);
+			},
+			error: function() {
+				alert('好像出了点小问题');
+			}
+		});
+	}
+
+
+	//删除单条文章
+	function delOneArt(arturl1, arturl2, fn) {
+		if (confirm('确定删除吗？')) {
+			var aid = $(this).parents('li').find('.aid').html();
+			$.ajax({
+				url: window.location.href + '/' + arturl2 + '/' + aid + '/del',
+				type: 'POST',
+				success: function(data) {
+					if (data) {
+						console.log(data);
+						showArticle(arturl1, arturl2, fn);
+					}
+				},
+				error: function() {
+					alert('好像出了点小问题');
+				}
+			});
+		}
+	}
+
+	//批量删除文章
+	function delArts(arturl1, arturl2, fn) {
+		var list = [];
+		if (confirm('确定删除吗？')) {
+			$('.listbody').find('input:checkbox').each(function(index, el) {
+				if ($(this).prop('checked')) {
+					list.push($(this).parents('li').find('.aid').html());
+				}
+			});
+			$.ajax({
+				url: window.location.href + '/' + arturl2 + '/' + list + '/mutidel/',
+				type: 'POST',
+				success: function(data) {
+					if (data) {
+						console.log(data);
+						showArticle(arturl1, arturl2, fn);
+					}
+				},
+				error: function() {
+					alert('好像出了点小问题');
+				}
+			});
+		}
 	}
 
 	//添加文章
@@ -290,6 +308,7 @@ $(function() {
 	$('.groupall').off().click(function() {
 		$('.listbody').find('input:checkbox').prop('checked', true);
 	});
+
 	//反选
 	$('.groupres').off().click(function() {
 		$('.listbody').find('input:checkbox').each(function(el, index) {
