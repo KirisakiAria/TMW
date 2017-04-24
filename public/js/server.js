@@ -174,15 +174,17 @@ $(function() {
 				}
 
 				$('.del').click(function() {
-					delOneArt(arturl1, arturl2, fn)
+					var self = $(this);
+					delOneArt(arturl1, arturl2, fn, self);
 				});
 
 				$('.edit').click(function() {
-					editPage(arturl2, fn);
+					var self = $(this);
+					editPage(arturl2, fn, self);
 				});
 
 				$('.groupdel').click(function() {
-					delArts(arturl1, arturl2, fn);
+					delArts(arturl1, arturl2, fn, self);
 				});
 
 			},
@@ -193,8 +195,8 @@ $(function() {
 	}
 
 	//编辑文章页
-	function editPage(arturl2, fn) {
-		var aid = $(this).parents('li').find('.aid').html();
+	function editPage(arturl2, fn, self) {
+		var aid = self.parents('li').find('.aid').html();
 		fn();
 		$.ajax({
 			url: window.location.href + '/edit' + arturl2 + '/' + aid,
@@ -206,6 +208,7 @@ $(function() {
 				$('#content').val(data.content);
 			},
 			error: function() {
+				console.log(url);
 				alert('好像出了点小问题');
 			}
 		});
@@ -213,9 +216,9 @@ $(function() {
 
 
 	//删除单条文章
-	function delOneArt(arturl1, arturl2, fn) {
+	function delOneArt(arturl1, arturl2, fn, self) {
 		if (confirm('确定删除吗？')) {
-			var aid = $(this).parents('li').find('.aid').html();
+			var aid = self.parents('li').find('.aid').html();
 			$.ajax({
 				url: window.location.href + '/' + arturl2 + '/' + aid + '/del',
 				type: 'POST',
@@ -233,7 +236,7 @@ $(function() {
 	}
 
 	//批量删除文章
-	function delArts(arturl1, arturl2, fn) {
+	function delArts(arturl1, arturl2, fn, self) {
 		var list = [];
 		if (confirm('确定删除吗？')) {
 			$('.listbody').find('input:checkbox').each(function(index, el) {
@@ -317,12 +320,6 @@ $(function() {
 	});
 
 	//导航栏添加新闻
-	$('.addnews').click(function() {
-		$('.item,#editbtn,.aid,.dailybtn').addClass('disnone');
-		$('.editartarea-art,#subbtn-news,.newsbtn').removeClass('disnone');
-	});
-
-	//查看/编辑单条新闻
 	$('.addnews').click(function() {
 		$('.item,#editbtn,.aid,.dailybtn').addClass('disnone');
 		$('.editartarea-art,#subbtn-news,.newsbtn').removeClass('disnone');
