@@ -98,9 +98,9 @@ $(function() {
 			datatype: 'json',
 			success: function(data) {
 				$('.listbody').find('ul').empty();
-				for (var i = 0; i < data.length; i++) {
-					var date = moment(data[i].time).utc().utcOffset(+8).format('YYYY-MM-DD HH:mm:ss');
-					var html = '<li class="clearfix">' +
+				for (let i = 0; i < data.length; i++) {
+					let date = moment(data[i].time).utc().utcOffset(+8).format('YYYY-MM-DD HH:mm:ss');
+					let html = '<li class="clearfix">' +
 						'<div class="aid">' + data[i].id + '</div>' +
 						'<div>' + data[i].title + '</div>' +
 						'<div>' + data[i].author + '</div>' +
@@ -113,7 +113,7 @@ $(function() {
 				}
 				//编辑主内容
 				$('.edit').click(function() {
-					var aid = $(this).parents('li').find('.aid').html();
+					let aid = $(this).parents('li').find('.aid').html();
 					$('.item,#editbtn,.aid,.dailybtn').addClass('disnone');
 					$('.editartarea-mc').removeClass('disnone');
 					$.ajax({
@@ -157,9 +157,9 @@ $(function() {
 			datatype: 'json',
 			success: function(data) {
 				$('.listbody').find('ul').empty();
-				for (var i = 0; i < data.length; i++) {
-					var date = moment(data[i].time).utc().utcOffset(+8).format('YYYY-MM-DD HH:mm:ss');
-					var html = '<li class="clearfix">' +
+				for (let i = 0; i < data.length; i++) {
+					let date = moment(data[i].time).utc().utcOffset(+8).format('YYYY-MM-DD HH:mm:ss');
+					let html = '<li class="clearfix">' +
 						'<div class="aid">' + data[i].id + '</div>' +
 						'<div>' + data[i].titlel + '</div>' +
 						'<div>' + data[i].author + '</div>' +
@@ -174,12 +174,12 @@ $(function() {
 				}
 
 				$('.del').click(function() {
-					var self = $(this);
+					let self = $(this);
 					delOneArt(arturl1, arturl2, fn, self);
 				});
 
 				$('.edit').click(function() {
-					var self = $(this);
+					let self = $(this);
 					editPage(arturl2, fn, self);
 				});
 
@@ -196,7 +196,7 @@ $(function() {
 
 	//编辑文章页
 	function editPage(arturl2, fn, self) {
-		var aid = self.parents('li').find('.aid').html();
+		let aid = self.parents('li').find('.aid').html();
 		fn();
 		$.ajax({
 			url: window.location.href + '/edit' + arturl2 + '/' + aid,
@@ -218,7 +218,7 @@ $(function() {
 	//删除单条文章
 	function delOneArt(arturl1, arturl2, fn, self) {
 		if (confirm('确定删除吗？')) {
-			var aid = self.parents('li').find('.aid').html();
+			let aid = self.parents('li').find('.aid').html();
 			$.ajax({
 				url: window.location.href + '/' + arturl2 + '/' + aid + '/del',
 				type: 'POST',
@@ -237,7 +237,7 @@ $(function() {
 
 	//批量删除文章
 	function delArts(arturl1, arturl2, fn, self) {
-		var list = [];
+		let list = [];
 		if (confirm('确定删除吗？')) {
 			$('.listbody').find('input:checkbox').each(function(index, el) {
 				if ($(this).prop('checked')) {
@@ -279,7 +279,7 @@ $(function() {
 
 	//编辑主内容/文章
 	function editArticle(id, url, fn) {
-		var id = $(id).val();
+		let id = $(id).val();
 		$.ajax({
 			url: window.location.href + '/' + url + '/' + id + '/edit',
 			data: $('.editartarea').find('form').serialize(),

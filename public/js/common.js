@@ -32,14 +32,14 @@ $(function() {
 		return thisa.html();
 	}
 	$(".news").find(".page").find("a").click(function(e) {
-		var thisa = $(this);
-		var pageid = fn(e, thisa);
+		let thisa = $(this);
+		let pageid = fn(e, thisa);
 		$.ajax({
 			url: window.location.href + /page/ + pageid,
 			type: "get",
 			success: function(data) {
 				$("#src1,#src2").remove();
-				var html = "";
+				let html = "";
 				data.forEach(function(e, i) {
 					html += '<a href="#cd-modal" data-href="' + data[i].id + '"' +
 						'class="tilter cd-modal-trigger">' +
@@ -65,7 +65,7 @@ $(function() {
 				$(".pagecontent").empty().append(html);
 				$.getScript("/js/hovereffect.js", function() {
 					(function() {
-						var tiltSettings = {
+						let tiltSettings = {
 							movement: {
 								imgWrapper: {
 									translation: {
@@ -163,15 +163,15 @@ $(function() {
 	});
 
 	$(".daily").find(".page").find("a").click(function(e) {
-		var thisa = $(this);
-		var pageid = fn(e, thisa);
+		let thisa = $(this);
+		let pageid = fn(e, thisa);
 		$.ajax({
 			url: window.location.href + /page/ + pageid,
 			type: "get",
 			success: function(data) {
 				$("#src1,#src2").remove();
-				var html = "";
-				var circle = ""
+				let html = "";
+				let circle = ""
 				data.forEach(function(e, i, array) {
 					if (i >= 3 && i % 3 == 0) {
 						//每三个a标签外面套个div 循环三次清空一次变量circle以便进行下次循环
