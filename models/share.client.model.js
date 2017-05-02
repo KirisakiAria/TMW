@@ -3,9 +3,12 @@
 const mongoose = require('mongoose');
 
 const ShareSchema = new mongoose.Schema({
-	age: String,
-	imgsrc: String,
-	src: String
+	title: String, //歌名
+	singer: String //歌手
+	details: String, //详情
+	href: String, //链接
+	imgsrc: String, //图片
+	time: Date //创建时间
 });
 
 //删除分享
@@ -17,7 +20,7 @@ ShareSchema.statics.removeById = function(shareid, next, fn) {
 			console.log(err);
 			return next();
 		} else {
-			console.log(`删除ID为${shareid}的日志`);
+			console.log(`删除ID为${shareid}的分享`);
 			fn();
 		}
 	});
@@ -35,7 +38,7 @@ ShareSchema.statics.removeByIdList = function(idList, next, fn) {
 			return next();
 		} else {
 			idList.forEach(function(e, i) {
-				console.log(`删除ID为${e}的日志`);
+				console.log(`删除ID为${e}的分享`);
 			});
 			fn();
 		}

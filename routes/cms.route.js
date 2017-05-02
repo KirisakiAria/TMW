@@ -6,8 +6,10 @@ const mongoose = require('mongoose');
 const MainContent = mongoose.model('MainContent');
 const News = mongoose.model('News');
 const Daily = mongoose.model('Daily');
+const Share = mongoose.model('Daily');
 const NewsIncrement = mongoose.model('NewsIncrement');
 const DailyIncrement = mongoose.model('DailyIncrement');
+const ShareIncrement = mongoose.model('ShareIncrement');
 const checkLogin = require('../lib/checkLogin').checkLogin;
 const checkAuth = require('../lib/checkLogin').checkAuth;
 
@@ -170,7 +172,7 @@ router.post('/news/create', checkLogin, (req, res, next) => {
 				}
 			});
 			await NewsIncrement.findOne((err, doc) => {
-				console.log(req.body.titles);
+				console.log(req.body);
 				let news = new News({
 					id: doc.index,
 					titles: req.body.titles,
@@ -362,5 +364,48 @@ router.post('/daily/:dailyid/edit', checkLogin, (req, res, next) => {
 });
 
 /*------日志结束------*/
+
+/*------分享------*/
+
+//查看所有分享
+router.get('/showshare', checkLogin, (req, res, next) => {
+	Share.find({}, (err, docs) => {
+		if (err) {
+			console.log(err);
+			return next();
+		} else {
+			res.json(docs);
+		}
+	});
+});
+
+(async() => {
+	try {
+		let doc = await ShareIncrement.find({}, (err, doc) => {
+			if (err) {
+				console.log(err);
+				return;
+			} else {
+				return doc;
+			}
+		});
+		await (() => {
+			if (!doc[0]) {
+				let inc = new ShareIncrement({
+					index: 0
+				});
+				inc.save((err, doc) => {
+					if (err) {
+						return console.log(err);
+					}
+				});
+			}
+		})();
+	} catch (e) {
+		console.log(e);
+	}
+})();
+
+/*------分享结束------*/
 
 module.exports = router;

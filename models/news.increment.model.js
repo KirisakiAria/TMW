@@ -10,7 +10,7 @@ const NewsIncrementSchema = new mongoose.Schema({
 });
 
 //自增
-NewsIncrementSchema.statics.addOne = function(doc,next) {
+NewsIncrementSchema.statics.addOne = function(doc, next) {
 	this.update({
 		index: doc.index
 	}, {

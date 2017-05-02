@@ -23,7 +23,6 @@ jQuery(document).ready(function($) {
 		event.preventDefault();
 		var href = $(this).data("href");
 		$("html,body").addClass('overflow-hidden');
-		var url = $(this).data("url")
 		transitionLayer.addClass('visible opening');
 		setTimeout(function() {
 			modalWindow.addClass('visible');
@@ -31,8 +30,7 @@ jQuery(document).ready(function($) {
 		}, 1000);
 		//获取单页内容
 		$.ajax({
-			url: "/" + url + "/" +
-				href,
+			url: window.location.href + "/" + href,
 			type: "get",
 			success: function(data) {
 				$(".modal-content").find("h3").html(data[0].titlel);

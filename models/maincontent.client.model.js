@@ -6,7 +6,7 @@ const MainContentSchema = new mongoose.Schema({
 	id: String,
 	title: String, //英文标题
 	describe: String, //中文信息
-	bgsrc:String, //背景路径
+	bgsrc: String, //背景路径
 	author: String, //作者
 	editor: String, //修改人
 	time: Date //发表时间

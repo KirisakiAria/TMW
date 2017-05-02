@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-const DailyIncrementSchema = new mongoose.Schema({
+const ShareIncrementSchema = new mongoose.Schema({
 	index: {
 		type: Number,
 		default: 0
@@ -10,7 +10,7 @@ const DailyIncrementSchema = new mongoose.Schema({
 });
 
 //自增
-DailyIncrementSchema.statics.addOne = function(doc, next) {
+ShareIncrementSchema.statics.addOne = function(doc, next) {
 	this.update({
 		index: doc.index
 	}, {
@@ -25,4 +25,4 @@ DailyIncrementSchema.statics.addOne = function(doc, next) {
 	});
 }
 
-mongoose.model('DailyIncrement', DailyIncrementSchema);
+mongoose.model('ShareIncrement', ShareIncrementSchema);

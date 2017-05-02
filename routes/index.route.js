@@ -1,6 +1,5 @@
 'use strict';
 
-//两次回调以上用es7的async函数做异步
 module.exports = (app) => {
 	//注册
 	app.use('/tmwcms/signup', require('./signup.route'));
