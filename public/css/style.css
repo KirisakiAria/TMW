@@ -1317,7 +1317,7 @@ footer div a:hover
     width: -webkit-calc(100vw - 15px);
     height: 100vh;
 
-    background: url(../img/ed2.jpg) center;
+    background: url(../img/news.jpg) center;
     background-attachment: fixed;
 
             justify-content: center;
@@ -1397,7 +1397,7 @@ footer div a:hover
 /*新闻*/
 .news main
 {
-    background-image: url(../img/bg.jpg);
+    background-image: url(../img/list.jpg);
     background-position: center;
 }
 .pagecontent .loader
@@ -2004,11 +2004,11 @@ footer div a:hover
 /* DAILY */
 .daily .title
 {
-    background-image: url(../img/zedd4.jpg);
+    background-image: url(../img/daily.jpg);
 }
 .daily main
 {
-    background-image: url(../img/bg.jpg);
+    background-image: url(../img/list.jpg);
 }
 .daily .content
 {
@@ -2217,6 +2217,10 @@ footer div a:hover
     }
 }
 /*分享*/
+.share .title
+{
+    background-image: url(../img/share.jpg);
+}
 .share .animsition
 {
     height: 100%;
@@ -2287,7 +2291,7 @@ footer div a:hover
 
 .hero > div
 {
-    background: #212121 url(../img/share.jpg) no-repeat 50% 0;
+    background: #212121 url(../img/camera.jpg) no-repeat 50% 0;
 
     -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
