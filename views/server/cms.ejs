@@ -226,6 +226,59 @@
 						<button id="editbtn-main" type="submit" class="btn btn-success">修改</button>
 					</form>
 				</div>
+				<div class="article article-share item disnone">
+					<div class="listheader">
+						<ul class="clearfix">
+							<li>ID</li>
+							<li>标题</li>
+							<li>添加人</li>
+							<li>修改人</li>
+							<li>添加/编辑时间</li>
+							<li>操作</li>
+						</ul>
+						<ul class="clearfix oper">
+							<li>
+								<a href="javascript:;" class="groupdel">删除</a>
+							</li>
+							<li>
+								<a href="javascript:;" class="groupres">反选</a>
+							</li>
+							<li>
+								<a href="javascript:;" class="groupall">全选</a>
+							</li>
+						</ul>
+					</div>
+					<div class="listbody">
+						<ul></ul>
+					</div>
+				</div>
+				<div class="editartarea editartarea-share item disnone">
+					<form enctype="multipart/form-data" method="post">
+						<div class="form-group aid disnone">
+							<label for="aid2">文章ID</label>
+							<input type="text" class="form-control" id="aid2" name="aid" readonly="readonly" placeholder=""></div>
+						<div class="form-group">
+							<label for="titles">文章短标题</label>
+							<input type="text" class="form-control" id="titles" name="titles" placeholder=""></div>
+						<div class="form-group">
+							<label for="listimg">文章列表图片</label>
+							<div class="filediv">
+								<i class="fa fa-file-image-o"></i>
+								<input type="file" id="listimg" name="listimg">
+								<label for="listimg">添加图片</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="titlel">文章长标题</label>
+							<input type="text" class="form-control" id="titlel" name="titlel" placeholder=""></div>
+						<div class="form-group">
+							<label for="content">文章内容</label>
+							<textarea class="form-control" id="content" name="content" rows="5"></textarea>
+						</div>
+							<button id="subbtn-share" type="submit" class="btn btn-success">保存</button>
+							<button id="editbtn-share" type="submit" class="btn btn-success disnone">修改</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</main>

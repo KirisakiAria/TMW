@@ -170,6 +170,7 @@ router.post('/news/create', checkLogin, (req, res, next) => {
 				}
 			});
 			await NewsIncrement.findOne((err, doc) => {
+				console.log(req.body.titles);
 				let news = new News({
 					id: doc.index,
 					titles: req.body.titles,

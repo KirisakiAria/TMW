@@ -3,9 +3,48 @@
 <div class="animsition">
 	<%- include('../public/nav') %>
 	<%- include('../public/title') %>
-	<main></main>
+	<main><div class="mask-in"></div>
+	<div class="container">
+		<div class="hero">
+			<div class="hero__back hero__back--static"></div>
+			<div class="hero__back hero__back--mover"></div>
+			<div class="hero__front"></div>
+		</div>
+		<div class="stack-slider">
+			<div class="stacks-wrapper">
+				<% for(var i=0;i<3;i++){%>
+				<div class="stack">
+					<h2 class="stack-title"><a href="#" data-text="Portraits"><span>Portraits</span></a></h2>
+					<% for(var j=0;j<3;j++){%>
+					<div class="item">
+						<div class="item__content">
+							<a href=""><img src="img/type1/1.jpg" alt="img01" /></a>
+							<h3 class="item__title">Hoodie stumptown kitsch <span class="item__date">05/05/2015</span></h3>
+							<div class="item__details">
+								<ul>
+									<li><i class="icon icon-camera"></i><span>Canon PowerShot S95</span></li>
+									<li><i class="icon icon-focal_length"></i><span>22.5mm</span></li>
+									<li><i class="icon icon-aperture"></i><span>&fnof;/5.6</span></li>
+									<li><i class="icon icon-exposure_time"></i><span>1/1000</span></li>
+									<li><i class="icon icon-iso"></i><span>80</span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<%}%>
+				</div>
+				<%}%>
+			</div>
+			<!-- /stacks-wrapper -->
+		</div>
+		<!-- /stacks -->
+		<img class="loader" src="img/three-dots.svg" width="60" alt="Loader image" />
+	</div></main>
+	<script src="../lib/modernizr.custom.share.js"></script>
+	<script src="../js/flickity.pkgd.min.js"></script>
+	<script src="../js/smoothscroll.js"></script>
+	<script src="../js/camera.js"></script>
 	<script src="../js/nav.js"></script>
-	<script src="../js/room.js"></script>
 	<script src="../js/common.js"></script>
 </body>
 </html>

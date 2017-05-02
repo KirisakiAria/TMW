@@ -174,17 +174,17 @@ $(function() {
 				}
 
 				$('.del').click(function() {
-					let self = $(this);
-					delOneArt(arturl1, arturl2, fn, self);
+					let thisElement = $(this);
+					delOneArt(arturl1, arturl2, fn, thisElement);
 				});
 
 				$('.edit').click(function() {
-					let self = $(this);
-					editPage(arturl2, fn, self);
+					let thisElement = $(this);
+					editPage(arturl2, fn, thisElement);
 				});
 
 				$('.groupdel').click(function() {
-					delArts(arturl1, arturl2, fn, self);
+					delArts(arturl1, arturl2, fn, thisElement);
 				});
 
 			},
@@ -195,8 +195,9 @@ $(function() {
 	}
 
 	//编辑文章页
-	function editPage(arturl2, fn, self) {
-		let aid = self.parents('li').find('.aid').html();
+	function editPage(arturl2, fn, thisElement) {
+		var aid = thisElement.parents('li').find('.aid').html();
+		console.log(thisElement)
 		fn();
 		$.ajax({
 			url: window.location.href + '/edit' + arturl2 + '/' + aid,
@@ -208,7 +209,6 @@ $(function() {
 				$('#content').val(data.content);
 			},
 			error: function() {
-				console.log(url);
 				alert('好像出了点小问题');
 			}
 		});
@@ -216,9 +216,9 @@ $(function() {
 
 
 	//删除单条文章
-	function delOneArt(arturl1, arturl2, fn, self) {
+	function delOneArt(arturl1, arturl2, fn, thisElement) {
 		if (confirm('确定删除吗？')) {
-			let aid = self.parents('li').find('.aid').html();
+			let aid = thisElement.parents('li').find('.aid').html();
 			$.ajax({
 				url: window.location.href + '/' + arturl2 + '/' + aid + '/del',
 				type: 'POST',
@@ -236,7 +236,7 @@ $(function() {
 	}
 
 	//批量删除文章
-	function delArts(arturl1, arturl2, fn, self) {
+	function delArts(arturl1, arturl2, fn, thisElement) {
 		let list = [];
 		if (confirm('确定删除吗？')) {
 			$('.listbody').find('input:checkbox').each(function(index, el) {
@@ -278,13 +278,14 @@ $(function() {
 	}
 
 	//编辑主内容/文章
-	function editArticle(id, url, fn) {
-		let id = $(id).val();
+	function editArticle(aid, url, fn) {
+		let id = $(aid).val();
 		$.ajax({
 			url: window.location.href + '/' + url + '/' + id + '/edit',
 			data: $('.editartarea').find('form').serialize(),
 			type: 'POST',
 			success: function(data) {
+
 				if (data) {
 					alert(data);
 				}
@@ -299,7 +300,7 @@ $(function() {
 
 	//查看新闻
 	$('.shownews').click(function() {
-		$('.item,#editbtn-news,.aid,.editartarea,.dailybtn').addClass('disnone');
+		$('.item,#editbtn-news,.aid,.dailybtn').addClass('disnone');
 		$('.article-art,#subbtn-news').removeClass('disnone');
 		showArticle('/shownews', 'news', function() {
 			$('#subbtn-news,.article').addClass('disnone');
@@ -335,7 +336,7 @@ $(function() {
 	$('#editbtn-news').off().click(function(e) {
 		e.preventDefault();
 		editArticle('#aid', 'news', function() {
-			$('.item,#editbtn-news,.aid,.editartarea').addClass('disnone');
+			$('.item,#editbtn-news,.aid').addClass('disnone');
 			$('.article-art,#subbtn-news').removeClass('disnone');
 			showArticle('/shownews', 'news', function() {
 				$('#subbtn-news,.article').addClass('disnone');
@@ -351,7 +352,7 @@ $(function() {
 
 	//查看日志
 	$('.showdailies').click(function() {
-		$('.item,#editbtn-daily,.aid,.editartarea,.newsbtn').addClass('disnone');
+		$('.item,#editbtn-daily,.aid,.newsbtn').addClass('disnone');
 		$('.article-art,#subbtn-daily').removeClass('disnone');
 		showArticle('/showdailies', 'daily', function() {
 			$('#subbtn-daily,.article').addClass('disnone');
@@ -375,7 +376,7 @@ $(function() {
 	$('#editbtn-daily').off().click(function(e) {
 		e.preventDefault();
 		editArticle('#aid', 'daily', function() {
-			$('.item,#editbtn-daily,.aid,.editartarea').addClass('disnone');
+			$('.item,#editbtn-daily,.aid').addClass('disnone');
 			$('.article-art,#subbtn-daily').removeClass('disnone');
 			showArticle('/showdailies', 'daily', function() {
 				$('#subbtn-daily,.article').addClass('disnone');

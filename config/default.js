@@ -1,4 +1,5 @@
 'use strict';
+
 const configs = {
 	port: 80,
 	//是否开放注册
