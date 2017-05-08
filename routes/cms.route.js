@@ -22,7 +22,11 @@ router.get('/', checkLogin, (req, res, next) => {
 
 //登出
 router.get('/signout', (req, res, next) => {
-	req.session.user = null;
+	req.session.destroy(function(err) {
+		if (err) {
+			return console.log(err);
+		}
+	})
 	return res.send('success');
 });
 
