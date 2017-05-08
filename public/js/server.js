@@ -2,6 +2,8 @@
 
 $(function() {
 
+	showMainContent();
+
 	//阻止a链接跳转
 	$('.tmw').find('a').click(function(e) {
 		e.preventDefault();
@@ -160,7 +162,7 @@ $(function() {
 			success: function(data) {
 				$('.listbody').find('ul').empty();
 				data.forEach(function(e, i) {
-					let date = moment(e).utc().utcOffset(+8).format('YYYY-MM-DD HH:mm:ss');
+					let date = moment(e.time).utc().utcOffset(+8).format('YYYY-MM-DD HH:mm:ss');
 					let html = '<li class="clearfix">' +
 						'<div class="aid">' + e.id + '</div>' +
 						'<div>' + e.titlel + '</div>' +
@@ -204,10 +206,18 @@ $(function() {
 			url: window.location.href + '/edit' + arturl2 + '/' + aid,
 			type: 'POST',
 			success: function(data) {
-				$('#aid').val(data.id);
-				$('#titles').val(data.titles);
-				$('#titlel').val(data.titlel);
-				$('#content').val(data.content);
+				if (arturl2 == "share") {
+					$('#songid').val(data.id);
+					$('#song').val(data.titlel);
+					$('#singer').val(data.singer);
+					$('#href').val(data.href);
+					$('#details').val(data.details);
+				} else {
+					$('#aid').val(data.id);
+					$('#titles').val(data.titles);
+					$('#titlel').val(data.titlel);
+					$('#content').val(data.content);
+				}
 			},
 			error: function() {
 				alert('好像出了点小问题');
@@ -225,7 +235,6 @@ $(function() {
 				type: 'POST',
 				success: function(data) {
 					if (data) {
-						console.log(data);
 						showArticle(arturl1, arturl2, fn);
 					}
 				},
@@ -250,7 +259,6 @@ $(function() {
 				type: 'POST',
 				success: function(data) {
 					if (data) {
-						console.log(data);
 						showArticle(arturl1, arturl2, fn);
 					}
 				},
@@ -262,10 +270,10 @@ $(function() {
 	}
 
 	//添加文章
-	function addArticle(url) {
+	function addArticle(className, url) {
 		$.ajax({
 			url: window.location.href + url,
-			data: $('.artform').serialize(),
+			data: $(className).serialize(),
 			type: 'POST',
 			success: function(data) {
 				if (data) {
@@ -329,7 +337,7 @@ $(function() {
 	//发表新闻按钮
 	$('#subbtn-news').off().click(function(e) {
 		e.preventDefault();
-		addArticle('/news/create');
+		addArticle('.artform', '/news/create');
 	});
 
 	//编辑新闻按钮
@@ -369,7 +377,7 @@ $(function() {
 	//发表日志按钮
 	$('#subbtn-daily').off().click(function(e) {
 		e.preventDefault();
-		addArticle('/daily/create');
+		addArticle('.artform', '/daily/create');
 	});
 
 	//编辑日志按钮
@@ -397,6 +405,32 @@ $(function() {
 			$('#editbtn-share,.editartarea-share,.aid').removeClass('disnone');
 		});
 	});
+
+	//导航栏添加分享
+	$('.addshare').click(function() {
+		$('.item,#editbtn-share,.aid').addClass('disnone');
+		$('.editartarea-share,#subbtn-share').removeClass('disnone');
+	});
+
+	//发表分享按钮
+	$('#subbtn-share').off().click(function(e) {
+		e.preventDefault();
+		addArticle('.shareform', '/share/create');
+	});
+
+	//编辑分享按钮
+	$('#editbtn-share').off().click(function(e) {
+		e.preventDefault();
+		editArticle('.shareform', '#songid', 'share', function() {
+			$('.item,#editbtn-share,.aid').addClass('disnone');
+			$('.article-art,#subbtn-share').removeClass('disnone');
+			showArticle('/showshare', 'share', function() {
+				$('#subbtn-share,.article').addClass('disnone');
+				$('#editbtn-share,.editartarea-share,.aid').removeClass('disnone');
+			});
+		})
+	});
+
 	/*------分享结束------*/
 
 });

@@ -12,6 +12,7 @@ module.exports = () => {
 	require('../models/news.client.model');
 	require('../models/news.increment.model');
 	require('../models/share.client.model');
+	require('../models/share.increment.model');
 	require('../models/user.server.model');
 	require('../models/secretcode.server.model');
 

@@ -60,7 +60,7 @@
 		<div class="row clearfix">
 			<nav>
 				<ul>
-					<li class="mainli">
+					<!-- <li class="mainli">
 						<a class="maina" href="javascript:;">
 							<i class="fa fa-user-o " aria-hidden="true"></i>
 							账户管理
@@ -73,14 +73,15 @@
 								<a href="">添加账户</a>
 							</li>
 						</ul>
-					</li>
+					</li> -->
 					<li class="mainli">
 						<a class="maina" href="javascript:;">
 							<i class="fa fa-file-text-o" aria-hidden="true"></i>
 							主内容管理
 						</a>
 						<ul class="mainul">
-							<li>
+							<li class="act"
+							>
 								<a class="maincontent" href="">查看主内容</a>
 							</li>
 						</ul>
@@ -91,7 +92,7 @@
 							新闻管理
 						</a>
 						<ul class="mainul">
-							<li class="act">
+							<li>
 								<a class="shownews" href="javascript:;">查看新闻</a>
 							</li>
 							<li>
@@ -130,7 +131,7 @@
 				</ul>
 			</nav>
 			<div class="editarea">
-				<div class="article article-art item">
+				<div class="article article-art item disnone">
 					<div class="listheader">
 						<ul class="clearfix">
 							<li>ID</li>
@@ -156,7 +157,7 @@
 						<ul></ul>
 					</div>
 				</div>
-				<div class="editartarea editartarea-art item disnone">
+				<div class="editartarea-art item disnone">
 					<form class="artform" enctype="multipart/form-data" method="post">
 						<div class="form-group aid disnone">
 							<label for="aid">文章ID</label>
@@ -184,12 +185,12 @@
 							<button id="editbtn-news" type="submit" class="btn btn-success disnone">修改</button>
 						</div>
 						<div class="dailybtn">
-							<button id="subbtn-daily" type="submit" class="btn btn-success">保存</button>
+							<button id="subbtn-daily" type="submit" class="btn btn-success">添加</button>
 							<button id="editbtn-daily" type="submit" class="btn btn-success disnone">修改</button>
 						</div>
 					</form>
 				</div>
-				<div class="article article-mc item disnone">
+				<div class="article article-mc item">
 					<div class="listheader">
 						<ul class="clearfix">
 							<li>模块ID</li>
@@ -204,7 +205,7 @@
 						<ul></ul>
 					</div>
 				</div>
-				<div class="editartarea editartarea-mc item disnone">
+				<div class="editartarea-mc item disnone">
 					<form class="mcform" enctype="multipart/form-data" method="post">
 						<div class="form-group">
 							<label for="mcid">ID</label>
@@ -226,19 +227,25 @@
 						<button id="editbtn-main" type="submit" class="btn btn-success">修改</button>
 					</form>
 				</div>
-				<div class="editartarea editartarea-share item disnone">
-					<form enctype="multipart/form-data" method="post">
+				<div class="editartarea-share item disnone">
+					<form class="shareform" enctype="multipart/form-data" method="post">
 						<div class="form-group aid disnone">
 							<label for="songid">歌曲ID</label>
 							<input type="text" class="form-control" id="songid" name="songid" readonly="readonly" placeholder=""></div>
 						<div class="form-group">
 							<label for="song">歌名</label>
-							<input type="text" class="form-control" id="song" name="song" placeholder=""></div>
-							<div class="form-group">
+							<input type="text" class="form-control" id="song" name="titlel" placeholder=""></div>
+						<div class="form-group">
 							<label for="singer">歌手</label>
 							<input type="text" class="form-control" id="singer" name="singer" placeholder=""></div>
 						<div class="form-group">
-							<label for="listimg">文章列表图片</label>
+							<label for="details">歌曲详情</label>
+							<input type="text" class="form-control" id="details" name="details" placeholder=""></div>
+						<div class="form-group">
+							<label for="href">歌曲链接</label>
+							<input type="text" class="form-control" id="href" name="href" placeholder=""></div>
+						<div class="form-group">
+							<label for="listimg">歌曲相关图片</label>
 							<div class="filediv">
 								<i class="fa fa-file-image-o"></i>
 								<input type="file" id="listimg" name="listimg">
@@ -246,16 +253,14 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="titlel">文章长标题</label>
-							<input type="text" class="form-control" id="titlel" name="titlel" placeholder=""></div>
-							<button id="subbtn-share" type="submit" class="btn btn-success">保存</button>
+							<button id="subbtn-share" type="submit" class="btn btn-success">添加</button>
 							<button id="editbtn-share" type="submit" class="btn btn-success disnone">修改</button>
+						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</main>
-	<div class="container-fluid"></div>
 	<script src="../js/server.js"></script>
 </body>
 </html>

@@ -1,9 +1,9 @@
 <%- include('../public/header') %>
 <body class="daily tmw-in extinguisher-transition">
-<div class="animsition">
-	<%- include('../public/nav') %>
-	<%- include('../public/title') %>
-	<main>
+	<div class="animsition">
+		<%- include('../public/nav') %>
+		<%- include('../public/title') %>
+		<main>
 		<div class="mask-in"></div>
 		<section class="cd-modal" id="cd-modal">
 			<div class="modal-close"></div>
@@ -32,27 +32,27 @@
 					</div>
 					<div class="grid__item-caption">
 						<h3 class="grid__item-title" data-title=<%=docs[i+j].titles%>
-							>
-							<%=docs[i+j].titles%></h3>
+						>
+						<%=docs[i+j].titles%></h3>
 					</div>
 				</a>
-				<% } %></div>
-			<% } %></section>
+			<% } %></div>
+		<% } %></section>
 		<%- include('../public/page') %>
 		<%- include('../public/footer') %></main>
-</div>
-<script src="../lib/modernizr.custom.js"></script>
-<script src="../js/card.js"></script>
-<script src="../js/nav.js"></script>
-<script src="../js/listShift.js"></script>
-<script src="../js/common.js"></script>
-<script>
-		$(function() {
-			$("#menu").fadeIn(500);
-			[].slice.call(document.querySelectorAll('.grid--effect-pollux > .grid__item')).forEach(function(stackEl) {
-				new PolluxFx(stackEl);
+	</div>
+	<script src="../lib/modernizr.custom.js"></script>
+	<script src="../js/card.js"></script>
+	<script src="../js/nav.js"></script>
+	<script src="../js/listShift.js"></script>
+	<script src="../js/common.js"></script>
+	<script>
+			$(function() {
+				$("#menu").fadeIn(500);
+				[].slice.call(document.querySelectorAll('.grid--effect-pollux > .grid__item')).forEach(function(stackEl) {
+					new PolluxFx(stackEl);
+				});
 			});
-		});
-</script>
+	</script>
 </body>
 </html>

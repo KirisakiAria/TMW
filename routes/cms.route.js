@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const MainContent = mongoose.model('MainContent');
 const News = mongoose.model('News');
 const Daily = mongoose.model('Daily');
-const Share = mongoose.model('Daily');
+const Share = mongoose.model('Share');
 const NewsIncrement = mongoose.model('NewsIncrement');
 const DailyIncrement = mongoose.model('DailyIncrement');
 const ShareIncrement = mongoose.model('ShareIncrement');
@@ -81,7 +81,39 @@ router.post('/maincontent/:mcid/edit', checkLogin, (req, res, next) => {
 		});
 });
 
+/*------计数器方法------*/
+async function increment(i) {
+	try {
+		let doc = await i.find({}, (err, doc) => {
+			if (err) {
+				console.log(err);
+				return;
+			} else {
+				return doc;
+			}
+		});
+		await (() => {
+			if (!doc[0]) {
+				let inc = new i({
+					index: 0
+				});
+				inc.save((err, doc) => {
+					if (err) {
+						return console.log(err);
+					}
+				});
+			}
+		})();
+	} catch (e) {
+		console.log(e);
+	}
+};
+/*------计数器方法结束------*/
+
 /*------新闻------*/
+
+//新闻计数器
+increment(NewsIncrement);
 
 //查看所有新闻
 router.get('/shownews', checkLogin, (req, res, next) => {
@@ -125,34 +157,6 @@ router.post('/news/:list/mutidel/', checkLogin, (req, res, next) => {
 		res.send('删除成功！');
 	});
 });
-
-//先查一下有没有计数器
-(async() => {
-	try {
-		let doc = await NewsIncrement.find({}, (err, doc) => {
-			if (err) {
-				console.log(err);
-				return;
-			} else {
-				return doc;
-			}
-		});
-		await (() => {
-			if (!doc[0]) {
-				let inc = new NewsIncrement({
-					index: 0
-				});
-				inc.save((err, doc) => {
-					if (err) {
-						return console.log(err);
-					}
-				});
-			}
-		})();
-	} catch (e) {
-		console.log(e);
-	}
-})();
 
 //添加新闻
 router.post('/news/create', checkLogin, (req, res, next) => {
@@ -228,6 +232,9 @@ router.post('/news/:newsid/edit', checkLogin, (req, res, next) => {
 
 /*------日志------*/
 
+//日志计数器
+increment(DailyIncrement);
+
 //查看所有日志
 router.get('/showdailies', checkLogin, (req, res, next) => {
 	Daily.find({}, (err, docs) => {
@@ -270,33 +277,6 @@ router.post('/daily/:list/mutidel/', checkLogin, (req, res, next) => {
 		res.send('删除成功！');
 	});
 });
-
-(async() => {
-	try {
-		let doc = await DailyIncrement.find({}, (err, doc) => {
-			if (err) {
-				console.log(err);
-				return;
-			} else {
-				return doc;
-			}
-		});
-		await (() => {
-			if (!doc[0]) {
-				let inc = new DailyIncrement({
-					index: 0
-				});
-				inc.save((err, doc) => {
-					if (err) {
-						return console.log(err);
-					}
-				});
-			}
-		})();
-	} catch (e) {
-		console.log(e);
-	}
-})();
 
 //添加日志
 router.post('/daily/create', checkLogin, (req, res, next) => {
@@ -371,6 +351,9 @@ router.post('/daily/:dailyid/edit', checkLogin, (req, res, next) => {
 
 /*------分享------*/
 
+//分享计数器
+increment(ShareIncrement);
+
 //查看所有分享
 router.get('/showshare', checkLogin, (req, res, next) => {
 	Share.find({}, (err, docs) => {
@@ -383,32 +366,107 @@ router.get('/showshare', checkLogin, (req, res, next) => {
 	});
 });
 
-(async() => {
-	try {
-		let doc = await ShareIncrement.find({}, (err, doc) => {
-			if (err) {
-				console.log(err);
-				return;
-			} else {
-				return doc;
-			}
-		});
-		await (() => {
-			if (!doc[0]) {
-				let inc = new ShareIncrement({
-					index: 0
+//编辑单条分享
+router.post('/editshare/:shareid', checkLogin, (req, res, next) => {
+	let shareid = req.params.shareid;
+	Share.findOne({
+		id: shareid
+	}, (err, docs) => {
+		if (err) {
+			console.log(err);
+			return next();
+		} else {
+			res.json(docs);
+		}
+	});
+});
+
+//删除分享
+router.post('/share/:shareid/del', checkLogin, (req, res, next) => {
+	let shareid = req.params.shareid;
+	Share.removeById(shareid, next, () => {
+		res.send('删除成功！');
+	});
+});
+
+//批量删除分享
+router.post('/share/:list/mutidel/', checkLogin, (req, res, next) => {
+	let list = req.params.list.split(',');
+	Share.removeByIdList(list, next, () => {
+		res.send('删除成功！');
+	});
+});
+
+//添加分享
+router.post('/share/create', checkLogin, (req, res, next) => {
+	(async() => {
+		try {
+			let doc = await ShareIncrement.findOne((err, doc) => {
+				if (err) {
+					console.log(err);
+					return next();
+				} else {
+					return doc;
+				}
+			});
+			await ShareIncrement.addOne(doc, next);
+			doc = await ShareIncrement.findOne((err, doc) => {
+				if (err) {
+					console.log(err);
+					return next();
+				} else {
+					return doc;
+				}
+			});
+			await ShareIncrement.findOne((err, doc) => {
+				let share = new Share({
+					id: doc.index,
+					titlel: req.body.titlel,
+					singer: req.body.singer,
+					details: req.body.details,
+					href: req.body.href,
+					author: req.session.user.username,
+					editor: req.session.user.username,
+					listimg: '',
+					time: new Date(),
 				});
-				inc.save((err, doc) => {
+				share.save((err) => {
 					if (err) {
-						return console.log(err);
+						console.log(err);
+						return next();
 					}
+					res.send('发表成功！')
 				});
+			});
+		} catch (e) {
+			console.log(e);
+			next();
+		}
+	})();
+});
+
+//编辑分享
+router.post('/share/:shareid/edit', checkLogin, (req, res, next) => {
+	let shareid = req.params.shareid;
+	Share.updateOne({
+			id: shareid
+		}, {
+			$set: {
+				titlel: req.body.titlel,
+				singer: req.body.singer,
+				details: req.body.details,
+				href: req.body.href,
+				editor: req.session.user.username,
+				time: new Date()
 			}
-		})();
-	} catch (e) {
-		console.log(e);
-	}
-})();
+		},
+		(err) => {
+			if (err) {
+				return console.log(err);
+			}
+			return res.send('修改成功！')
+		});
+});
 
 /*------分享结束------*/
 

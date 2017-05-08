@@ -3,11 +3,14 @@
 const mongoose = require('mongoose');
 
 const ShareSchema = new mongoose.Schema({
-	title: String, //歌名
-	singer: String //歌手
+	id: Number, //ID
+	titlel: String, //歌名
+	singer: String, //歌手
 	details: String, //详情
 	href: String, //链接
-	imgsrc: String, //图片
+	listimg: String, //图片
+	author: String, //作者
+	editor: String, //修改人
 	time: Date //创建时间
 });
 

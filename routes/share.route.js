@@ -10,9 +10,7 @@ const Share = mongoose.model('Share');
 //分享列表页
 router.get('/', (req, res, next) => {
 	(async() => {
-		let sharedocs = await Share.find({}, null, {
-				limit: 6
-			},
+		let sharedocs = await Share.find({},
 			(err, docs) => {
 				if (err) {
 					console.log(err);
