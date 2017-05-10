@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 module.exports = () => {
 	mongoose.Promise = global.Promise;
-	let db = mongoose.connect(config.mongodb);
+	const db = mongoose.connect(config.mongodb);
 	require('../models/maincontent.client.model');
 	require('../models/daily.client.model');
 	require('../models/daily.increment.model');
