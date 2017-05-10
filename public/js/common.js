@@ -207,6 +207,7 @@ $(function() {
 							new PolluxFx(stackEl);
 						});
 					});
+					$.getScript("/js/listShift.js");
 				});
 			},
 			error: function() {
