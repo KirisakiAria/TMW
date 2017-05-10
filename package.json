@@ -1,6 +1,6 @@
 {
   "name": "tmw",
-  "version": "0.0.1",
+  "version": "0.9.0",
   "description": "My Personal Website",
   "main": "index.js",
   "scripts": {
