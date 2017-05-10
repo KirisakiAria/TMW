@@ -9,16 +9,6 @@ const Share = mongoose.model('Share');
 
 //分享列表页
 router.get('/', (req, res, next) => {
-	var a = new MainContent({
-		id: 3,
-		title: 'SHARE', //英文标题
-		describe: '赠人玫瑰 手有余香', //中文信息
-		bgsrc: '', //背景路径
-		author: 'admin', //作者
-		editor: 'admin', //修改人
-		time: new Date() //发表时间
-	});
-	a.save();
 	(async() => {
 		let sharedocs = await Share.find({},
 			(err, docs) => {
