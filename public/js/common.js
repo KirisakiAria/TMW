@@ -200,6 +200,14 @@ $(function() {
 				});
 				$(".loader").fadeOut().remove();
 				$(".pagecontent").empty().append(html);
+				$.getScript("/js/card.js", function() {
+					$(function() {
+						$("#menu").fadeIn(500);
+						[].slice.call(document.querySelectorAll('.grid--effect-pollux > .grid__item')).forEach(function(stackEl) {
+							new PolluxFx(stackEl);
+						});
+					});
+				});
 			},
 			error: function() {
 
