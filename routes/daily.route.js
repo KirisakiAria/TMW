@@ -9,16 +9,16 @@ const Daily = mongoose.model('Daily');
 
 //日志列表页
 router.get('/', (req, res, next) => {
-	var aa = new MainContent({
+	var a = new MainContent({
 		id: 1,
 		title: 'DAILY', //英文标题
 		describe: '书卷多情似故人', //中文信息
 		bgsrc: '', //背景路径
 		author: 'admin', //作者
 		editor: 'admin', //修改人
-		time:new Date() //发表时间
+		time: new Date() //发表时间
 	});
-	aa.save();
+	a.save();
 	(async() => {
 		let dailydocs = await Daily.find({}, null, {
 				limit: 9
@@ -33,7 +33,8 @@ router.get('/', (req, res, next) => {
 		await res.status(200).render('../views/daily/daily.ejs', {
 			title: mcdocs.title,
 			describe: mcdocs.describe,
-			docs: dailydocs
+			docs: dailydocs,
+			bgurl:'../img/daily.jpg'
 		});
 	})();
 });

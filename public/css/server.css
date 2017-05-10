@@ -278,9 +278,12 @@ nav .mainli li a
     font-family: 'VD','微软雅黑';
 
     float: left;
+    overflow: auto;
 
     width:         calc(100% - 200px);
     width: -webkit-calc(100% - 200px);
+    height:         calc(100vh - 70px);
+    height: -webkit-calc(100vh - 70px);
     padding: 30px;
 }
 .editarea li
@@ -296,7 +299,8 @@ nav .mainli li a
 
     border-bottom: 1px solid #e2e2e2;
 }
-.editarea .listheader ul.oper {
+.editarea .listheader ul.oper
+{
     border-bottom: 0;
 }
 .editarea .listheader li
@@ -393,6 +397,8 @@ nav .mainli li a
     font-size: 16px;
 
     margin-bottom: 30px;
+
+    cursor: pointer;
 }
 .editarea .form-group
 {
@@ -424,6 +430,8 @@ nav .mainli li a
     left: 0;
 
     display: inline-block;
+
+    cursor: pointer;
 }
 .editarea .filediv i
 {

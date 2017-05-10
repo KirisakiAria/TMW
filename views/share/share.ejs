@@ -4,14 +4,14 @@
 		<%- include('../public/nav') %>
 		<%- include('../public/title') %>
 		<main>
-		<div class="mask-in"></div>
+		<section class="mask-in"></section>
 		<div class="container">
-			<div class="hero">
-				<div class="hero__back hero__back--static"></div>
-				<div class="hero__back hero__back--mover"></div>
-				<div class="hero__front"></div>
-			</div>
-			<div class="stack-slider">
+			<section class="hero">
+				<div class="hero__back hero__back--static" style="background-image:url(<%=movebg%>)"></div>
+				<div class="hero__back hero__back--mover" style="background-image:url(<%=movebg%>)"></div>
+				<div class="hero__front" style="background-image:url(<%=movebg%>)"></div>
+			</section>
+			<section class="stack-slider">
 				<div class="stacks-wrapper">
 					<% for(var i=0;i<Math.ceil(docs.length/5);i++){%>
 					<div class="stack">
@@ -37,7 +37,7 @@
 					<%}%></div>
 				<%}%></div>
 				<!-- /stacks-wrapper -->
-			</div>
+			</section>
 			<!-- /stacks -->
 			<img class="loader" src="img/three-dots.svg" width="60" alt="Loader image" />
 		</div>

@@ -16,7 +16,7 @@ module.exports = (app) => {
 	//分享
 	app.use('/share', require('./share.route'));
 	//个人
-	// app.use('/myself', require('./myself'));
+	app.use('/myself', require('./myself.route'));
 	//404
 	app.use((req, res) => {
 		if (!res.headersSent) {
