@@ -2020,6 +2020,8 @@ footer div a:hover
 
     display: flex;
 
+    min-height: 860px;
+
     flex-wrap: wrap;
     align-items: center;
 }

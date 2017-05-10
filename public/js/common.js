@@ -178,7 +178,7 @@ $(function() {
 						html += "<div class='grid grid--effect-pollux'>" + circle + "</div>";
 						circle = "";
 					}
-					circle += "<a href=" + data[i].id + "class='cd-modal-trigger grid__item' data-url='daily'  data-href=" + data[i].id + ">" +
+					circle += "<a href=" + data[i].id + " class='cd-modal-trigger grid__item' data-url='daily'  data-href=" + data[i].id + ">" +
 						"<div class='stack'>" +
 						"<div class='stack__deco'></div>" +
 						"<div class='stack__deco'></div>" +
