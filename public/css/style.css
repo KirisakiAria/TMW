@@ -1820,7 +1820,7 @@ footer div a:hover
 {
     .cd-modal .modal-content
     {
-        padding: 6em 5%;
+        padding: 3em 5%;
     }
     .cd-modal .modal-close
     {
@@ -1980,12 +1980,13 @@ footer div a:hover
     line-height: 1.6;
 
     color: #818181;
+    margin-top: 60px;
 }
 .tmw-in .modalbg
 {
     height: 400px;
 
-    background: url(../img/zedd.jpg) center ;
+    background: url(../img/inpage.jpg) center ;
     background-size: cover;
 }
 .cd-modal .modal-content

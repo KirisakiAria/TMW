@@ -97,7 +97,7 @@ $(function() {
 		$(".item").addClass("disnone");
 		$(".article-mc").removeClass("disnone");
 		$.ajax({
-			url: window.location.href + "/maincontent",
+			url: window.location.href + "/showmaincontent",
 			datatype: 'json',
 			success: function(data) {
 				$('.listbody').find('ul').empty();
@@ -186,7 +186,7 @@ $(function() {
 					editPage(arturl2, fn, thisElement);
 				});
 
-				$('.groupdel').click(function() {
+				$('.groupdel').off().click(function() {
 					let thisElement = $(this);
 					delArts(arturl1, arturl2, fn, thisElement);
 				});

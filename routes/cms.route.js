@@ -33,7 +33,7 @@ router.get('/signout', (req, res, next) => {
 /*------主内容------*/
 
 //查看主内容
-router.get('/maincontent', checkLogin, (req, res, next) => {
+router.get('/showmaincontent', checkLogin, (req, res, next) => {
 	MainContent.find({}, (err, docs) => {
 		if (err) {
 			console.log(err);

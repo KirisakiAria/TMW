@@ -5,7 +5,6 @@ const express = require('express');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const bodyParser = require('body-parser');
-const flash = require('connect-flash');
 //此模块会检测环境变量的设置，如无特殊设置则自动执行default.js
 const config = require('config-lite')(__dirname);
 const routes = require('./routes/index.route');
@@ -45,8 +44,6 @@ app.use(session({
 		url: config.mongodb // mongodb 地址
 	})
 }));
-// flash 中间件，用来显示通知
-app.use(flash());
 
 // 设置模板全局常量
 app.locals.site = {
