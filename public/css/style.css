@@ -132,66 +132,6 @@ button
 
     opacity: 0;
 }
-
-.btn-con
-{
-    position: absolute;
-    z-index: 100;
-    bottom: 20%;
-    left: 50%;
-
-    transform: translateX(-50%);
-}
-
-.svg-filters
-{
-    position: absolute;
-
-    visibility: hidden;
-
-    width: 1px;
-    height: 1px;
-}
-
-.button-8
-{
-    font-family: 'Montserrat', sans-serif;
-    font-size: .85em;
-    font-weight: 700;
-
-    position: relative;
-    z-index: 100;
-
-    display: inline-block;
-
-    padding: 20px 40px;
-
-    user-select: none;
-    -webkit-transition: all .2s ease-out;
-       -moz-transition: all .2s ease-out;
-            transition: all .2s ease-out;
-    text-decoration: none;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-
-    color: #000;
-    border: 3px solid #000;
-    background: #f6f6f6;
-
-    -webkit-font-smoothing: antialiased;
-}
-.button--8:hover
-{
-    color: #2cd892;
-    border-color: #2cd892;
-    background: #f6f6f6;
-}
-.btn-hidden
-{
-    visibility: hidden;
-
-    opacity: 0;
-}
 /*首页*/
 
 /*start按钮*/
