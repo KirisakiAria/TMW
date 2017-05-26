@@ -21,12 +21,12 @@ body
 /*登录、注册页面*/
 .login
 {
-    background: url(../img/zedd2.jpg) center;
+    background: url(../img/login.jpg) center;
     background-size: cover;
 }
 .signup
 {
-    background: url(../img/zedd3.jpg) center;
+    background: url(../img/signup.jpg) center;
     background-size: cover;
 }
 .login a,

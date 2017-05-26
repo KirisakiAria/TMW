@@ -1,9 +1,6 @@
 'use strict';
-
+let show;
 $(function() {
-
-	showMainContent();
-
 	//阻止a链接跳转
 	$('.tmw').find('a').click(function(e) {
 		e.preventDefault();
@@ -139,6 +136,8 @@ $(function() {
 		});
 	}
 
+	show = showMainContent;
+	
 	$('.maincontent').click(function() {
 		showMainContent();
 	});
