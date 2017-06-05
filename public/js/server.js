@@ -172,7 +172,6 @@ $(function() {
 						'<a href="javascript:;" class="edit">编辑</a>' +
 						'<a href="javascript:;" class="del">删除</a>' +
 						'</div></li>';
-
 					$('.listbody').find('ul').append(html);
 				});
 				$('.del').click(function() {
@@ -202,8 +201,8 @@ $(function() {
 		var aid = thisElement.parents('li').find('.aid').html();
 		fn();
 		$.ajax({
-			url: window.location.href + '/edit' + arturl2 + '/' + aid,
-			type: 'POST',
+			url: window.location.href + 'edit' + arturl2 + '/' + aid,
+			type: 'GET',
 			success: function(data) {
 				if (arturl2 == "share") {
 					$('#songid').val(data.id);
@@ -309,7 +308,7 @@ $(function() {
 	$('.shownews').click(function() {
 		$('.item,#editbtn-news,.aid,.dailybtn').addClass('disnone');
 		$('.article-art,#subbtn-news').removeClass('disnone');
-		showArticle('/shownews', 'news', function() {
+		showArticle('shownews', 'news', function() {
 			$('#subbtn-news,.article').addClass('disnone');
 			$('#editbtn-news,.editartarea-art,.aid').removeClass('disnone');
 		});
@@ -345,7 +344,7 @@ $(function() {
 		editArticle('.artform', '#aid', 'news', function() {
 			$('.item,#editbtn-news,.aid').addClass('disnone');
 			$('.article-art,#subbtn-news').removeClass('disnone');
-			showArticle('/shownews', 'news', function() {
+			showArticle('shownews', 'news', function() {
 				$('#subbtn-news,.article').addClass('disnone');
 				$('#editbtn-news,.editartarea-art,.aid').removeClass('disnone');
 			});
@@ -361,7 +360,7 @@ $(function() {
 	$('.showdailies').click(function() {
 		$('.item,#editbtn-daily,.aid,.newsbtn').addClass('disnone');
 		$('.article-art,#subbtn-daily').removeClass('disnone');
-		showArticle('/showdailies', 'daily', function() {
+		showArticle('showdailies', 'daily', function() {
 			$('#subbtn-daily,.article').addClass('disnone');
 			$('#editbtn-daily,.editartarea-art,.aid').removeClass('disnone');
 		});
@@ -385,7 +384,7 @@ $(function() {
 		editArticle('.artform', '#aid', 'daily', function() {
 			$('.item,#editbtn-daily,.aid').addClass('disnone');
 			$('.article-art,#subbtn-daily').removeClass('disnone');
-			showArticle('/showdailies', 'daily', function() {
+			showArticle('showdailies', 'daily', function() {
 				$('#subbtn-daily,.article').addClass('disnone');
 				$('#editbtn-daily,.editartarea-art,.aid').removeClass('disnone');
 			});
@@ -399,7 +398,7 @@ $(function() {
 	$('.showshare').click(function() {
 		$('.item,#editbtn-share,.aid').addClass('disnone');
 		$('.article-art,#subbtn-share').removeClass('disnone');
-		showArticle('/showshare', 'share', function() {
+		showArticle('showshare', 'share', function() {
 			$('#subbtn-share,.article').addClass('disnone');
 			$('#editbtn-share,.editartarea-share,.aid').removeClass('disnone');
 		});
@@ -423,7 +422,7 @@ $(function() {
 		editArticle('.shareform', '#songid', 'share', function() {
 			$('.item,#editbtn-share,.aid').addClass('disnone');
 			$('.article-art,#subbtn-share').removeClass('disnone');
-			showArticle('/showshare', 'share', function() {
+			showArticle('showshare', 'share', function() {
 				$('#subbtn-share,.article').addClass('disnone');
 				$('#editbtn-share,.editartarea-share,.aid').removeClass('disnone');
 			});

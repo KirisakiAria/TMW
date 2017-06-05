@@ -1,9 +1,9 @@
 <%- include('../public/header') %>
 <body class="share tmw-in extinguisher-transition">
-	<div class="animsition">
-		<%- include('../public/nav') %>
-		<%- include('../public/title') %>
-		<main>
+<div class="animsition">
+	<%- include('../public/nav') %>
+	<%- include('../public/title') %>
+	<main>
 		<section class="mask-in"></section>
 		<div class="container">
 			<section class="hero">
@@ -16,9 +16,10 @@
 					<% for(var i=0;i<Math.ceil(docs.length/5);i++){%>
 					<div class="stack">
 						<h2 class="stack-title">
-						<a href="#" docs-text="Portraits">
-							<span><%= Math.ceil(i/5)+1 %></span>
-						</a>
+							<a href="#" docs-text="Portraits">
+								<span>
+									<%= Math.ceil(i/5)+1 %></span>
+							</a>
 						</h2>
 						<%var max = docs.length<5?docs.length:5; for(var j=0;j<max;j++){ %>
 						<div class="item">
@@ -28,26 +29,25 @@
 									<img src="img/type1/1.jpg" alt="img01" />
 								</a>
 								<h3 class="item__title">
-								<%=docs[i].titlel %></h3>
+									<%=docs[i].titlel %></h3>
 								<div class="item__details">
-									<%=docs[i].details%>
-								</div>
+									<%=docs[i].details%></div>
 							</div>
 						</div>
+						<%}%></div>
 					<%}%></div>
-				<%}%></div>
 				<!-- /stacks-wrapper -->
 			</section>
 			<!-- /stacks -->
 			<img class="loader" src="img/three-dots.svg" width="60" alt="Loader image" />
 		</div>
-		</main>
-	</div>
-	<script src="../lib/modernizr.custom.share.js"></script>
-	<script src="../js/flickity.pkgd.min.js"></script>
-	<script src="../js/smoothscroll.js"></script>
-	<script src="../js/camera.js"></script>
-	<script src="../js/nav.js"></script>
-	<script src="../js/common.js"></script>
+	</main>
+</div>
+<script src="../lib/modernizr.custom.share.js"></script>
+<script src="../js/flickity.pkgd.min.js"></script>
+<script src="../js/smoothscroll.js"></script>
+<script src="../js/camera.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/common.js"></script>
 </body>
 </html>

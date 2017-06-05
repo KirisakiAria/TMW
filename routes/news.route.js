@@ -50,7 +50,7 @@ router.get('/page/:pageid', (req, res, next) => {
 router.get('/:newsid', (req, res, next) => {
 	//获取:xxx
 	let newsid = req.params.newsid;
-	News.find({
+	News.findOne({
 		id: newsid
 	}, (err, docs) => {
 		if (err) {

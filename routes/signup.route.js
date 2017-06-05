@@ -21,10 +21,10 @@ router.post('/sign', (req, res, next) => {
 		let secretcode = req.body.secretcode;
 		(async() => {
 			try {
-				//验证神秘代码
+				//验证邀请码
 				let code = await SecretCode.findByCode(secretcode);
 				if (!code) {
-					return res.send('神秘代码有误！');
+					return res.send('邀请码有误！');
 				}
 				//查一下用户名是不是已存在
 				let re2 = await User.findByUsername(username);

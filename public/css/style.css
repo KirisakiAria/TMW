@@ -126,11 +126,16 @@ button
     opacity: 0;
 }
 /*按钮*/
-.btn--hidden
+.btn--hidden,
+.btn-hidden
 {
     pointer-events: none;
 
     opacity: 0;
+}
+.btn-hidden
+{
+    visibility: hidden;
 }
 /*首页*/
 
@@ -1919,8 +1924,9 @@ footer div a:hover
     font-size: 16px;
     line-height: 1.6;
 
-    color: #818181;
     margin-top: 60px;
+
+    color: #818181;
 }
 .tmw-in .modalbg
 {

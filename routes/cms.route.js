@@ -11,7 +11,6 @@ const NewsIncrement = mongoose.model('NewsIncrement');
 const DailyIncrement = mongoose.model('DailyIncrement');
 const ShareIncrement = mongoose.model('ShareIncrement');
 const checkLogin = require('../lib/checkLogin').checkLogin;
-const checkAuth = require('../lib/checkLogin').checkAuth;
 
 //cms
 router.get('/', checkLogin, (req, res, next) => {
@@ -128,7 +127,7 @@ router.get('/shownews', checkLogin, (req, res, next) => {
 });
 
 //编辑单条新闻
-router.post('/editnews/:newsid', checkLogin, (req, res, next) => {
+router.get('/editnews/:newsid', checkLogin, (req, res, next) => {
 	let newsid = req.params.newsid;
 	News.findOne({
 		id: newsid
@@ -171,16 +170,7 @@ router.post('/news/create', checkLogin, (req, res, next) => {
 				}
 			});
 			await NewsIncrement.addOne(doc, next);
-			doc = await NewsIncrement.findOne((err, doc) => {
-				if (err) {
-					console.log(err);
-					return next();
-				} else {
-					return doc;
-				}
-			});
 			await NewsIncrement.findOne((err, doc) => {
-				console.log(req.body);
 				let news = new News({
 					id: doc.index,
 					titles: req.body.titles,
@@ -291,14 +281,6 @@ router.post('/daily/create', checkLogin, (req, res, next) => {
 				}
 			});
 			await DailyIncrement.addOne(doc, next);
-			doc = await DailyIncrement.findOne((err, doc) => {
-				if (err) {
-					console.log(err);
-					return next();
-				} else {
-					return doc;
-				}
-			});
 			await DailyIncrement.findOne((err, doc) => {
 				let daily = new Daily({
 					id: doc.index,

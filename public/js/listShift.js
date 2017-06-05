@@ -33,8 +33,8 @@ jQuery(document).ready(function($) {
 			url: window.location.href + "/" + href,
 			type: "get",
 			success: function(data) {
-				$(".modal-content").find("h3").html(data[0].titlel);
-				$(".modal-content").find("p").html(data[0].content);
+				$(".modal-content").find("h3").html(data.titlel);
+				$(".modal-content").find("p").html(data.content);
 			}
 		});
 	});

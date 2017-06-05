@@ -34,7 +34,7 @@ router.get('/', (req, res, next) => {
 			title: mcdocs.title,
 			describe: mcdocs.describe,
 			docs: dailydocs,
-			bgurl:'../img/daily.jpg'
+			bgurl: '../img/daily.jpg'
 		});
 	})();
 });
