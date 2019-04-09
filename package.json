@@ -10,7 +10,7 @@
     "KirisakiAria"
   ],
   "author": "KirisakiAria",
-  "license": "ISC",
+  "license": "Anti 996 License",
   "dependencies": {
     "config-lite": "^2.0.0",
     "connect-flash": "^0.1.1",
